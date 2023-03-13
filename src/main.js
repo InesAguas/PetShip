@@ -7,6 +7,10 @@ import popper from 'popper.js'
 
 
 
+
+
+
+
 window.$ = jquery
 window.jQuery = jquery
 window.Popper = popper

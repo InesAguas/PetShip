@@ -1,43 +1,46 @@
 <template>
-  
-    <h1>{{ count }}</h1>
-    <button @click="adicionar">Adicionar</button>
-  
-    
+  <div class="col-4">
+    <form>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="nome">
+      </div>
+      <div class="mb-3">
+        <input type="text" class="form-control" id="exampleInputPassword1" v-model="apelido">
+      </div>
+      <button type="button" class="btn btn-primary" v-on:click="adicionar">Submit</button>
+    </form>
+  </div>
 </template>
 
 <script>
+import { tSMethodSignature } from '@babel/types';
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
-  data(){
-    return{
-      count: 0
+  data() {
+    return {
+      nome: "",
+      apelido: ""
     }
   },
   methods: {
-    adicionar(){
-      this.count++;
+    adicionar() {
+      console.log(this.nome);
+      console.log(this.apelido);
+
+      this.$http.post('https://api.example.com/data')
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
     }
 
-  
+
+
+
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
