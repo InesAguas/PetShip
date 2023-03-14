@@ -1,15 +1,15 @@
 <template>
-  <HelloWorld></HelloWorld>
+  <FormLogin></FormLogin>
 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FormLogin from './components/FormLogin.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    FormLogin
   }
 }
 </script>
