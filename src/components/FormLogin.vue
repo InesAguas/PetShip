@@ -1,4 +1,5 @@
 <template>
+    <NavBar></NavBar>
     <div class="row justify-content-center">
         <div class="col-4">
             <div class="card bg-white text-black" style="border-radius: 1rem;">
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import NavBar from './NavBar.vue'
 
 export default {
     name: 'FormLogin',
@@ -34,6 +36,9 @@ export default {
             }
 
         }
-    }
+    },
+    components: {
+        NavBar
+  }
 }
 </script>
