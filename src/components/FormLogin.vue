@@ -1,6 +1,7 @@
 <template>
     <NavBar></NavBar>
-    <div class="row justify-content-center">
+    <div class="py-5">
+        <div class="row justify-content-center">
         <div class="col-4">
             <div class="card bg-white text-black" style="border-radius: 1rem;">
                 <div class="card-body p-4 text-center">
@@ -21,6 +22,8 @@
             </div>
         </div>
     </div>
+    </div>
+    
 </template>
 
 <script>
