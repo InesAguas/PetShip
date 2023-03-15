@@ -1,7 +1,7 @@
 <template>
     <NavBar></NavBar>
     <div class="row py-5 justify-content-center">
-        <div class="col-4 ">
+        <div class="col-3 ">
             <div class="card" style="border-radius: 1rem;">
                 <div class="card-body p-4 text-center">
                     <img src="../assets/logo_sem_fundo.png" alt="Logo" width="150" height="150" class="">
