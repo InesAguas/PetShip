@@ -39,12 +39,22 @@ export default {
     name: 'FormRegisto',
     data() {
         return {
-
+            utilizador:{
+                nome:"",
+                email:"",
+                password:"",
+                tipo: 0
+            }
 
         }
     },
     components: {
         NavBar
+    },
+    methods:{
+     registar(){
+        axios.post("/registar", this.utilizador);
+     }   
     }
 }
 </script>
