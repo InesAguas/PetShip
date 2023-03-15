@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page"  to="/teste">Home</router-link>
+            <router-link class="nav-link text-white" aria-current="page"  to="/registar">Home</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Features</a>
