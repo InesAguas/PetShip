@@ -9,7 +9,9 @@
       </div>
       <button type="button" class="btn btn-primary" v-on:click="adicionar">Submit</button>
     </form>
+    <router-view></router-view>
   </div>
+  
 </template>
 
 <script>

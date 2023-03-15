@@ -1,16 +1,17 @@
 <template>
-  <FormLogin></FormLogin>
-  
+  <div id="app">
+    <h1>Hello</h1>
+    <router-link to="/olaaa">asdsad</router-link>
+    <router-view></router-view>
+  </div>
 
 </template>
 
 <script>
-import FormLogin from './components/FormLogin.vue'
 
 export default {
   name: 'App',
   components: {
-    FormLogin
   }
 }
 </script>
