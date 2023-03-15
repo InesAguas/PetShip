@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
   data() {
@@ -38,7 +38,11 @@ export default {
       }
     });*/
 
-      axios.post("http://127.0.0.1:8000/api/utilizadores", this.utilizador);
+    this.axios.post("/utilizadores", this.utilizador)
+    .then(function (response) {
+                console.log(response);
+            });
+
 
       /*this.$http.post('https://api.example.com/data')
         .then(response => {
