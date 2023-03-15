@@ -53,7 +53,7 @@ export default {
     },
     methods:{
      registar(){
-        axios.post("/registar", this.utilizador);
+        this.axios.post("/registar", this.utilizador);
      }   
     }
 }
