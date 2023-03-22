@@ -1,5 +1,6 @@
 <template>
     <NavBar></NavBar>
+    <div class="container">
     <div class="row py-5 justify-content-center">
         <div class="col-3 ">
             <div class="card" style="border-radius: 1rem;">
@@ -34,6 +35,7 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
