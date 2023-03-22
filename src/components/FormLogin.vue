@@ -16,16 +16,14 @@
                         </div>
 
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Palavra-passe"
-                                v-model="utilizador.password">
+                            <input type="password" class="form-control" v-bind:placeholder="$t('loginMsg.pass')" v-model="utilizador.password">
                         </div>
                         <button class="btn px-5 text-white fw-bold mb-4" style="background-color:#FD7E14;" type="button"
                             v-on:click="login">Login</button>
 
-                        <p><router-link to="" style="color:#ADB5BD;text-decoration: none;">Esqueceu-se da
-                                password?</router-link></p>
-                        <p style="color:#ADB5BD;">Ainda não tens conta?<router-link to="/registar" class="fw-bold"
-                                style="color:#6c757d;text-decoration: none;">Registar</router-link></p>
+                        <p><router-link to="" style="color:#ADB5BD;text-decoration: none;">{{ $t('loginMsg.esqueceuPass') }}</router-link></p>
+                        <p style="color:#ADB5BD;">{{ $t('loginMsg.semConta') }}<router-link to="/registar" class="fw-bold"
+                                style="color:#6c757d;text-decoration: none;">{{ $t('loginMsg.registar') }}</router-link></p>
 
                     </div>
                 </div>

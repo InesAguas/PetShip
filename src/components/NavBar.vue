@@ -23,6 +23,10 @@
         </ul>
       </div>
 
+      <span class="text-white lang" :class="{ 'fw-bold': (this.$i18n.locale == 'pt') }"  @click="setLocale('pt')">PT</span>
+      <span class="text-white"> &nbsp;|&nbsp; </span>
+      <span class="text-white lang" :class="{ 'fw-bold': (this.$i18n.locale == 'en') }" @click="setLocale('en')">EN</span>
+
       <!--Aqui falta o nome da pessoa caso esteja logged in...-->
       <a href="#" class="">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-person-circle"
@@ -37,20 +41,25 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      
-
-      
-
       
     </div>
   </nav>
 </template>
 
+<style>
+.lang {
+  cursor:pointer;
+}
+</style>
+
 <script>
-
-
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+
+  methods: {
+    setLocale(locale) {
+      this.$i18n.locale = locale
+    }
+  }
 }
 </script>
