@@ -2,14 +2,14 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #FD7E14;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#" style="color:white; font-family:Coiny;">
-        <img src="../assets/logo_site.png" alt="Logo" width="42" height="48" class="">
+        <img src="../assets/logo_site_smaller.png" alt="Logo" width="42" height="48" class="">
         <b>PetShip</b>
       </a>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page"  to="/teste">Home</router-link>
+            <router-link class="nav-link text-white" aria-current="page"  to="/registar">Home</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Features</a>
