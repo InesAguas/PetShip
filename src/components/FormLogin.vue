@@ -66,8 +66,14 @@ export default {
             this.axios.post("/login", this.utilizador)
                 .then((response) => {
                     console.log(response);
+                    console.log(response.data.token)
+                    sessionStorage.setItem('token', response.data.token)
+                    sessionStorage.setItem('token', response.data.nome)
+                    sessionStorage.setItem('token', response.data.email)
+                    sessionStorage.setItem('token', response.data.tipo)
                     //aqui tem de receber o token e guardar na localstorage
                     //depois convem dar redirect para a pagina inicial com o login feito
+                    this.$router.push('/teste');
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
