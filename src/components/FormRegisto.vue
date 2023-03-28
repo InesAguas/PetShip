@@ -21,7 +21,7 @@
                             v-model="utilizador.password">
                     </div>
                     <div class="mb-3">
-                        <select class="form-select">
+                        <select class="form-select" v-model="utilizador.tipo">
                             <option selected disabled value="0">{{ $t('registarMsg.tipoConta') }}</option>
                             <option value="1">{{ $t('registarMsg.particular') }}</option>
                             <option value="2">{{ $t('registarMsg.associacao') }}</option>
