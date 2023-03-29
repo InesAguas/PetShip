@@ -3,7 +3,7 @@
     <div class="container">
     <div class="py-5">
         <div class="row justify-content-center">
-            <div class="col-3">
+            <div class="col-9 col-lg-4 col-md-7 col-sm-8">
                 <div class="card bg-white text-black" style="border-radius: 1rem;">
                     <div class="card-body p-4 text-center">
 
