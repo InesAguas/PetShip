@@ -16,6 +16,10 @@ export const en = {
     },
     cardMsg: {
         verMais: "See details"
+    },
+    pageAdotar: {
+        pesquisar : "Search..."
+
     }
     
 }
