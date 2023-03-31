@@ -15,7 +15,7 @@
                 Sénior, Médio<br />
                 Coimbra,22 de Março
             </p>
-            <a href="" class="fw-semibold" style="text-decoration: none; color: #fd7e14">Ver mais</a>
+            <a href="" class="fw-semibold" style="text-decoration: none; color: #fd7e14">{{$t('cardMsg.verMais')}}</a>
         </div>
     </div>
 </template>

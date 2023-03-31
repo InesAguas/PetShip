@@ -13,6 +13,9 @@ export const en = {
         particular: "Private",
         associacao: "Society / Kennel",
         temConta: "Already have an account?"
+    },
+    cardMsg: {
+        verMais: "See details"
     }
     
 }

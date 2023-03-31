@@ -13,5 +13,8 @@ export const pt = {
         particular: "Particular",
         associacao: "Associação / Canil",
         temConta: "Já tem conta?"
+    },
+    cardMsg: {
+        verMais: "Ver mais"
     }
 }

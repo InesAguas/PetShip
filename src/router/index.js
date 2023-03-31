@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import FormLogin from '../components/FormLogin'
 import FormRegisto from '../components/FormRegisto'
-import CardAnimal from '../components/CardAnimal'
+import PageAdotar from '../components/PageAdotar'
 //import App from '../App'
 
 const routes = [
@@ -22,9 +22,9 @@ const routes = [
         component: FormRegisto
     },
     {
-        path: '/card',
-        name: 'card',
-        component: CardAnimal
+        path: '/adotar',
+        name: 'adotar',
+        component: PageAdotar
     }
 
 ]
