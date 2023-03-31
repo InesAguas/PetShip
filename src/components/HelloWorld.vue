@@ -1,5 +1,7 @@
 <template>
     <NavBar></NavBar>
+   
+    <PerfilParticular></PerfilParticular>
     <FormAnimal></FormAnimal>
   <router-view></router-view>
 </template>
@@ -8,6 +10,7 @@
 
 import FormAnimal from './animais/FormAnimal.vue'
 import NavBar from './NavBar.vue'
+import PerfilParticular from './perfil/PerfilParticular.vue'
 
 export default {
   name: 'HelloWorld',
@@ -22,7 +25,8 @@ export default {
   },
   components: {
         FormAnimal,
-        NavBar
+        NavBar,
+        PerfilParticular
     },
   methods: {
 
