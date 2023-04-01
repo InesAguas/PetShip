@@ -18,8 +18,7 @@ export const en = {
         verMais: "See details"
     },
     pageAdotar: {
-        pesquisar : "Search..."
-
+        titulo : "Adopt"
     }
     
 }

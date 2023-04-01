@@ -2,7 +2,7 @@
     <NavBar></NavBar>
     <div class="container">
         <div class="row mt-3">
-            <h1 class="fw-bold" style="color: #653208">Adotar</h1>
+            <h1 class="fw-bold" style="color: #653208">{{ $t('pageAdotar.titulo') }}</h1>
         </div>
         <div class="row">
             <div class="col-2 mt-3">

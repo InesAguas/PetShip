@@ -16,5 +16,9 @@ export const pt = {
     },
     cardMsg: {
         verMais: "Ver mais"
+    },
+    pageAdotar: {
+        titulo : "Adotar"
+
     }
 }
