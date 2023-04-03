@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import NavBar from './NavBar.vue'
+import NavBar from '../NavBar.vue'
 import CardAnimal from './CardAnimal.vue'
 
 export default {

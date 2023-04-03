@@ -2,15 +2,16 @@
     <NavBar></NavBar>
    
     <PerfilParticular></PerfilParticular>
-    <FormAnimal></FormAnimal>
+
+    <PerfilAssociacao></PerfilAssociacao>
   <router-view></router-view>
 </template>
 
 <script>
 
-import FormAnimal from './animais/FormAnimal.vue'
 import NavBar from './NavBar.vue'
 import PerfilParticular from './perfil/PerfilParticular.vue'
+import PerfilAssociacao from './perfil/PerfilAssociacao.vue'
 
 export default {
   name: 'HelloWorld',
@@ -24,9 +25,9 @@ export default {
     }
   },
   components: {
-        FormAnimal,
         NavBar,
-        PerfilParticular
+        PerfilParticular,
+        PerfilAssociacao
     },
   methods: {
 
