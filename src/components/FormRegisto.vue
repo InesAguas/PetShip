@@ -2,7 +2,7 @@
     <NavBar></NavBar>
     <div class="container">
     <div class="row py-5 justify-content-center">
-        <div class="col-3 ">
+        <div class="col-lg-4 col-md-7 col-sm-8 col-9">
             <div class="card" style="border-radius: 1rem;">
                 <div class="card-body p-4 text-center">
                     <img src="../assets/logo_sem_fundo.png" alt="Logo" width="150" height="150" class="">
@@ -21,7 +21,7 @@
                             v-model="utilizador.password">
                     </div>
                     <div class="mb-3">
-                        <select class="form-select">
+                        <select class="form-select" v-model="utilizador.tipo">
                             <option selected disabled value="0">{{ $t('registarMsg.tipoConta') }}</option>
                             <option value="1">{{ $t('registarMsg.particular') }}</option>
                             <option value="2">{{ $t('registarMsg.associacao') }}</option>
