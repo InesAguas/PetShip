@@ -41,6 +41,9 @@ export const en = {
     },
     pageAdotar: {
         titulo : "Adopt"
+    },
+    perfilAssMsg: {
+        dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     }
     
 }
