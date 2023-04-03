@@ -70,6 +70,7 @@
 
 export default {
     name: 'FormAnimal',
+    
     data() {
         return {
             animal: {
@@ -99,12 +100,18 @@ export default {
             this.preview = []
             for (let i = 0; i < e.target.files.length; i++) {
                 this.preview.push(URL.createObjectURL(e.target.files[i]))
-                this.animal.fotografias.push(URL.createObjectURL(e.target.files[i]))
+                this.animal.fotografias.push(e.target.files[i])
             }
         },
 
         anunciarAnimal() {
-            this.axios.post("/anunciaranimal", this.animal)
+            console.log(this.animal.fotografias)
+            console.log(this.animal)
+            this.axios.post("/anunciaranimal", this.animal, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
                 .then(function (response) {
                     console.log(response);
 
