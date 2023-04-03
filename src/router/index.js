@@ -4,6 +4,7 @@ import FormLogin from '../components/FormLogin'
 import FormRegisto from '../components/FormRegisto'
 import PageAdotar from '../components/animais/PageAdotar'
 import PageAssociacoes from '../components/associacoes/PageAssociacoes'
+import PageAnunciarAnimal from '../components/animais/PageAnunciarAnimal'
 //import App from '../App'
 
 const routes = [
@@ -32,7 +33,13 @@ const routes = [
         path: '/associacao',
         name: 'associacao',
         component: PageAssociacoes
+    },
+    {
+        path:'/anunciar',
+        name:'anunciar',
+        component: PageAnunciarAnimal
     }
+    
 
 ]
 
