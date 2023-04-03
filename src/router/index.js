@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HelloWorld from '../components/HelloWorld'
 import FormLogin from '../components/FormLogin'
 import FormRegisto from '../components/FormRegisto'
-import PageAdotar from '../components/PageAdotar'
-import PageAssociacoes from '../components/PageAssociacoes'
+import PageAdotar from '../components/animais/PageAdotar'
+import PageAssociacoes from '../components/associacoes/PageAssociacoes'
 //import App from '../App'
 
 const routes = [

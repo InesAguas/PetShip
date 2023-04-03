@@ -1,6 +1,6 @@
 <template>
     <div class="card" style="width: 18rem">
-        <img src="../assets/cao.jpeg" class="card-img-top" alt="..." height="162" />
+        <img src="../../assets/cao.jpeg" class="card-img-top" alt="..." height="162" />
         <div class="card-body">
             <div class="row">
                 <div class="col-7">
