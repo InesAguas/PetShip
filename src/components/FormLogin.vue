@@ -6,7 +6,7 @@
             <div class="col-9 col-lg-4 col-md-7 col-sm-8">
                 <div class="card bg-white text-black" style="border-radius: 1rem;">
                     <div class="card-body p-4 text-center">
-
+                        {{ $store.state.utilizador }}
                         <img src="../assets/logo_sem_fundo.png" alt="Logo" width="150" height="150" class="">
                         <h2 class="fw-bold text-uppercase mb-4" style="color: #653208;">Login</h2>
                         <div class="alert alert-danger" role="alert" style="padding:5px" v-show="erro">
@@ -56,23 +56,23 @@ export default {
     },
     methods: {
         login() {
+            console.log(this.$store.state.utilizador)
 
             if (this.utilizador.email == null || this.utilizador.password == null) {
                 this.mensagemErro = "Não pode deixar campos vazios."
                 this.erro = true;
                 return;
             }
+           
 
             this.axios.post("/login", this.utilizador)
                 .then((response) => {
                     console.log(response);
                     console.log(response.data.token)
-                    sessionStorage.setItem('token', response.data.token)
-                    sessionStorage.setItem('token', response.data.nome)
-                    sessionStorage.setItem('token', response.data.email)
-                    sessionStorage.setItem('token', response.data.tipo)
                     //aqui tem de receber o token e guardar na localstorage
                     //depois convem dar redirect para a pagina inicial com o login feito
+                    this.$store.commit('login', response.data);
+                    console.log(this.$store.state.utilizador);
                     this.$router.push('/teste');
                 })
                 .catch((error) => {

@@ -6,7 +6,7 @@ import jquery from 'jquery'
 import popper from 'popper.js'
 import router from './router'
 import axios from 'axios'
-
+import store from './store'
 
 import { createI18n } from 'vue-i18n'
 import { pt } from './locales/pt.js'
@@ -30,6 +30,7 @@ const i18n = createI18n({
 const app = createApp(App)
 app.use(i18n)
 app.use(router)
+app.use(store)
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/api"
 app.config.globalProperties.axios=axios
