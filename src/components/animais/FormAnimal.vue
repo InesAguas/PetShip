@@ -1,8 +1,11 @@
 <template>
     <div class="container mt-5 p-5 pt-3 rounded-3 border" style="max-width: 1000px; background-color:white;">
         <div class="row bg-blue-300">
+            <div class="row">
             <h2 class="fw-bold mb-4" style="color: #653208;">{{ $t('formAnimalMsg.anunciar') }}</h2>
-            <div class="col">
+            
+        </div>
+            <div class="col-10 col-sm-8 col-md-6 offset-md-0 offset-sm-2  offset-1" >
                 <label for="nome" class="form-label">{{ $t('formAnimalMsg.nome') }}</label>
                 <input type="text" id="nome" class="form-control" v-bind:placeholder="$t('formAnimalMsg.nome')" v-model="animal.nome">
                 <label for="sexo" class="form-label">{{ $t('formAnimalMsg.sexo') }}</label>
@@ -33,27 +36,10 @@
                 </select>
 
             </div>
-            <div class="col">
+            <div class="col-10 col-sm-8 col-md-6 offset-md-0 offset-sm-2 offset-1">
                 <label for="distrito" class="form-label">{{ $t('formAnimalMsg.distrito') }}</label>
                 <select class="form-select" id="distrito" v-model="animal.distrito">
-                    <option value="1">Aveiro</option>
-                    <option value="2">Beja</option>
-                    <option value="3">Braga</option>
-                    <option value="4">Bragança</option>
-                    <option value="5">Castelo Branco</option>
-                    <option value="6">Coimbra</option>
-                    <option value="7">Évora</option>
-                    <option value="8">Faro</option>
-                    <option value="9">Guarda</option>
-                    <option value="10">Leiria</option>
-                    <option value="11">Lisboa</option>
-                    <option value="12">Portalegre</option>
-                    <option value="13">Porto</option>
-                    <option value="14">Santarém</option>
-                    <option value="15">Setúbal</option>
-                    <option value="16">Viana do Castelo</option>
-                    <option value="17">Vila Real</option>
-                    <option value="18">Viseu</option>
+                    <option v-for="(item, index) in distritos" :key="item" :value="index+1">{{item}}</option>                 
                 </select>
                 <label for="etiqueta" class="form-label">{{ $t('formAnimalMsg.etiqueta') }}</label>
                 <select class="form-select" id="etiqueta" v-model="animal.etiqueta">
@@ -70,8 +56,12 @@
                 </div>
             </div>
                 <button type="button" class="btn px-5 mt-3 text-white fw-bold float-end"
-                    style="background-color: #FD7E14;">{{ $t('formAnimalMsg.publicar') }}</button>
+                    style="background-color: #FD7E14;" @click="anunciarAnimal">{{ $t('formAnimalMsg.publicar') }}</button>
+                    <div class="alert alert-danger p-2 mt-3" role="alert" style="max-width:250px" v-show="erro">
+                        {{ this.mensagemErro }}
+                    </div>
             </div>
+            
         </div>
     </div>
 </template>
@@ -80,6 +70,7 @@
 
 export default {
     name: 'FormAnimal',
+    
     data() {
         return {
             animal: {
@@ -93,10 +84,13 @@ export default {
                 distrito: 1,
                 etiqueta: 1,
                 descricao: null,
-                fotografias: null
+                fotografias: []
             },
-            racas: ["1", "2"],
-            preview: []
+            distritos: ["Aveiro", "Beja", "Braga", "Bragança","Castelo Branco", 
+            "Coimbra", "Évora","Faro","Guarda","Leiria","Lisboa","Portalegre","Porto","Santarém","Setúbal","Viana do Castelo","Vila Real","Viseu"],
+            preview: [],
+            mensagemErro: null,
+            erro: false,
         }
     },
     components: {
@@ -106,7 +100,51 @@ export default {
             this.preview = []
             for (let i = 0; i < e.target.files.length; i++) {
                 this.preview.push(URL.createObjectURL(e.target.files[i]))
+                this.animal.fotografias.push(e.target.files[i])
             }
+        },
+
+        anunciarAnimal() {
+
+            if(this.animal.nome == null || this.animal.nome == ""){
+                this.mensagemErro = "O nome do animal é obrigatório"
+                this.erro = true;
+                return;
+            }
+
+            if(this.animal.descricao == null || this.animal.descricao == ""){
+                this.mensagemErro = "A descrição do animal é obrigatória"
+                this.erro = true;
+                return;
+            }
+
+            //isto nao é necessario, pode nao ter fotografia ?
+            /*if(this.animal.fotografias.length == 0){
+                this.mensagemErro = "Tem de inserir pelo menos uma fotografia"
+                this.erro = true;
+                return;
+            }*/
+
+            this.erro = false;
+
+            this.axios.post("/anunciaranimal", this.animal, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then(function (response) {
+                    console.log(response.data.sucesso);
+                })
+                .catch((error) => {
+                    if (error.response.status == 422) {
+                        this.mensagemErro = error.response.data.message
+                        this.erro = true;
+                    } else {
+                        this.mensagemErro = error.response.data.message
+                        this.erro = true;
+                    }
+                    console.log(this.mensagemErro)
+                });
         }
     }
 }
