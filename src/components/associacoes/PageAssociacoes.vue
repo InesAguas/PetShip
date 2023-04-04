@@ -5,16 +5,7 @@
             <h1>Associações</h1>
         </div>
         <div class="row">
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
-            <div class="col-auto mb-2"><CardAssociacao></CardAssociacao></div>
+            <CardAssociacao v-for="(row) in associacoes" :key="row" :associacao="row" class="col-auto m-2"></CardAssociacao>
         </div>
     </div>
     
@@ -27,7 +18,20 @@ export default {
     components: {
         NavBar,
         CardAssociacao
-    }
+    },
+    data() {
+        return {
+            associacoes: [],
+        }
+    },
+    mounted() {
+
+        this.axios.get('/associacoes')
+            .then(response => {
+                console.log(response.data)
+                this.associacoes = response.data
+            })
+        }
 }
 
 
