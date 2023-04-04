@@ -5,7 +5,7 @@
             <h2 class="fw-bold mb-4" style="color: #653208;">{{ $t('formAnimalMsg.anunciar') }}</h2>
             
         </div>
-            <div class="col">
+            <div class="col-10 col-sm-8 col-md-6 offset-md-0 offset-sm-2  offset-1" >
                 <label for="nome" class="form-label">{{ $t('formAnimalMsg.nome') }}</label>
                 <input type="text" id="nome" class="form-control" v-bind:placeholder="$t('formAnimalMsg.nome')" v-model="animal.nome">
                 <label for="sexo" class="form-label">{{ $t('formAnimalMsg.sexo') }}</label>
@@ -36,7 +36,7 @@
                 </select>
 
             </div>
-            <div class="col">
+            <div class="col-10 col-sm-8 col-md-6 offset-md-0 offset-sm-2 offset-1">
                 <label for="distrito" class="form-label">{{ $t('formAnimalMsg.distrito') }}</label>
                 <select class="form-select" id="distrito" v-model="animal.distrito">
                     <option v-for="(item, index) in distritos" :key="item" :value="index+1">{{item}}</option>                 
@@ -105,28 +105,45 @@ export default {
         },
 
         anunciarAnimal() {
-            console.log(this.animal.fotografias)
-            console.log(this.animal)
+
+            if(this.animal.nome == null || this.animal.nome == ""){
+                this.mensagemErro = "O nome do animal é obrigatório"
+                this.erro = true;
+                return;
+            }
+
+            if(this.animal.descricao == null || this.animal.descricao == ""){
+                this.mensagemErro = "A descrição do animal é obrigatória"
+                this.erro = true;
+                return;
+            }
+
+            //isto nao é necessario, pode nao ter fotografia ?
+            /*if(this.animal.fotografias.length == 0){
+                this.mensagemErro = "Tem de inserir pelo menos uma fotografia"
+                this.erro = true;
+                return;
+            }*/
+
+            this.erro = false;
+
             this.axios.post("/anunciaranimal", this.animal, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
                 .then(function (response) {
-                    console.log(response);
-
+                    console.log(response.data.sucesso);
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
-                        
-                        this.mensagemErro = error.message;
+                        this.mensagemErro = error.response.data.message
                         this.erro = true;
                     } else {
-                        this.mensagemErro = error.message
+                        this.mensagemErro = error.response.data.message
                         this.erro = true;
                     }
-
-                    
+                    console.log(this.mensagemErro)
                 });
         }
     }
