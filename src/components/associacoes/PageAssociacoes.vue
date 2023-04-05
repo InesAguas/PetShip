@@ -1,8 +1,8 @@
 <template>
     <NavBar></NavBar>
     <div class="container">
-        <div class="row">
-            <h1>Associações</h1>
+        <div class="row mt-3">
+            <h1 class="fw-bold" style="color: #653208">{{ $t('pageAssociacoes.titulo') }}</h1>
         </div>
         <div class="row">
             <CardAssociacao v-for="(row) in associacoes" :key="row" :associacao="row" class="col-auto m-2"></CardAssociacao>

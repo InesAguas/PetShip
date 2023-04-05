@@ -44,6 +44,10 @@ export const en = {
     },
     perfilAssMsg: {
         dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    },
+    pageAssociacoes: {
+        titulo : "Associations"
+
     }
     
 }
