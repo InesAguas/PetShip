@@ -5,23 +5,40 @@ import FormRegisto from '../components/FormRegisto'
 import PageAdotar from '../components/animais/PageAdotar'
 import PageAssociacoes from '../components/associacoes/PageAssociacoes'
 import PageAnunciarAnimal from '../components/animais/PageAnunciarAnimal'
+import PagePerfil from '../components/perfil/PagePerfil'
+
 //import App from '../App'
+
+function logado() {
+    if (localStorage.getItem('utilizador') == null) {
+        return '/login'
+    }
+}
+
+function deslogado() {
+    if (localStorage.getItem('utilizador') != null) {
+        return '/teste'
+    }
+}
 
 const routes = [
     {
         path: '/login',
         name: 'login',
-        component: FormLogin
+        component: FormLogin,
+        beforeEnter: [deslogado]
     },
     {
         path: '/teste',
         name: 'teste',
-        component: HelloWorld
+        component: HelloWorld,
+        beforeEnter: [logado]
     },
     {
         path: '/registar',
         name: 'registar',
-        component: FormRegisto
+        component: FormRegisto,
+        beforeEnter: [deslogado]
     },
     {
         path: '/adotar',
@@ -37,10 +54,15 @@ const routes = [
     {
         path:'/anunciar',
         name:'anunciar',
-        component: PageAnunciarAnimal
+        component: PageAnunciarAnimal,
+        beforeEnter: [logado]
+    },
+    {
+        path:'/perfil',
+        name:'perfil',
+        component: PagePerfil,
+        beforeEnter: [logado]
     }
-    
-
 ]
 
 const router = createRouter({
@@ -48,14 +70,4 @@ const router = createRouter({
     routes
 })
 
-//const isAuthenticated = false
-
-/*router.beforeEach(async (to) => {
-    if (!isAuthenticated && to.name !== 'Login' ) {
-      return { name: 'login' }
-    } else if(isAuthenticated && to.name == 'login') {
-        return { name: 'teste' }
-    }
-  })
-*/
 export default router
