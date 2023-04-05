@@ -75,30 +75,7 @@
             </div>
             <div class="col">
                 <div class="row">
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
-                    <div class="col-auto mb-3">
-                        <CardAnimal></CardAnimal>
-                    </div>
+                    <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col-auto m-2"></CardAnimal>
                 </div>
             </div>
         </div>
@@ -118,9 +95,17 @@ export default {
     },
     data() {
         return {
-            distritos: ["Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo", "Vila Real", "Viseu"]
-
+            distritos: ["Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo", "Vila Real", "Viseu"],
+            animais: []
         }
+    },
+    mounted() {
+        this.axios.get('/adotar')
+            .then(response => {
+                console.log(response.data)
+                this.animais = response.data
+                
+            })
     }
 }
 
