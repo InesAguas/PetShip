@@ -1,6 +1,6 @@
 <template>
     <div class="card" style="width: 18rem">
-        <img :src="require('../../assets/' + animal.fotografias[0])" class="card-img-top" alt="..." height="162" />
+        <img v-if="animal.fotografias != null" :src="animal.fotografias[0]" class="card-img-top" alt="..." height="162" />
         <div class="card-body">
             <div class="row">
                 <div class="col-7">

@@ -103,7 +103,8 @@ export default {
         this.axios.get('/adotar')
             .then(response => {
                 console.log(response.data)
-                this.animais = response.data
+                this.animais = response.data.animais
+                console.log(this.animais)
                 
             })
     }
