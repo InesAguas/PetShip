@@ -27,8 +27,8 @@
           </li>
         </ul>
         <div class="d-flex justify-content-end">
-          <div class="dropdown">
-          <span class="text-white">Nome aqui</span>
+          <div class="dropdown" v-if="utilizador">
+          <span class="text-white">{{ utilizador.nome }}</span>
           
             <button type="button" class="btn p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-circle"
@@ -42,6 +42,7 @@
               <li><a class="dropdown-item" href="/teste">Perfil</a></li>
               <li><a class="dropdown-item" href="/anunciar">Publicar animal</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#" v-on:click="logout">logout</a></li>
             </ul>
           </div>
   
@@ -50,8 +51,6 @@
           <span class="text-white"> &nbsp;|&nbsp; </span>
           <span class="text-white lang" :class="{ 'fw-bold': (this.$i18n.locale == 'en') }"
             @click="setLocale('en')">EN</span>
-          
-          
         </div>
       </div>
     </div>
@@ -67,11 +66,27 @@
 <script>
 export default {
   name: 'NavBar',
-
+  data() {
+    return {
+      utilizador: []
+    }
+  },
   methods: {
     setLocale(locale) {
       this.$i18n.locale = locale
+    },
+
+    logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('utilizador');
+
+      this.$router.push('/login');
+      //pedido a api para logout para apagar token???
     }
+  },
+  mounted() {
+    this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
+    console.log(this.utilizador);
   }
 }
 </script>
