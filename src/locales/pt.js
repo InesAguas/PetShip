@@ -50,5 +50,12 @@ export const pt = {
     pageAssociacoes: {
         titulo : "Associações"
 
+    },
+    perfilMsg: {
+        localizacao: "Localização",
+        contacto: "Contacto",
+        mensagem: "Enviar Mensagem",
+        horario: "Horário",
+        vazio: "Sem informação"
     }
 }

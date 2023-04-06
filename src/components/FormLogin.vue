@@ -72,7 +72,7 @@ export default {
                     localStorage.setItem('token', response.data.token);
                     this.axios.defaults.headers.common['Authorization'] = 'token' + response.data.token;
                     console.log(this.$store.state.utilizador.nome);
-                    this.$router.push('/teste');
+                    this.$router.push('/adotar');
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
