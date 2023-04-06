@@ -14,13 +14,13 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/registar">Home</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/adotar">Home</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Features</a>
+            <router-link class="nav-link text-white" aria-current="page" to="/adotar">Adotar</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Pricing</a>
+            <router-link class="nav-link text-white" aria-current="page" to="/associacao">Associações</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">About</a>
