@@ -11,64 +11,61 @@
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Distrito</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroDistrito">"
+                        <option selected value="">Qualquer</option>
                         <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{ distrito }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Espécie</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example"  v-model="filtroEspecie">
+                        <option selected value="">Qualquer</option>
+                        <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}</option>
+                    <option v-bind:value="$t('formAnimalMsg.especies[1]')">{{ $t('formAnimalMsg.especies[1]') }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Raça</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroRaca">
+                        <option selected value="">Qualquer</option>
+                        <option disabled>--- CÃES ---</option>
+                        <option v-for="item in $tm('formAnimalMsg.racas_caes')" :key="item" :value="item">{{item}}</option>
+                        <option disabled>--- GATOS ---</option>
+                        <option v-for="item in $tm('formAnimalMsg.racas_gatos')" :key="item" :value="item">{{item}}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Idade</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroIdade">
+                        <option selected value="">Qualquer</option>
+                        <option v-for="item in $tm('formAnimalMsg.idades')" :key="item" :value="item">{{item}}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Sexo</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroSexo">
+                        <option selected value="">Qualquer</option>
+                        <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[0]') }}</option>
+                        <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[1]') }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Tamanho</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroTamanho">
+                        <option selected value="">Qualquer</option>
+                        <option v-for="item in $tm('formAnimalMsg.portes')" :key="item" :value="item">{{item}}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Cor</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Qualquer</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroCor">
+                        <option selected value="">Qualquer</option>
+                        <option v-for="item in $tm('formAnimalMsg.cores')" :key="item" :value="item">{{item}}</option>
                     </select>
+                </div>
+                <div class="mb-2 text-center">
+                <button type="button" class="btn px-4 mt-2 text-white fw-bold"
+                    style="background-color: #FD7E14;" v-on:click="filtrar" >Pesquisar</button>
                 </div>
 
 
@@ -96,16 +93,43 @@ export default {
     data() {
         return {
             distritos: ["Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo", "Vila Real", "Viseu"],
-            animais: []
+            animais: [],
+            todosAnimais: [],
+            filtroDistrito: "",
+            filtroEspecie: "",
+            filtroRaca: "",
+            filtroIdade: "",
+            filtroSexo: "",
+            filtroTamanho: "",
+            filtroCor: "",
         }
+        
     },
     mounted() {
         this.axios.get('/adotar')
             .then(response => {
                 console.log(response.data)
-                this.animais = response.data
+                this.todosAnimais = response.data.animais
+                this.animais = this.todosAnimais
+                console.log(this.animais)
                 
             })
+    },
+    methods: {
+        filtrar() {
+            this.animais = this.todosAnimais.filter((animal) => {
+                return (this.filtroDistrito != "" ? animal.distrito === this.filtroDistrito : true)
+                    && (this.filtroEspecie != "" ? animal.especie === this.filtroEspecie : true)
+                    && (this.filtroRaca != "" ? animal.raca === this.filtroRaca : true)
+                    && (this.filtroIdade != "" ? animal.idade === this.filtroIdade : true)
+                    && (this.filtroSexo != "" ? animal.sexo === this.filtroSexo : true)
+                    && (this.filtroTamanho != "" ? animal.tamanho === this.filtroTamanho : true)
+                    && (this.filtroCor != "" ? animal.cor === this.filtroCor : true)
+            });
+
+            console.log(this.animais)
+
+        }
     }
 }
 
