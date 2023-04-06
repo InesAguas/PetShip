@@ -47,8 +47,8 @@ const routes = [
     }
     ,
     {
-        path: '/associacao',
-        name: 'associacao',
+        path: '/associacoes',
+        name: 'associacoes',
         component: PageAssociacoes
     },
     {

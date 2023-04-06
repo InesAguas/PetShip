@@ -28,8 +28,8 @@ export default {
 
         this.axios.get('/associacoes')
             .then(response => {
-                console.log(response.data)
-                this.associacoes = response.data
+                console.log(response.data.associacoes)
+                this.associacoes = response.data.associacoes
             })
         }
 }
