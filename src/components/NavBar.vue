@@ -39,7 +39,7 @@
             </svg>
           </button>
             <ul class="dropdown-menu dropdown-menu-center">
-              <li><a class="dropdown-item" href="/teste">Perfil</a></li>
+              <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
               <li><a class="dropdown-item" href="/anunciar">Publicar animal</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
               <li><a class="dropdown-item" href="#" v-on:click="logout">logout</a></li>

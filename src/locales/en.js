@@ -49,6 +49,13 @@ export const en = {
     pageAssociacoes: {
         titulo : "Associations"
 
+    },
+    perfilMsg: {
+        localizacao: "Location",
+        contacto: "Contact",
+        mensagem: "Send Message",
+        horario: "Schedule",
+        vazio: "No information"
     }
     
 }

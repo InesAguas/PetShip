@@ -17,7 +17,7 @@ function logado() {
 
 function deslogado() {
     if (localStorage.getItem('utilizador') != null) {
-        return '/teste'
+        return '/adotar'
     }
 }
 
