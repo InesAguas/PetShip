@@ -7,9 +7,6 @@
         <div class="row">
             <div class="col-2 mt-3">
                 <div class="mb-2">
-                    <input type="search" class="form-control" placeholder="Pesquisar...">
-                </div>
-                <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Distrito</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroDistrito">"
                         <option selected value="">Qualquer</option>
