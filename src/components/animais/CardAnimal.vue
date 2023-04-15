@@ -1,6 +1,6 @@
 <template>
     <div class="card" style="width: 17rem">
-        <img  :src="animal.fotografias == null ? require('../../assets/default_animal.png') : animal.fotografias[0] " class="card-img-top mt-3" alt="..." height="162" />
+        <img  :src="animal.fotografias.length == 0 ? require('../../assets/default_animal.png') : animal.fotografias[0] " class="card-img-top mt-3" alt="..." height="162" />
         <div class="card-body">
             <div class="row">
                 <div class="col-7">

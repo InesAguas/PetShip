@@ -55,7 +55,8 @@ export const en = {
         contacto: "Contact",
         mensagem: "Send Message",
         horario: "Schedule",
-        vazio: "No information"
+        vazio: "No information",
+        editar: "Edit Profile",
     }
     
 }

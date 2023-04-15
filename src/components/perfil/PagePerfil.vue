@@ -1,7 +1,9 @@
 <template>
+    <div v-if="utilizador">
     <NavBar></NavBar>
-    <PerfilParticular v-if="utilizador.tipo == 1" :utilizador="utilizador"></PerfilParticular>
-    <PerfilAssociacao v-if="utilizador.tipo == 2" :utilizador="utilizador"></PerfilAssociacao>
+    <PerfilParticular v-if="utilizador.tipo == 1" :utilizador="utilizador" :utilizadorLogado="utilizadorLogado"></PerfilParticular>
+    <PerfilAssociacao v-if="utilizador.tipo == 2" :utilizador="utilizador" :utilizadorLogado="utilizadorLogado"></PerfilAssociacao>
+</div>
 </template>
 <script>
 
@@ -18,12 +20,27 @@ export default {
     },
     data() {
         return {
-            utilizador: []
+            utilizadorLogado: null,
+            utilizador: null,
         }
     },
     mounted() {
-        this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
-        console.log(this.utilizador);
+        this.utilizadorLogado = JSON.parse(localStorage.getItem('utilizador'));
+        console.log(this.utilizadorLogado);
+
+        if(this.$route.params.id == null) {
+            this.utilizador = this.utilizadorLogado;
+            console.log(this.utilizador);
+        } else {
+            this.axios.get('/perfil/' + this.$route.params.id)
+        .then(response => {
+            this.utilizador = response.data.utilizador;
+        })
+        .catch(error => {
+            this.erro = true;
+            this.mensagemErro = error.response.data.message;
+        })
+        }
     }
 }
 

@@ -62,6 +62,11 @@ const routes = [
         name:'perfil',
         component: PagePerfil,
         beforeEnter: [logado]
+    },
+    {
+        path:'/perfil/:id',
+        name:'perfilOutro',
+        component: PagePerfil,
     }
 ]
 
