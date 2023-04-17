@@ -1,49 +1,82 @@
+<style>
+#imagem {
+    opacity: 0.7;
+}
+
+#imagem:hover {
+    opacity: 1;
+}
+</style>
+
 <template>
     <NavBar></NavBar>
-    <div class="container-fluid p-0">
-        <div class="row d-flex align-items-center justify-content-center" style="height:400px">
-            <img src="../assets/cat_dog.jpg" class="w-100 z-0 h-100" >
-            <h1 class="fw-bold p-5 z-1" style="color: #653208; margin-top:-600px">Faça um animal feliz <br>Adote</h1>
 
-            <div class="input-group z-1 p-2 rounded" style="max-width:40%; margin-top:-60px; margin-bottom:30px; background-color:white;">
+    <div class="container-fluid p-0">
+        <div class="d-flex" style="height:400px">
+            <img src="../assets/cat_dog.jpg" class="w-100 z-0 h-100 opacity-75" style="object-fit:cover;">
+            <h1 class="fw-bold p-5 z-1 position-absolute" style="color: #653208;">Faça um animal feliz <br>Adote</h1>
+            <div class="input-group z-1 p-2 position-absolute rounded"
+                style="width:40%; margin-top:320px; margin-left:30%;  background-color:white;">
                 <select class="form-select w-auto">
                     <option>Procurar Cães e Gatos</option>
                 </select>
                 <select class="form-select w-auto">
-                    <option >Idade</option>
+                    <option>Idade</option>
                 </select>
                 <select class="form-select w-auto">
-                    <option >Sexo</option>
+                    <option>Sexo</option>
                 </select>
                 <select class="form-select w-auto">
-                    <option >Distrito</option>
+                    <option>Distrito</option>
                 </select>
-                <button type="button" class="btn text-white fw-bold" style="background-color: #FD7E14;">Procurar</button>   
+                <button type="button" class="btn text-white fw-bold" style="background-color: #FD7E14;">Procurar</button>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row justify-content-center mt-3">
-            <div class="col-auto" >
+            <div class="col-auto">
                 <h1 class="fw-bold" style="color: #653208;">Animais para adoção</h1>
             </div>
 
         </div>
-        <div class="row justify-content-center" >
-            <div class="col-auto"><img src="../assets/dog.jpg"  width="150px" height="150px"></div>
-            <div class="col-auto"><img src="../assets/cat.jpg"  width="150px" height="150px"></div>
+        <div class="row justify-content-center">
+            <div class="col-auto z-0 d-flex justify-content-center align-items-end"><a href="/adotar"><img
+                        src="../assets/dog.jpg" id="imagem" width="200px" height="200px" style="object-fit:cover;"></a>
+                <h2 class="fw-bold z-1 position-absolute" style="color:white">Cães</h2>
+            </div>
+            <div class="col-auto <-0 d-flex justify-content-center align-items-end"><a href="/adotar"><img
+                        src="../assets/cat.jpg" id="imagem" width="200px" height="200px" style="object-fit:cover;"></a>
+                <h2 class="fw-bold z-1 position-absolute" style="color:white">Gatos</h2>
+            </div>
         </div>
         <div class="row justify-content-center mt-5">
 
-        <div class="col-auto">
+            <div class="col-auto">
                 <h1 class="fw-bold" style="color: #653208;">Ultimos anuncios</h1>
             </div>
         </div>
-            <div class="row justify-content-center">
-                <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col-auto m-2"></CardAnimal>
+        <div class="row justify-content-center">
+            <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col m-2"></CardAnimal>
+        </div>
+        <div class="row mt-5">
+            <div class="col me-2 mb-5" style="background-color:white;">
+                <h1 class="fw-bold" style="color: #653208;">Associações perto de si</h1>
+                <h6>Encontre uma associação na sua área.</h6>
+                <div width="500" height="500">
+                    <GMapMap :center="{ lat: latitude, lng: longitude }" :zoom="13" map-type-id="terrain" style="height:400px">
+                        <GMapMarker :position="{ lat: latitude, lng: longitude }" />
+                    </GMapMap>
+                </div>
             </div>
-        
-            
-</div>
+            <div class="col ms-2 mb-5" style="background-color:white;">
+                <h1 class="fw-bold" style="color: #653208;">Não pode adotar mas quer ajudar?</h1>
+                <h6>Com o nosso website, pode tornar-se petsitter, voluntário na sua associação local ou fazer donativos.</h6>
+            </div>
+        </div>
+    </div>
 </template>
+
 
 <script>
 import NavBar from './NavBar.vue'
@@ -58,11 +91,19 @@ export default {
                 this.animais = response.data.animais
                 this.animais = this.animais.slice(-4)
                 console.log(this.animais)
-            })
+            });
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log("Latitude is :", position.coords.latitude);
+            console.log("Longitude is :", position.coords.longitude);
+            this.latitude = position.coords.latitude;
+            this.longitude = position.coords.longitude;
+        });
     },
     data() {
         return {
             animais: [],
+            latitude: 40.3609438,
+            longitude: -7.8633804
         }
     },
     components: {
@@ -72,4 +113,6 @@ export default {
     methods: {
     }
 }
+
+
 </script>
