@@ -6,6 +6,7 @@ import PageAdotar from '../components/animais/PageAdotar'
 import PageAssociacoes from '../components/associacoes/PageAssociacoes'
 import PageAnunciarAnimal from '../components/animais/PageAnunciarAnimal'
 import PagePerfil from '../components/perfil/PagePerfil'
+import PaginaInicial from '../components/PaginaInicial'
 
 //import App from '../App'
 
@@ -22,6 +23,11 @@ function deslogado() {
 }
 
 const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: PaginaInicial
+    },
     {
         path: '/login',
         name: 'login',

@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-lg  navbar-expand-md bg-body-tertiary" style="background-color: #FD7E14;">
+<nav class="navbar navbar-expand-lg  navbar-expand-md bg-body-tertiary pb-0 pt-0" style="background-color: #FD7E14;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#" style="color:white; font-family:Coiny;">
         <img src="../assets/logo_site_smaller.png" alt="Logo" width="42" height="48" class="">
