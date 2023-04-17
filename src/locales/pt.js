@@ -56,6 +56,7 @@ export const pt = {
         contacto: "Contacto",
         mensagem: "Enviar Mensagem",
         horario: "Horário",
-        vazio: "Sem informação"
+        vazio: "Sem informação",
+        editar: "Editar Perfil",
     }
 }

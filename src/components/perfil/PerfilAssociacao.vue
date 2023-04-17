@@ -46,6 +46,7 @@
 export default {
     name: 'PerfilAssociacao',
     props: [
+        'utilizadorLogado',
         'utilizador'
         ],
     data() {
@@ -55,7 +56,6 @@ export default {
             mensagemErro: null
         }
     },
-
     components: {
     },
     methods: {
