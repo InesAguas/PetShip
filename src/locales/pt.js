@@ -58,5 +58,8 @@ export const pt = {
         horario: "Horário",
         vazio: "Sem informação",
         editar: "Editar Perfil",
+    },
+    pageDesaparecido: {
+        titulo: "Desaparecidos"
     }
 }
