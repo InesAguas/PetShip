@@ -61,5 +61,18 @@ export const pt = {
     },
     pageDesaparecido: {
         titulo: "Desaparecidos"
+    },
+    paginaInicialMsg: {
+        tituloImagem: "Faça um animal feliz",
+        tituloAdote: "Adote",
+        procurar: "Procurar",
+        adocao: "Animais para adoção",
+        caes: "Cães",
+        gatos: "Gatos",
+        ultimosAnuncios: "Últimos anúncios",
+        associacoesPerto: "Associações perto de si",
+        encontreAssociacao: "Encontre uma associação na sua área",
+        ajudarTexto: "Não pode adotar mas quer ajudar?",
+        textAjudas: "Com o nosso website, pode tornar-se petsitter, voluntário numa associação ou canil, ou fazer donativos e ajudar animais que necessitam de cuidados.",
     }
 }

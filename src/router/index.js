@@ -8,6 +8,7 @@ import PageAnunciarAnimal from '../components/animais/PageAnunciarAnimal'
 import PagePerfil from '../components/perfil/PagePerfil'
 import PageDesaparecido from '../components/animais/PageDesaparecido'
 import PagePetSitting from '../components/animais/PagePetSitting'
+import PaginaInicial from '../components/PaginaInicial'
 
 //import App from '../App'
 
@@ -24,6 +25,11 @@ function deslogado() {
 }
 
 const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: PaginaInicial
+    },
     {
         path: '/login',
         name: 'login',

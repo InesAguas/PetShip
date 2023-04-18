@@ -7,6 +7,7 @@ import popper from 'popper.js'
 import router from './router'
 import axios from 'axios'
 import store from './store'
+import VueGoogleMaps from '@fawmi/vue-google-maps'
 
 import { createI18n } from 'vue-i18n'
 import { pt } from './locales/pt.js'
@@ -31,10 +32,18 @@ const app = createApp(App)
 app.use(i18n)
 app.use(router)
 app.use(store)
+app.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyCB6KjQGetQmdzbyolgPMBLvvY_Zg-Y3bY',
+        // language: 'de',
+    },
+})
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/api"
 app.config.globalProperties.axios=axios
 
 app.mount('#app')
+
+
 
 

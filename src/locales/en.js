@@ -60,6 +60,19 @@ export const en = {
     },
     pageDesaparecido: {
         titulo : "Missing"
+    },
+    paginaInicialMsg: {
+        tituloImagem: "Bring happinness to a pet's life",
+        tituloAdote: "Adopt",
+        procurar: "Search",
+        adocao: "Pets for adoption",
+        caes: "Dogs",
+        gatos: "Cats",
+        ultimosAnuncios: "Last announcements",
+        associacoesPerto: "Associations near you",
+        encontreAssociacao: "Find a shelter near you",
+        ajudarTexto: "Can't adopt a pet? You can still help them!",
+        textAjudas: "With our website, you can help by becoming a petsitter, volunteering at a shelter or donating to a shelter near you.",
     }
     
 }
