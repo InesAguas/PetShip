@@ -57,6 +57,9 @@ export const en = {
         horario: "Schedule",
         vazio: "No information",
         editar: "Edit Profile",
+    },
+    pageDesaparecido: {
+        titulo : "Missing"
     }
     
 }

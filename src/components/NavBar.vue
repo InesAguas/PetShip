@@ -23,6 +23,12 @@
             <router-link class="nav-link text-white" aria-current="page" to="/associacoes">Associações</router-link>
           </li>
           <li class="nav-item">
+            <router-link class="nav-link text-white" aria-current="page" to="/desaparecido">Desaparecidos</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link text-white" aria-current="page" to="/petsitting">Pet Sitting</router-link>
+          </li>
+          <li class="nav-item">
             <a class="nav-link text-white" href="#">About</a>
           </li>
         </ul>

@@ -6,6 +6,8 @@ import PageAdotar from '../components/animais/PageAdotar'
 import PageAssociacoes from '../components/associacoes/PageAssociacoes'
 import PageAnunciarAnimal from '../components/animais/PageAnunciarAnimal'
 import PagePerfil from '../components/perfil/PagePerfil'
+import PageDesaparecido from '../components/animais/PageDesaparecido'
+import PagePetSitting from '../components/animais/PagePetSitting'
 
 //import App from '../App'
 
@@ -67,6 +69,16 @@ const routes = [
         path:'/perfil/:id',
         name:'perfilOutro',
         component: PagePerfil,
+    },
+    {
+        path: '/desaparecido',
+        name: 'desaparecido',
+        component: PageDesaparecido
+    },
+    {
+        path: '/petsitting',
+        name: 'petsitting',
+        component: PagePetSitting
     }
 ]
 
