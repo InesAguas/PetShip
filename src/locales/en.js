@@ -73,6 +73,13 @@ export const en = {
         encontreAssociacao: "Find a shelter near you",
         ajudarTexto: "Can't adopt a pet? You can still help them!",
         textAjudas: "With our website, you can help by becoming a petsitter, volunteering at a shelter or donating to a shelter near you.",
+    },
+    paginaAnimalMsg: {
+        anunciado: "Announced by",
+        anuncioCriado: "Announcement created on",
+        carateristicas: "Characteristics",
+        tamanho: "Size",
+        contactos: "Contacts",
     }
     
 }

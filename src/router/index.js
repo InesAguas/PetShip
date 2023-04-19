@@ -9,6 +9,7 @@ import PagePerfil from '../components/perfil/PagePerfil'
 import PageDesaparecido from '../components/animais/PageDesaparecido'
 import PagePetSitting from '../components/animais/PagePetSitting'
 import PaginaInicial from '../components/PaginaInicial'
+import PageAnimal from '../components/animais/PageAnimal'
 
 //import App from '../App'
 
@@ -85,6 +86,11 @@ const routes = [
         path: '/petsitting',
         name: 'petsitting',
         component: PagePetSitting
+    },
+    {
+        path: '/animal',
+        name: 'animal',
+        component: PageAnimal
     }
 ]
 

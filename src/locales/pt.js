@@ -74,5 +74,12 @@ export const pt = {
         encontreAssociacao: "Encontre uma associação na sua área",
         ajudarTexto: "Não pode adotar mas quer ajudar?",
         textAjudas: "Com o nosso website, pode tornar-se petsitter, voluntário numa associação ou canil, ou fazer donativos e ajudar animais que necessitam de cuidados.",
+    },
+    paginaAnimalMsg: {
+        anunciado: "Anunciado por",
+        anuncioCriado: "Anúncio criado em",
+        carateristicas: "Caraterísticas",
+        tamanho: "Tamanho",
+        contactos: "Contactos",
     }
 }
