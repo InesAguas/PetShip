@@ -10,29 +10,29 @@
                 <input type="text" id="nome" class="form-control" v-bind:placeholder="$t('formAnimalMsg.nome')" v-model="animal.nome">
                 <label for="sexo" class="form-label">{{ $t('formAnimalMsg.sexo') }}</label>
                 <select class="form-select" id="sexo" v-model="animal.sexo">
-                    <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[0]') }}</option>
-                    <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[1]') }}</option>
+                    <option v-bind:value="1">{{ $t('formAnimalMsg.sexos[0]') }}</option>
+                    <option v-bind:value="2">{{ $t('formAnimalMsg.sexos[1]') }}</option>
                 </select>
                 <label for="especie" class="form-label">{{ $t('formAnimalMsg.especie') }}</label>
                 <select class="form-select" id="especie" v-model="animal.especie" v-on:change="alterarRacas">
-                    <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}</option>
-                    <option v-bind:value="$t('formAnimalMsg.especies[1]')">{{ $t('formAnimalMsg.especies[1]') }}</option>
+                    <option v-bind:value="1">{{ $t('formAnimalMsg.especies[0]') }}</option>
+                    <option v-bind:value="2">{{ $t('formAnimalMsg.especies[1]') }}</option>
                 </select>
                 <label for="raca" class="form-label">{{ $t('formAnimalMsg.raca') }}</label>
                 <select class="form-select" id="raca" v-model="animal.raca">
-                    <option v-for="item in racas" :key="item" :value="item">{{item}}</option>
+                    <option v-for="(item,index) in racas" :key="item" :value="index">{{item}}</option>
                 </select>
                 <label for="porte" class="form-label">{{ $t('formAnimalMsg.porte') }}</label>
                 <select class="form-select" id="porte" v-model="animal.porte">
-                    <option v-for="item in $tm('formAnimalMsg.portes')" :key="item" :value="item">{{item}}</option>
+                    <option v-for="(item,index) in $tm('formAnimalMsg.portes')" :key="item" :value="index">{{item}}</option>
                 </select>
                 <label for="idade" class="form-label">{{ $t('formAnimalMsg.idade') }}</label>
                 <select class="form-select" id="idade" v-model="animal.idade">
-                    <option v-for="item in $tm('formAnimalMsg.idades')" :key="item" :value="item">{{item}}</option>
+                    <option v-for="(item,index) in $tm('formAnimalMsg.idades')" :key="item" :value="index">{{item}}</option>
                 </select>
                 <label for="cor" class="form-label">{{ $t('formAnimalMsg.cor') }}</label>
                 <select class="form-select" id="cor" v-model="animal.cor">
-                    <option v-for="item in $tm('formAnimalMsg.cores')" :key="item" :value="item">{{item}}</option>
+                    <option v-for="(item, index) in $tm('formAnimalMsg.cores')" :key="item" :value="index">{{item}}</option>
                 </select>
 
             </div>
@@ -43,7 +43,7 @@
                 </select>
                 <label for="etiqueta" class="form-label">{{ $t('formAnimalMsg.etiqueta') }}</label>
                 <select class="form-select" id="etiqueta" v-model="animal.etiqueta">
-                    <option v-for="item in $tm('formAnimalMsg.etiquetas')" :key="item" :value="item">{{item}}</option>
+                    <option v-for="(item,index) in $tm('formAnimalMsg.etiquetas')" :key="item" :value="index">{{item}}</option>
                 </select>
                 <label for="descricao" class="form-label">{{ $t('formAnimalMsg.descricao') }}</label>
                 <textarea id="descricao" class="form-control" placeholder="Desccrição" v-model="animal.descricao"></textarea>
@@ -75,14 +75,14 @@ export default {
         return {
             animal: {
                 nome: null,
-                sexo: this.$t('formAnimalMsg.sexos[0]'),
-                especie: this.$t('formAnimalMsg.especies[0]'),
-                raca: this.$t('formAnimalMsg.racas_caes[0]'),
-                porte: this.$t('formAnimalMsg.portes[0]'),
-                idade: this.$t('formAnimalMsg.idades[0]'),
-                cor: this.$t('formAnimalMsg.cores[0]'),
+                sexo: 1,
+                especie: 1,
+                raca: 1,
+                porte: 1,
+                idade: 1,
+                cor: 1,
                 distrito: "Aveiro",
-                etiqueta: this.$t('formAnimalMsg.etiquetas[0]'),
+                etiqueta: 1,
                 descricao: null,
                 fotografias: []
             },
