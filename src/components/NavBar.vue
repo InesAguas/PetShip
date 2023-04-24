@@ -51,6 +51,9 @@
               <li><a class="dropdown-item" href="#" v-on:click="logout">logout</a></li>
             </ul>
           </div>
+          <div v-if="!utilizador">
+              <router-link class="nav-link text-white me-2" aria-current="page" to="/login">Login</router-link>
+          </div>
   
           <span class="text-white lang" :class="{ 'fw-bold': (this.$i18n.locale == 'pt') }"
             @click="setLocale('pt')">PT</span>
