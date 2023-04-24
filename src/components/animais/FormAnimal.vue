@@ -117,7 +117,8 @@ export default {
 
             this.axios.post("/anunciaranimal", this.animal, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             })
                 .then(function (response) {
