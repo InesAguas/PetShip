@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg  navbar-expand-md bg-body-tertiary pb-0 pt-0" style="background-color: #FD7E14;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" style="color:white; font-family:Coiny;">
+      <a class="navbar-brand" href="/" style="color:white; font-family:Coiny;">
         <img src="../assets/logo_site_smaller.png" alt="Logo" width="42" height="48" class="">
         <b>PetShip</b>
       </a>
@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/adotar">Home</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/">Home</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link text-white" aria-current="page" to="/adotar">Adotar</router-link>

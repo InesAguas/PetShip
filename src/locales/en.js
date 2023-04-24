@@ -41,7 +41,9 @@ export const en = {
         verMais: "See details"
     },
     pageAdotar: {
-        titulo : "Adopt"
+        titulo : "Adopt",
+        qualquer: "Any",
+        pesquisar: "Search",
     },
     perfilAssMsg: {
         dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -66,6 +68,7 @@ export const en = {
         tituloAdote: "Adopt",
         procurar: "Search",
         adocao: "Pets for adoption",
+        caesgatos: "Dogs and cats",
         caes: "Dogs",
         gatos: "Cats",
         ultimosAnuncios: "Last announcements",
@@ -73,6 +76,9 @@ export const en = {
         encontreAssociacao: "Find a shelter near you",
         ajudarTexto: "Can't adopt a pet? You can still help them!",
         textAjudas: "With our website, you can help by becoming a petsitter, volunteering at a shelter or donating to a shelter near you.",
+        idade: "Age",
+        sexo: "Sex",
+        distrito: "District",
     }
     
 }
