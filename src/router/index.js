@@ -51,6 +51,7 @@ const routes = [
     {
         path: '/adotar',
         name: 'adotar',
+        props: true,
         component: PageAdotar
     }
     ,

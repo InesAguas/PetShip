@@ -9,60 +9,63 @@
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Distrito</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroDistrito">"
-                        <option selected value="">Qualquer</option>
-                        <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{ distrito }}</option>
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
+                        <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{ distrito }}
+                        </option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Espécie</label>
-                    <select class="form-select" aria-label="Default select example"  v-model="filtroEspecie">
-                        <option selected value="">Qualquer</option>
-                        <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}</option>
-                    <option v-bind:value="$t('formAnimalMsg.especies[1]')">{{ $t('formAnimalMsg.especies[1]') }}</option>
+                    <select class="form-select" aria-label="Default select example" v-model="filtroEspecie">
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
+                        <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}
+                        </option>
+                        <option v-bind:value="$t('formAnimalMsg.especies[1]')">{{ $t('formAnimalMsg.especies[1]') }}
+                        </option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Raça</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroRaca">
-                        <option selected value="">Qualquer</option>
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
                         <option disabled>--- CÃES ---</option>
-                        <option v-for="item in $tm('formAnimalMsg.racas_caes')" :key="item" :value="item">{{item}}</option>
+                        <option v-for="item in $tm('formAnimalMsg.racas_caes')" :key="item" :value="item">{{ item }}</option>
                         <option disabled>--- GATOS ---</option>
-                        <option v-for="item in $tm('formAnimalMsg.racas_gatos')" :key="item" :value="item">{{item}}</option>
+                        <option v-for="item in $tm('formAnimalMsg.racas_gatos')" :key="item" :value="item">{{ item }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Idade</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroIdade">
-                        <option selected value="">Qualquer</option>
-                        <option v-for="item in $tm('formAnimalMsg.idades')" :key="item" :value="item">{{item}}</option>
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
+                        <option v-for="item in $tm('formAnimalMsg.idades')" :key="item" :value="item">{{ item }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Sexo</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroSexo">
-                        <option selected value="">Qualquer</option>
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
                         <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[0]') }}</option>
-                        <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[1]') }}</option>
+                        <option v-bind:value="$t('formAnimalMsg.sexos[1]')">{{ $t('formAnimalMsg.sexos[1]') }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Tamanho</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroTamanho">
-                        <option selected value="">Qualquer</option>
-                        <option v-for="item in $tm('formAnimalMsg.portes')" :key="item" :value="item">{{item}}</option>
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
+                        <option v-for="(item,index) in $tm('formAnimalMsg.portes')" :key="item" :value="index">{{ item }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Cor</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroCor">
-                        <option selected value="">Qualquer</option>
-                        <option v-for="item in $tm('formAnimalMsg.cores')" :key="item" :value="item">{{item}}</option>
+                        <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
+                        <option v-for="item in $tm('formAnimalMsg.cores')" :key="item" :value="item">{{ item }}</option>
                     </select>
                 </div>
                 <div class="mb-2 text-center">
-                <button type="button" class="btn px-4 mt-2 text-white fw-bold"
-                    style="background-color: #FD7E14;" v-on:click="filtrar" >Pesquisar</button>
+                    <button type="button" class="btn px-4 mt-2 text-white fw-bold" style="background-color: #FD7E14;"
+                        v-on:click="filtrar">{{$t('pageAdotar.pesquisar')}}</button>
                 </div>
 
 
@@ -100,17 +103,23 @@ export default {
             filtroTamanho: "",
             filtroCor: "",
         }
-        
+
     },
     mounted() {
-        this.axios.get('/adotar')
-            .then(response => {
-                console.log(response.data)
-                this.todosAnimais = response.data.animais
-                this.animais = this.todosAnimais
-                console.log(this.animais)
-                
-            })
+        if(this.$route.params != null) {
+            this.filtroDistrito = this.$route.params.distrito != null ? this.$route.params.distrito : "";
+            console.log("Hello")
+            console.log(this.filtroDistrito);
+            this.filtroSexo = this.$route.params.sexo != null ? this.$route.params.sexo : "";
+            this.filtroIdade = this.$route.params.idade != null ? this.$route.params.idade : "";
+            this.filtroEspecie = this.$route.params.especie != null ? this.$route.params.especie : "";
+        }
+        this.loadAnimais();
+    },
+    watch: {
+        '$i18n.locale': function () {
+            this.loadAnimais();
+        }
     },
     methods: {
         filtrar() {
@@ -124,10 +133,26 @@ export default {
                     && (this.filtroCor != "" ? animal.cor === this.filtroCor : true)
             });
 
-            console.log(this.animais)
+        },
 
+
+        loadAnimais() {
+            this.axios.get('/adotar?lang=' + this.$i18n.locale)
+            .then(response => {
+                console.log(response.data)
+                this.todosAnimais = response.data.animais
+                this.animais = this.todosAnimais
+                console.log(this.animais)
+                this.filtrar();
+            })
+            
         }
+
+
+
     }
 }
+
+
 
 </script>
