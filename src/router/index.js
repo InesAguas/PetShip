@@ -88,7 +88,7 @@ const routes = [
         component: PagePetSitting
     },
     {
-        path: '/animal',
+        path: '/animal/:id',
         name: 'animal',
         component: PageAnimal
     }

@@ -2,8 +2,9 @@
     <NavBar></NavBar>
     <div class="container mt-5">
         <div class="row">
-            <h1 class="fw-bold" style="color: #653208">Snoppy <small><small><small><small class="badge rounded-pill"
-                                style="background-color: #FD7E14">Por adotar</small></small></small></small></h1>
+            <h1 class="fw-bold" style="color: #653208">{{ animal.nome }} <small><small><small><small
+                                class="badge rounded-pill" style="background-color: #FD7E14">{{ animal.etiqueta
+                                }}</small></small></small></small></h1>
         </div>
         <div class="row">
             <div id="carouselExample" class="carousel slide">
@@ -40,7 +41,7 @@
                                 class="rounded-circle" style="width:70px;height:70px;object-fit:cover;">
                         </div>
                         <div class="col">
-                            {{ $t('paginaAnimalMsg.anunciado') }}<h5>Jose almeida</h5>
+                            {{ $t('paginaAnimalMsg.anunciado') }}<h5>{{ utilizador.nome }}</h5>
                             <p>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -48,7 +49,7 @@
                                         d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z">
                                     </path>
                                 </svg>
-                                Oliveira de Hospital
+                                {{ utilizador.localizacao }}
                             </p>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                                 <path fill-rule="evenodd"
                                     d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
                             </svg>
-                            911923219
+                            {{ utilizador.telefone }}
                         </p>
                         <p>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -67,7 +68,7 @@
                                 <path
                                     d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
                             </svg>
-                            2maos4patas@gmail.com
+                            {{ utilizador.email }}
                         </p>
                     </div>
                     <div class="row">
@@ -87,7 +88,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p class="mt-3">{{ $t('paginaAnimalMsg.anuncioCriado') }} <span>24 abril de 2023</span></p>
+                        <p class="mt-3">{{ $t('paginaAnimalMsg.anuncioCriado') }} <span>{{ animal.created_at }}</span></p>
                     </div>
                 </div>
             </div>
@@ -96,19 +97,16 @@
                     <div class="text-start">
                         <h4 class="fw-bold">{{ $t('paginaAnimalMsg.carateristicas') }}</h4>
                         <p class="fw-bold fs-6">
-                            {{ $t('formAnimalMsg.especie') }}: <span class="fw-normal">Cachorro</span><br>
-                            {{ $t('formAnimalMsg.raca') }}: <span class="fw-normal">SRD</span><br>
-                            {{ $t('formAnimalMsg.sexo') }}: <span class="fw-normal">Macho</span><br>
-                            {{ $t('paginaAnimalMsg.tamanho') }}: <span class="fw-normal">Pequeno</span><br>
-                            {{ $t('formAnimalMsg.idade') }}: <span class="fw-normal">1 ano</span><br>
-                            {{ $t('formAnimalMsg.cor') }}: <span class="fw-normal">Preto</span><br>
+                            {{ $t('formAnimalMsg.especie') }}: <span class="fw-normal">{{animal.especie}}</span><br>
+                            {{ $t('formAnimalMsg.raca') }}: <span class="fw-normal">{{animal.raca}}</span><br>
+                            {{ $t('formAnimalMsg.sexo') }}: <span class="fw-normal">{{animal.sexo}}</span><br>
+                            {{ $t('paginaAnimalMsg.tamanho') }}: <span class="fw-normal">{{animal.porte}}</span><br>
+                            {{ $t('formAnimalMsg.idade') }}: <span class="fw-normal">{{animal.idade}}</span><br>
+                            {{ $t('formAnimalMsg.cor') }}: <span class="fw-normal">{{animal.cor}}</span><br>
                         </p>
                         <h4 class="fw-bold">{{ $t('formAnimalMsg.descricao') }}</h4>
                         <p>
-                            O Xavier chegou até nós muito mal tratado mas agora está um bonitão, prontinho a partir corações
-                            😁Ainda procura uma familia responsavel que o trate como ele realmente merece.O Xavi é de porte
-                            pequeno (mas "godo" 😆), já está esterilizado, chipado e vacinado.Ainda é um jovem e requer
-                            muito carinho 😍😍😍
+                            {{animal.descricao}}
                         </p>
                     </div>
                 </div>
@@ -128,12 +126,21 @@ export default {
     },
     data() {
         return {
-            animal: []
+            animal: [],
+            utilizador: [],
         }
 
     },
     mounted() {
-
+        this.axios.get('animal/' + this.$route.params.id)
+            .then(response => {
+                this.animal = response.data.animal
+                this.utilizador = response.data.utilizador
+                console.log(this.animal)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     },
     methods: {
 
