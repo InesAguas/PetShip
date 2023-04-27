@@ -9,6 +9,7 @@ import PagePerfil from '../components/perfil/PagePerfil'
 import PageDesaparecido from '../components/animais/PageDesaparecido'
 import PagePetSitting from '../components/animais/PagePetSitting'
 import PaginaInicial from '../components/PaginaInicial'
+import PageMensagens from '../components/mensagens/PageMensagens'
 
 //import App from '../App'
 
@@ -86,6 +87,13 @@ const routes = [
         path: '/petsitting',
         name: 'petsitting',
         component: PagePetSitting
+    },
+    {
+        path:'/mensagens',
+        name: 'mensagens',
+        component: PageMensagens,
+        beforeEnter: [logado]
+        
     }
 ]
 
