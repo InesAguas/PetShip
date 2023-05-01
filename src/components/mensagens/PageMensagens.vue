@@ -1,16 +1,16 @@
 <template>
     <NavBar></NavBar>
-    <div class="container">
-        <div class="row">
-            <h1 class="fw-bold" style="color: #653208">Mensagens</h1>
+    <div class="container h-75" style="background-color:white; border:solid black;">
+        <div class="row" style="height:10%">
+            <div class="col ps-0">
+                <h1 class="fw-bold" style="color: #653208">Mensagens</h1>
+            </div>
         </div>
-        <div class="row bg-white">
-            <div class="col-4">
-                <div class="row" v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)"><CardPessoa :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa></div>
+        <div class="row bg-white" style="height:90%">
+            <div class="col-3 overflow-y-scroll">
+                <CardPessoa v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)" :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa>
             </div>
-            <div class="col-8" v-if="conversas != null">
-                <CardConversa :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
-            </div>
+                <CardConversa v-if="conversas != null" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
         </div>
     </div>
 </template>
@@ -29,6 +29,7 @@ export default ({
     },
     mounted() {
         this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
+        console.log(localStorage.getItem('token'));
         this.getConversas();
 
     },
