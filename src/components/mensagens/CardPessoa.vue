@@ -1,15 +1,15 @@
 <template>
-    <div class="container m-1 p-1" style="max-width: 300px; background-color:white;">
+    <div class="container m-1 p-1" style="max-width: 300px;" :style="{'background-color': selected ? '#F3F3F3':'white'}">
         <div class="row">
-        <div class="col-auto" >
+        <div class="col-3" >
             <img :src="require('../../assets/default_user.jpg')" class="rounded-circle" style="width:50px;height:50px;object-fit:cover;">
         </div>
-        <div class="col-auto">
+        <div class="col-8">
             <div class="row">
-                <h6 class="fw-bold px-2">Joana Almeida</h6>
+                <h6 class="fw-bold px-2">{{utilizador.id == conversa.id_envia ? conversa.nome_recebe : conversa.nome_envia }}</h6>
             </div>
             <div class="row">
-                <span class="px-2">Joao: não</span>
+                <span class="px-2 text-truncate">{{ conversa.nome_envia }}: {{conversa.mensagem}}</span>
             </div>
         </div>
     </div>
@@ -19,6 +19,11 @@
 
 export default({
     name: 'CardPessoa',
+    props: [
+        'conversa',
+        'utilizador',
+        'selected'
+        ],
 })
 
 </script>

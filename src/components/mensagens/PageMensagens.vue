@@ -6,27 +6,10 @@
         </div>
         <div class="row bg-white">
             <div class="col-4">
-                <div class="row">
-                    <CardPessoa></CardPessoa>
-                </div>
-                <div class="row">
-                    <CardPessoa></CardPessoa>
-                </div>
-                <div class="row">
-                    <CardPessoa></CardPessoa>
-                </div>
-                <div class="row">
-                    <CardPessoa></CardPessoa>
-                </div>
-                <div class="row">
-                    <CardPessoa></CardPessoa>
-                </div>
-                <div class="row">
-                    <CardPessoa></CardPessoa>
-                </div>
+                <div class="row" v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)"><CardPessoa :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa></div>
             </div>
-            <div class="col-8">
-                <CardConversa></CardConversa>
+            <div class="col-8" v-if="conversas != null">
+                <CardConversa :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
             </div>
         </div>
     </div>
@@ -46,45 +29,44 @@ export default ({
     },
     mounted() {
         this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
-        this.getNomesConversas();
+        this.getConversas();
 
     },
     data() {
         return {
             utilizador: null,
             conversas: null,
+            mensagens: null,
+            selected : 0
         }
     },
     methods: {
-        getIdConversas() {
-            
-        },
-
-        getNomesConversas() {
+        getConversas() {
             this.axios.get('conversasativas', {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             }).then(response => {
                 console.log(response.data.conversas);
-                 let hello = response.data.conversas;
-                hello.forEach(element => {
-                    console.log(element);
-                this.axios.get('perfil/' + element)
-                    .then(response => {
-                        console.log(response.data.utilizador);
-                        this.conversas = response.data.utilizador;
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    })
-            });
+                 this.conversas = response.data.conversas;
+                 console.log(this.conversas);
+                 console.log("teste");
 
+                 console.log(this.conversas);   
+                
             console.log(this.conversas);
             }).catch(error => {
                     console.log(error);
-                })
+            });
+
+               
+
+                
             
+        },
+
+        troca(index) {
+            this.selected = index;
         }
     }
 })

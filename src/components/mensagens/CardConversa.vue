@@ -3,11 +3,9 @@
         <div class="row">
             Aqui fica foto da pessoa e nome
         </div>
-        <div class="row">
-            <MensagemEnviada></MensagemEnviada>
-        </div>
-        <div class="row">
-            <MensagemRecebida></MensagemRecebida>
+        <div class="row" v-for="m in mensagens" :key="m">
+            <MensagemEnviada v-if="m.id_envia == utilizador.id" :mensagem="m.mensagem"></MensagemEnviada>
+            <MensagemRecebida :mensagem="m.mensagem" v-else></MensagemRecebida>
         </div>
     </div>
 </template>
@@ -22,7 +20,33 @@ export default({
     components: {
         MensagemEnviada,
         MensagemRecebida
-    }
+    },
+    props: [
+        'id',
+        'utilizador'
+        ],
+        mounted() {
+            this.axios.get('mensagens/' + this.id, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(
+                response => {
+                    console.log("hi");
+                    console.log(response.data);
+                    this.mensagens = response.data.mensagens;
+                }
+            ).catch(error => {
+                console.log(error);
+            }
+            )
+        },
+        data() {
+            return {
+                mensagens: null,
+            }
+        }
+
 })
 
 </script>
