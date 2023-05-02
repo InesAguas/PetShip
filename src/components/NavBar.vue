@@ -48,6 +48,7 @@
               <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
               <li><a class="dropdown-item" href="/anunciar">Publicar animal</a></li>
               <li><a class="dropdown-item" href="/mensagens">Mensagens</a></li>
+              <li><a class="dropdown-item" href="/animal">Animal</a></li>
               <li><a class="dropdown-item" href="#" v-on:click="logout">logout</a></li>
             </ul>
           </div>

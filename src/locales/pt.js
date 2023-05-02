@@ -80,5 +80,12 @@ export const pt = {
         idade: "Idade",
         sexo: "Sexo",
         distrito: "Distrito",
+    },
+    paginaAnimalMsg: {
+        anunciado: "Anunciado por",
+        anuncioCriado: "Anúncio criado em",
+        carateristicas: "Caraterísticas",
+        tamanho: "Tamanho",
+        contactos: "Contactos",
     }
 }

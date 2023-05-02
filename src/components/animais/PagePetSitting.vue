@@ -28,7 +28,7 @@
             </div>
             <div class="col">
                 <div class="row">
-                    <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col-auto m-2"></CardAnimal>
+                    <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col-auto m-2" v-on:click="irPaginaAnimal(row)"></CardAnimal>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@ export default {
             filtroDistrito: "",
             filtroEspecie: "",
         }
-        
+
     },
     mounted() {
         this.axios.get('/petsitting')
@@ -75,6 +75,10 @@ export default {
             });
 
             console.log(this.animais)
+
+        },
+        irPaginaAnimal(animal) {
+            this.$router.push({ name: 'animal', params: { id: animal.id } })
 
         }
     }
