@@ -5,7 +5,7 @@
                     style="width:50px;height:50px;object-fit:cover;">
             </div>
         </div>
-        <div class="d-flex flex-column-reverse p-3" style="height:75%; overflow-y:scroll;">
+        <div class="d-flex flex-column-reverse p-3" style="height:75%; overflow-y:scroll;" :key="mensagens">
             <div class="row" v-for="m in mensagens" :key="m">
                 <MensagemEnviada v-if="m.id_envia == utilizador.id" :mensagem="m.mensagem"></MensagemEnviada>
                 <MensagemRecebida :mensagem="m.mensagem" v-else></MensagemRecebida>
@@ -15,8 +15,8 @@
         <div class="row pt-2">
             <div class="input-group my-auto ms-2" style="width:95%">
                 <input type="text" class="form-control" placeholder="Mensagem" aria-label="Mensagem"
-                    aria-describedby="button-addon2" @keydown="enviarMensagem">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><svg
+                    aria-describedby="button-addon2" @keydown.enter="enviarMensagem" v-model="mensagem" id="mensagemInput">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="enviarMensagem"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
                         viewBox="0 0 16 16">
                         <path
@@ -49,6 +49,7 @@ export default ({
     data() {
         return {
             mensagens: null,
+            mensagem: null
         }
     },
     methods: {
@@ -69,11 +70,24 @@ export default ({
         },
 
         enviarMensagem() {
-            this.axios.post('enviarmensagem', {
+            if(this.mensagem == null || this.mensagem == "") {
+                return;
+            }
+            console.log(this.mensagem)
+            this.axios.post('enviarmensagem', {id_recebe: this.id, mensagem: this.mensagem}, {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
-            });
+            }).then(
+                response => {
+                    console.log(response.data.mensagem);
+                    this.mensagens.unshift(response.data.mensagem);
+                    this.mensagem = null;
+                    document.getElementById("mensagemInput").value = "";
+                }
+            ).catch(error => {
+                console.log(error);
+            })
         }
     }
 
