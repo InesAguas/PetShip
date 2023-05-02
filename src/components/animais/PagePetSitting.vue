@@ -10,27 +10,30 @@
                     <label for="exampleFormControlInput1" class="form-label">Distrito</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroDistrito">"
                         <option selected value="">Qualquer</option>
-                        <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{ distrito }}</option>
+                        <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{ distrito }}
+                        </option>
                     </select>
                 </div>
                 <div class="mb-2">
                     <label for="exampleFormControlInput1" class="form-label">Espécie</label>
-                    <select class="form-select" aria-label="Default select example"  v-model="filtroEspecie">
+                    <select class="form-select" aria-label="Default select example" v-model="filtroEspecie">
                         <option selected value="">Qualquer</option>
-                        <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}</option>
-                    <option v-bind:value="$t('formAnimalMsg.especies[1]')">{{ $t('formAnimalMsg.especies[1]') }}</option>
+                        <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}
+                        </option>
+                        <option v-bind:value="$t('formAnimalMsg.especies[1]')">{{ $t('formAnimalMsg.especies[1]') }}
+                        </option>
                     </select>
                 </div>
                 <div class="mb-2 text-center">
-                <button type="button" class="btn px-4 mt-2 text-white fw-bold"
-                    style="background-color: #FD7E14;" v-on:click="filtrar" >Pesquisar</button>
+                    <button type="button" class="btn px-4 mt-2 text-white fw-bold" style="background-color: #FD7E14;"
+                        v-on:click="filtrar">Pesquisar</button>
                 </div>
 
 
             </div>
             <div class="col">
                 <div class="row">
-                    <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col-auto m-2"></CardAnimal>
+                    <CardAnimal v-for="(row) in animais" :key="row" :animal="row" class="col-auto m-2" v-on:click="irPaginaAnimal(row)"></CardAnimal>
                 </div>
             </div>
         </div>
@@ -57,7 +60,7 @@ export default {
             filtroDistrito: "",
             filtroEspecie: "",
         }
-        
+
     },
     mounted() {
         this.axios.get('/petsitting')
@@ -77,6 +80,10 @@ export default {
             });
 
             console.log(this.animais)
+
+        },
+        irPaginaAnimal(animal) {
+            this.$router.push({ name: 'animal', params: { id: animal.id } })
 
         }
     }
