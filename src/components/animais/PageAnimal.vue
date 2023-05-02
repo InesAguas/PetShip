@@ -8,23 +8,19 @@
         </div>
         <div class="row">
             <div id="carouselExample" class="carousel slide">
-                <div class="carousel-inner">
+                <div class="carousel-inner" v-if="animal.fotografias">
                     <div class="carousel-item active">
-                        <img src="https://blog.emania.com.br/wp-content/uploads/2016/02/direitos-autorais-e-de-imagem.jpg"
-                            class="d-block w-100" height="400" style="object-fit:cover;" alt="...">
+                        <img :src="animal.fotografias.length == 0 ? require('../../assets/default_animal.png') : animal.fotografias[0] "
+                            class="d-block w-100" height="400" style="object-fit:scale-down;" alt="...">
                     </div>
-                    <div class="carousel-item">
-                        <img src="https://blog.emania.com.br/wp-content/uploads/2016/02/direitos-autorais-e-de-imagem.jpg"
-                            class="d-block w-100" height="400" style="object-fit:cover;" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://blog.emania.com.br/wp-content/uploads/2016/02/direitos-autorais-e-de-imagem.jpg"
-                            class="d-block w-100" height="400" style="object-fit:cover;" alt="...">
+                    <div class="carousel-item" v-for="(imagem) in animal.fotografias.slice(1)" :key="imagem">
+                        <img :src=imagem
+                            class="d-block w-100" height="400" style="object-fit:scale-down;" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
+                    <span class="carousel-control-prev-icon"  aria-hidden="true" ></span>
+                    <span class="visually-hidden" >Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
@@ -114,7 +110,13 @@
         </div>
     </div>
 </template>
+<style>
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #FD7E14;
+}
 
+</style>
 <script>
 import NavBar from '../NavBar.vue'
 export default {
