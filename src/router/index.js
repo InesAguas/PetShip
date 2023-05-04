@@ -11,6 +11,7 @@ import PagePetSitting from '../components/animais/PagePetSitting'
 import PaginaInicial from '../components/PaginaInicial'
 import PageMensagens from '../components/mensagens/PageMensagens'
 import PageAnimal from '../components/animais/PageAnimal'
+import EditarPerfil from '../components/perfil/EditarPerfil'
 
 //import App from '../App'
 
@@ -101,6 +102,12 @@ const routes = [
         component: PageMensagens,
         beforeEnter: [logado]
         
+    },
+    {
+        path:'/editarPerfil',
+        name: 'editarPerfil',
+        component: EditarPerfil,
+        beforeEnter: [logado]
     }
 ]
 
