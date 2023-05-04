@@ -97,6 +97,7 @@ const routes = [
     {
         path:'/mensagens',
         name: 'mensagens',
+        props: true,
         component: PageMensagens,
         beforeEnter: [logado]
         
