@@ -14,7 +14,7 @@ import EditarPerfilParticular from './EditarPerfilParticular.vue';
 import EditarPerfilAssociacao from './EditarPerfilAssociacao.vue';
 
 export default {
-    name: 'PagePerfil',
+    name: 'EditarPerfil',
     components: {
         NavBar,
         EditarPerfilParticular,
