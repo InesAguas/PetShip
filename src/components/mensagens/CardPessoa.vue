@@ -8,7 +8,7 @@
                 <h6 class="fw-bold px-2">{{utilizador.id == conversa.id_envia ? conversa.nome_recebe : conversa.nome_envia }}</h6>
             </div>
             <div class="row">
-                <span class="px-2 text-truncate">{{ conversa.nome_envia }}: {{conversa.mensagem}}</span>
+                <span class="px-2 text-truncate" v-if="conversa.nome_envia">{{ conversa.nome_envia }}: {{conversa.mensagem}}</span>
             </div>
         </div>
     </div>

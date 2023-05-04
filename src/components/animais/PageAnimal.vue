@@ -73,7 +73,7 @@
                                     src="../../assets/facebook.png" height="30px"></a>
                             <a href="https://www.instagram.com/" class="me-1 mt-4"><img class="mt-3"
                                     src="../../assets/instagram.png" height="30px"></a>
-                            <button type="button" class="btn mt-3 ms-2" style="background-color:#FD7E14; color:white"><svg
+                            <button @click="mandarMensagem" type="button" class="btn mt-3 ms-2" style="background-color:#FD7E14; color:white"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
                                     class="bi bi-chat-dots me-2" viewBox="0 0 16 16">
                                     <path
@@ -145,7 +145,15 @@ export default {
             })
     },
     methods: {
-
+        mandarMensagem() {
+            this.$router.push({
+            name: "mensagens", //use name for router push
+            params: {
+                id: this.utilizador.id,
+                nome: this.utilizador.nome,
+            }
+            });
+        }
     }
 }
 </script>

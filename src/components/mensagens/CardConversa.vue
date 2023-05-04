@@ -31,7 +31,6 @@
 import MensagemEnviada from './MensagemEnviada.vue';
 import MensagemRecebida from './MensagemRecebida.vue';
 
-
 export default ({
 
     name: 'CardConversa',
@@ -70,6 +69,7 @@ export default ({
         },
 
         enviarMensagem() {
+            
             if(this.mensagem == null || this.mensagem == "") {
                 return;
             }
@@ -82,14 +82,29 @@ export default ({
                 response => {
                     console.log(response.data.mensagem);
                     this.mensagens.unshift(response.data.mensagem);
+                    this.$socket.emit('message', response.data.mensagem)
+                    this.$emit('mensagemEnviada', response.data.mensagem)
                     this.mensagem = null;
                     document.getElementById("mensagemInput").value = "";
+                    
                 }
             ).catch(error => {
                 console.log(error);
             })
         }
-    }
+    },
+    sockets: {
+        connection() {
+            console.log('socket connected')
+        },
+        message(data) {
+            console.log("Card conversa")
+            console.log(data)
+            if(data.id_envia == this.id) {
+                this.mensagens.unshift(data);
+            }
+        }
+    },
 
 })
 

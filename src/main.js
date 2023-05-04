@@ -9,6 +9,9 @@ import axios from 'axios'
 import store from './store'
 import VueGoogleMaps from '@fawmi/vue-google-maps'
 
+import VueSocketIO from 'vue-3-socket.io'
+//import SocketIO from 'socket.io-client'
+
 import { createI18n } from 'vue-i18n'
 import { pt } from './locales/pt.js'
 import { en } from './locales/en.js'
@@ -38,6 +41,12 @@ app.use(VueGoogleMaps, {
         // language: 'de',
     },
 })
+
+app.use(new VueSocketIO({
+    debug: true,
+    connection: 'http://127.0.0.1:3000',
+    //withCredentials: true,
+}))
 
 axios.defaults.baseURL = "http://127.0.0.1:8000/api"
 app.config.globalProperties.axios=axios

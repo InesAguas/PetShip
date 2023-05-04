@@ -1,16 +1,16 @@
 <template>
     <NavBar></NavBar>
-    <div class="container h-75" style="background-color:white; border:solid black;">
-        <div class="row" style="height:10%">
+    <div class="container h-75" >
+        <div class="row" style="height:10%; backgroud-color:#F8F9FA">
             <div class="col ps-0">
                 <h1 class="fw-bold" style="color: #653208">Mensagens</h1>
             </div>
         </div>
-        <div class="row bg-white" style="height:90%">
+        <div class="row bg-white shadow-sm" style="height:90%;">
             <div class="col-3 overflow-y-scroll">
                 <CardPessoa v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)" :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa>
             </div>
-                <CardConversa  v-if="conversas != null" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
+                <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas != null" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
         </div>
     </div>
 </template>
@@ -32,12 +32,15 @@ export default ({
         console.log(localStorage.getItem('token'));
         this.getConversas();
 
+        this.$socket.emit('authenticate', {token: this.utilizador.id});
+
+        
+
     },
     data() {
         return {
             utilizador: null,
             conversas: null,
-            mensagens: null,
             selected : 0
         }
     },
@@ -53,22 +56,55 @@ export default ({
                  console.log(this.conversas);
                  console.log("teste");
 
-                 console.log(this.conversas);   
+                 console.log(this.conversas);  
+                 
+                 if(this.$route.params.id != null && this.$route.params.id != this.utilizador.id) {
+                    var index = this.conversas.findIndex(x => x.id_envia == this.$route.params.id || x.id_recebe == this.$route.params.id);
+                    if(index >= 0) {
+                        this.selected = index;
+                    } else {
+                        var conversa = {
+                            id_envia: this.utilizador.id,
+                            id_recebe: this.$route.params.id,
+                            nome_recebe:this.$route.params.nome,
+                        }
+                        this.conversas.unshift(conversa);
+                    }
+        }
                 
             console.log(this.conversas);
             }).catch(error => {
                     console.log(error);
-            });
-
-               
-
-                
-            
+            });          
         },
 
         troca(index) {
             this.selected = index;
+        },
+
+        atualizaConversa(mensagem) {
+            var index = this.conversas.findIndex(x => x.id_envia == mensagem.id_recebe || x.id_recebe == mensagem.id_recebe);
+
+            this.conversas[index].mensagem = mensagem.mensagem;
+            this.conversas[index].nome_envia = mensagem.nome_envia;
         }
+    },
+    sockets: {
+        connection() {
+            console.log('socket connected')
+        },
+        message(data) {
+            console.log("Page conversa");
+            console.log(data)
+
+            //procurar o cardpessoa que corresponde a mensagem
+            var index = this.conversas.findIndex(x => x.id_envia == data.id_envia || x.id_recebe == data.id_envia);
+
+            this.conversas[index].mensagem = data.mensagem;
+            this.conversas[index].nome_envia = data.nome_envia;
+
+        }
+
     }
 })
 
