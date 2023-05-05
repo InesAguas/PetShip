@@ -9,7 +9,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col-4">
-                    <img :src="utilizador.fotografia == null ? require('../../assets/default_user.jpg') : utilizador.fotografia[0]"
+                    <img :src="preview == null ? require('../../assets/default_user.jpg') : preview"
                         alt="Avatar" id="avatar" class="rounded-circle ms-4"
                         style="width: 150px;height: 150px;object-fit:cover;">
                     <div class="mt-2 text-center">
@@ -21,7 +21,7 @@
                                 <path
                                     d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
                             </svg>{{ $t('paginaEditarPerfil.alterarFoto') }}
-                            <input type="file" style="display: none;">
+                            <input type="file" style="display: none;" v-on:change="alterarFoto">
                         </label>
                     </div>
                 </div>
@@ -30,17 +30,24 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">{{ $t('registarMsg.nome') }}</label>
                             <input type="text" class="form-control" id="name" aria-describedby="name"
-                                v-bind:placeholder="utilizador.nome">
+                                v-bind:placeholder="utilizador.nome" v-model="utilizadorEditado.nome">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" aria-describedby="email"
-                                v-bind:placeholder="utilizador.email">
+                                v-bind:placeholder="utilizador.email" v-model="utilizadorEditado.email">
                         </div>
                         <div class="mb-3">
                             <label for="telefone" class="form-label">{{ $t('paginaEditarPerfil.telefone') }}</label>
                             <input type="text" class="form-control" id="telefone" aria-describedby="telefone"
-                                v-bind:placeholder="utilizador.telefone ? utilizador.telefone : $t('paginaEditarPerfil.telefone')"><!--bind no placeholder-->
+                                v-bind:placeholder="utilizador.telefone ? utilizador.telefone : $t('paginaEditarPerfil.telefone')"
+                                v-model="utilizadorEditado.telefone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefone" class="form-label">{{ $t('perfilMsg.localizacao') }}</label>
+                            <input type="text" class="form-control" id="telefone" aria-describedby="telefone"
+                                v-bind:placeholder="utilizador.localizacao ? utilizador.localizacao : $t('perfilMsg.localizacao')"
+                                v-model="utilizadorEditado.localizacao">
                         </div>
                         <div class="text-end">
                             <button @click="editarPerfil" type="button" class="btn btn-lg"
@@ -63,27 +70,37 @@ export default {
     ],
     data() {
         return {
+            utilizadorEditado: {
+                nome: this.utilizador.nome,
+                email: this.utilizador.email,
+                telefone: this.utilizador.telefone,
+                fotografia: null,
+                localizacao: this.utilizador.localizacao
+            },
+            preview: this.utilizador.fotografia
         }
     },
     methods: {
         editarPerfil() {
-            this.axios.put('/editarperfil', {
+            console.log(this.utilizadorEditado)
+            this.axios.post('/editarperfil',this.utilizadorEditado, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                nome: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                telefone: document.getElementById('telefone').value,
-                id: this.utilizador.id
+                }
+                
             }).then(response => {
                 console.log(response.data)
-                //atualizar dados do utilizador no localstorage
-            
+                localStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
+                
                 alert("Perfil editado com sucesso!")
             }).catch(error => {
                 console.log(error)
             })
+        },
+        alterarFoto(e){
+            this.utilizadorEditado.fotografia = e.target.files[0]
+            this.preview = URL.createObjectURL(this.utilizadorEditado.fotografia)
         }
 
 
