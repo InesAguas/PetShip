@@ -86,6 +86,13 @@ export const en = {
         idade: "Age",
         sexo: "Sex",
         distrito: "District",
+    },
+    paginaEditarPerfil: {
+        titulo: "Edit Profile",
+        dadosPessoais: "Personal Information",
+        alterarFoto: "Change Picture",
+        editar: "Edit",
+        telefone: "Phone Number",
     }
     
 }

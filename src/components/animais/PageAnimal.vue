@@ -33,12 +33,12 @@
                 <div class="container mt-3 p-3 pt-3 rounded-3 border" style="background-color:white;">
                     <div class="row">
                         <div class="col-3 me-2">
-                            <img src="https://blog.emania.com.br/wp-content/uploads/2016/02/direitos-autorais-e-de-imagem.jpg"
+                            <img :src="utilizador.fotografia == null ? require('../../assets/default_user.jpg') : utilizador.fotografia"
                                 class="rounded-circle" style="width:70px;height:70px;object-fit:cover;">
                         </div>
                         <div class="col">
                             {{ $t('paginaAnimalMsg.anunciado') }}<h5>{{ utilizador.nome }}</h5>
-                            <p>
+                            <p v-if="utilizador.localizacao">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                     class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                                     <path
