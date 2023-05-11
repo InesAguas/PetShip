@@ -1,14 +1,15 @@
 <template>
     <div class="container">
         <div class="row mt-3">
-            <h1 class="fw-bold" style="color: #653208">Editar Perfil</h1>
+            <h1 class="fw-bold" style="color: #653208">{{ $t('paginaEditarPerfil.titulo') }}</h1>
         </div>
         <div class="row">
             <div class="col-7">
                 <div class="container" style="background-color: white;">
                     <div class="row">
                         <div class="col-6">
-                            <h3 class="fw-bold mt-2" style="color: #653208">Dados pessoais</h3>
+                            <h3 class="fw-bold mt-2" style="color: #653208">{{ $t('paginaEditarPerfil.dadosPessoais') }}
+                            </h3>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="text-center">
@@ -50,7 +51,7 @@
                             </form>
                         </div>
                         <div class="col-6">
-                            <h3 class="fw-bold mt-2" style="color: #653208">Contatos</h3>
+                            <h3 class="fw-bold mt-2" style="color: #653208">{{ $t('paginaAnimalMsg.contactos') }}</h3>
                             <form>
                                 <div class="mb-3">
                                     <label for="telefone" class="form-label">{{ $t('paginaEditarPerfil.telefone')
@@ -62,20 +63,23 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Website</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                        v-bind:placeholder="utilizador.nome" v-model="utilizadorEditado.nome">
+                                        v-bind:placeholder="utilizador.website ? utilizador.website : 'Website'"
+                                        v-model="utilizadorEditado.website">
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Instagram</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                        v-bind:placeholder="utilizador.nome" v-model="utilizadorEditado.nome">
+                                    v-bind:placeholder="utilizador.instagram ? utilizador.instagram : 'Instagram'"
+                                        v-model="utilizadorEditado.instagram">
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Facebook</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                        v-bind:placeholder="utilizador.nome" v-model="utilizadorEditado.nome">
+                                    v-bind:placeholder="utilizador.facebook ? utilizador.facebook : 'Facebook'"
+                                        v-model="utilizadorEditado.facebook">
                                 </div>
 
-                                <div class="text-end">
+                                <div class="text-end pt-5">
                                     <button type="button" class="btn btn-lg"
                                         style="background-color:#FD7E14; color: white;">{{ $t('paginaEditarPerfil.editar')
                                         }}</button>
@@ -89,15 +93,9 @@
             <div class="col">
                 <div class="container ms-2 pb-4" style="background-color: white;">
                     <div class="row">
-                        <h3 class="fw-bold mt-2" style="color: #653208">Horário</h3>
+                        <h3 class="fw-bold mt-2" style="color: #653208">{{ $t('paginaEditarPerfilAss.horario') }}</h3>
                     </div>
-                    <DiaSemana dia="Segunda-Feira"></DiaSemana>
-                    <DiaSemana dia="Terça-Feira"></DiaSemana>
-                    <DiaSemana dia="Quarta-Feira"></DiaSemana>
-                    <DiaSemana dia="Quinta-Feira"></DiaSemana>
-                    <DiaSemana dia="Sexta-Feira"></DiaSemana>
-                    <DiaSemana dia="Sábado"></DiaSemana>
-                    <DiaSemana dia="Domingo"></DiaSemana>
+                    <DiaSemana v-for="dia in $tm('perfilAssMsg.dias')" :key="dia" :dia="dia"></DiaSemana>
                 </div>
             </div>
         </div>
@@ -122,12 +120,22 @@ export default {
                 email: this.utilizador.email,
                 telefone: this.utilizador.telefone,
                 localizacao: this.utilizador.localizacao,
+                website: this.utilizador.website,
+                instagram: this.utilizador.instagram,
+                facebook: this.utilizador.facebook,
             },
             preview: this.utilizador.fotografia,
+
         }
     },
     mounted() {
 
+    },
+    methods:{
+        alterarFoto(e){
+            this.utilizadorEditado.fotografia = e.target.files[0]
+            this.preview = URL.createObjectURL(this.utilizadorEditado.fotografia)
+        }
     }
 }
 

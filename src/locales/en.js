@@ -93,6 +93,12 @@ export const en = {
         alterarFoto: "Change Picture",
         editar: "Edit",
         telefone: "Phone Number",
+    },
+    paginaEditarPerfilAss: {
+        fechado: "Closed",
+        abertura: "Opening",
+        encerramento: "Closing",
+        horario: "Schedule",
     }
     
 }
