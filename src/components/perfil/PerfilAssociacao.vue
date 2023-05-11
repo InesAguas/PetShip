@@ -61,11 +61,16 @@ export default {
     methods: {
         mandarMensagem() {
             this.$router.push({
-            name: "mensagens", //use name for router push
-            params: {
-                id: this.utilizador.id,
-                nome: this.utilizador.nome,
-            }
+                name: "mensagens", //use name for router push
+                params: {
+                    id: this.utilizador.id,
+                    nome: this.utilizador.nome,
+                }
+            });
+        },
+        editarPerfil() {
+            this.$router.push({
+                name: "editarPerfil", //use name for router push
             });
         }
     }
