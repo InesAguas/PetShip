@@ -75,11 +75,11 @@
                                         v-bind:placeholder="utilizador.nome" v-model="utilizadorEditado.nome">
                                 </div>
 
-                            
-                                    <button type="button" class="btn btn-lg align-self-end"
+                                <div class="text-end">
+                                    <button type="button" class="btn btn-lg"
                                         style="background-color:#FD7E14; color: white;">{{ $t('paginaEditarPerfil.editar')
                                         }}</button>
-                               
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -87,27 +87,34 @@
             </div>
 
             <div class="col">
-                <div class="container" style="background-color: white;">
+                <div class="container ms-2 pb-4" style="background-color: white;">
                     <div class="row">
-                        <h3 class="fw-bold mt-2 ms-2" style="color: #653208">Horário</h3>
+                        <h3 class="fw-bold mt-2" style="color: #653208">Horário</h3>
                     </div>
-
+                    <DiaSemana dia="Segunda-Feira"></DiaSemana>
+                    <DiaSemana dia="Terça-Feira"></DiaSemana>
+                    <DiaSemana dia="Quarta-Feira"></DiaSemana>
+                    <DiaSemana dia="Quinta-Feira"></DiaSemana>
+                    <DiaSemana dia="Sexta-Feira"></DiaSemana>
+                    <DiaSemana dia="Sábado"></DiaSemana>
+                    <DiaSemana dia="Domingo"></DiaSemana>
                 </div>
-
             </div>
         </div>
-
     </div>
 </template>
     
 <script>
 
-
+import DiaSemana from './DiaSemana.vue'
 export default {
     name: 'EditarPerfilAssociacao',
     props: [
         'utilizador'
     ],
+    components: {
+        DiaSemana,
+    },
     data() {
         return {
             utilizadorEditado: {
@@ -116,7 +123,7 @@ export default {
                 telefone: this.utilizador.telefone,
                 localizacao: this.utilizador.localizacao,
             },
-            preview: this.utilizador.fotografia
+            preview: this.utilizador.fotografia,
         }
     },
     mounted() {
