@@ -1,9 +1,9 @@
 <template>
     <NavBar></NavBar>
-    <div class="container ms-0">
+    <div class="container-fluid ms-0">
         <div class="row flex-nowrap">
     <PainelDashboard></PainelDashboard>
-    <div class="col">
+    <div class="col-8">
         <div class="row my-3">
             <div class="col">
                 <h2 class="fw-bold" style="color: #653208;">Animais</h2>
@@ -17,71 +17,179 @@
             <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>First</th>
-                  <th>Last</th>
-                  <th>Handle</th>
+                  <th>Espécie</th>
+                  <th>Sexo</th>
+                  <th>Idade</th>
+                  <th>Chip</th>
+                  <th>Estado</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
+              <tbody>
+                <tr v-for="animal in animais" :key="animal">
+                  <td>{{animal.nome}}</td>
+                  <td>{{animal.especie}}</td>
+                  <td>{{animal.sexo}}</td>
+                  <td>{{animal.idade}}</td>
+                  <td>{{animal.chip}}</td>
+                  <td>s</td>
+                  <td>s</td>
+                </tr>      
+              </tbody>
         </table>
-    </div>
+    </div>  
 </div>
-</div>
-
-
 <!-- Modal -->
-<div class="modal modal-lg fade" id="formRegisto" tabindex="-1" aria-labelledby="exampleModalLabel" data-bs-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Registar Animal</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col">
-          <label for="data_recolha" class="form-label">Data de recolha</label>
-                <input type="date" id="data_recolha" class="form-control">
+<div class="modal modal-lg" id="formRegisto" tabindex="-1" aria-labelledby="exampleModalLabel"  data-bs-backdrop="static" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Registar Animal</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row mb-3">
+            <div class="col">
+        <label for="data_recolha" class="form-label mb-0">Data de recolha*</label>
+              <input type="date" id="data_recolha" class="form-control" v-model="animalModal.data_recolha">
+            </div>
+            <div class="col">
+              <label for="formFile" class="form-label mb-0">Fotografia</label>
+            <input class="form-control" type="file" id="formFile" accept="image/*" @change="atualizaFotografia">
+            </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6">
+                <label for="local" class="form-label mb-0">Local de captura</label>
+                <input type="text" id="local" class="form-control" v-model="animalModal.local_captura">
               </div>
               <div class="col">
-                <label for="local" class="form-label">Local de captura</label>
-                <input type="text" id="local" class="form-control">
-                ferido e agressivo
+                <label class="form-label mb-0">Animal ferido*</label><br>
+                <div class="form-check form-check-inline" id="checkferido" >
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="true" v-model="animalModal.ferido">
+                  <label class="form-check-label" for="inlineRadio1">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="false" v-model="animalModal.ferido">
+                  <label class="form-check-label" for="inlineRadio2">Não</label>
+                </div>
               </div>
+              
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="nome" class="form-label mb-0">Nome*</label>
+              <input type="text" id="nome" class="form-control" v-model="animalModal.nome">
               </div>
-                <label for="nome" class="form-label">{{ $t('formAnimalMsg.nome') }}</label>
-                <input type="text" id="nome" class="form-control">
-                <label for="sexo" class="form-label">{{ $t('formAnimalMsg.sexo') }}</label>
-                <select class="form-select" id="sexo">
-                    <option v-bind:value="1">{{ $t('formAnimalMsg.sexos[0]') }}</option>
-                    <option v-bind:value="2">{{ $t('formAnimalMsg.sexos[1]') }}</option>
-                </select>
-                <label for="especie" class="form-label">{{ $t('formAnimalMsg.especie') }}</label>
-                <select class="form-select" id="especie">
-                    <option v-bind:value="1">{{ $t('formAnimalMsg.especies[0]') }}</option>
-                    <option v-bind:value="2">{{ $t('formAnimalMsg.especies[1]') }}</option>
-                </select>
-                <label for="raca" class="form-label">{{ $t('formAnimalMsg.raca') }}</label>
-                <select class="form-select" id="raca">
-                    
-                </select>
-                <label for="idade" class="form-label">{{ $t('formAnimalMsg.idade') }}</label>
-                <select class="form-select" id="idade">
-                    <option v-for="(item,index) in $tm('formAnimalMsg.idades')" :key="item" :value="index+1">{{item}}</option>
-                </select>
-                <label for="cor" class="form-label">{{ $t('formAnimalMsg.cor') }}</label>
-                <select class="form-select" id="cor">
-                    <option v-for="(item, index) in $tm('formAnimalMsg.cores')" :key="item" :value="index+1">{{item}}</option>
+              <div class="col">
+                <label class="form-label mb-0">Comportamento agressivo*</label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="true" v-model="animalModal.agressivo">
+                  <label class="form-check-label" for="inlineRadio3">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4" value="false" v-model="animalModal.agressivo">
+                  <label class="form-check-label" for="inlineRadio4">Não</label>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col">
+                <label for="porte" class="form-label mb-0">{{ $t('formAnimalMsg.porte') }}*</label>
+                <select class="form-select" id="porte" v-model="animalModal.porte">
+                    <option v-for="(item,index) in $tm('formAnimalMsg.portes')" :key="item" :value="index+1">{{item}}</option>
                 </select>
               </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+              <div class="col">
+                <label for="sexo" class="form-label mb-0">Sexo*</label>
+              <select class="form-select" id="sexo" v-model="animalModal.sexo">
+                  <option v-bind:value="1">{{ $t('formAnimalMsg.sexos[0]') }}</option>
+                  <option v-bind:value="2">{{ $t('formAnimalMsg.sexos[1]') }}</option>
+              </select>
+              </div>
+            </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="especie" class="form-label mb-0">Especie*</label>
+                  <select class="form-select" id="especie" v-model="animalModal.especie" v-on:change="alterarRacas">
+                      <option v-bind:value="1">{{ $t('formAnimalMsg.especies[0]') }}</option>
+                      <option v-bind:value="2">{{ $t('formAnimalMsg.especies[1]') }}</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="raca" class="form-label mb-0">{{ $t('formAnimalMsg.raca') }}*</label>
+                <select class="form-select" id="raca" v-model="animalModal.raca">
+                    <option v-for="(item,index) in racas" :key="item" :value="index+1">{{item}}</option>
+                </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="idade" class="form-label mb-0">{{ $t('formAnimalMsg.idade') }}*</label>
+              <select class="form-select" id="idade" v-model="animalModal.idade">
+                  <option v-for="(item,index) in $tm('formAnimalMsg.idades')" :key="item" :value="index+1">{{item}}</option>
+              </select>
+                </div>
+                <div class="col">
+                  <label for="cor" class="form-label mb-0">{{ $t('formAnimalMsg.cor') }}*</label>
+              <select class="form-select" id="cor" v-model="animalModal.cor">
+                  <option v-for="(item, index) in $tm('formAnimalMsg.cores')" :key="item" :value="index+1">{{item}}</option>
+              </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  
+                  <label class="form-label mb-0">Identificação eletrónica*</label><br>
+                  <div class="input-group">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio5" value="true" v-model="animalModal.identificacao">
+                    <label class="form-check-label" for="inlineRadio5">Sim</label>
+                  </div>
+                  
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio6" value="false" v-model="animalModal.identificacao">
+                    <label class="form-check-label" for="inlineRadio6">Não</label>
+                  </div>
+                  <label for="identificacao" class="form-label mb-0">Nº de chip</label>
+                  <input type="text" id="identificacao" class="form-control" v-model="animalModal.chip">
+                </div>
+                </div>
+
+                <div class="col">
+                  <label for="desparasitacao" class="form-label mb-0">Desparasitação</label>
+                  <input type="date" id="desparasitacao" class="form-control" v-model="animalModal.desparasitacao">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="temperatura" class="form-label mb-0">Temperatura rectal</label>
+                  <div class="input-group">
+                  <input type="number" id="temperatura" class="form-control" v-model="animalModal.temperatura">
+                 <span class="input-group-text">ºC</span>
+                </div>
+                </div>
+                <div class="col">
+                  <label for="medicacao" class="form-label mb-0">Medicação</label>
+                  <input type="text" id="medicacao" class="form-control" v-model="animalModal.medicacao">
+                </div>
+              </div>
+              <div>* Campos obrigatórios</div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn text-white" style="background-color: #FD7E14;" @click="publicarAnimal">Confirmar</button>
       </div>
     </div>
   </div>
+</div>
+</div>
+
+
 </template>
 <script>
 import NavBar from '../NavBar.vue';
@@ -95,10 +203,60 @@ export default {
     },
     data() {
         return {
+          animalModal: {
+            nome: null,
+            sexo: 1,
+            especie: 1,
+            raca: 1,
+            idade: 1,
+            cor: 1,
+            porte: 1,
+            data_recolha: null,
+            local_captura: null,
+            ferido: false,
+            agressivo: false,
+            identificacao: false,
+            chip: null,
+            desparasitacao: null,
+            temperatura: null,
+            medicacao: null
+          },
+          racas: this.$tm('formAnimalMsg.racas_caes'),
+          animais: [],
         }
     },
     mounted() {
-        }
+      this.axios.get("associacao/animais", {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(response => {
+                this.animais = response.data.animais
+            })
+            console.log(localStorage.getItem('token'))
+        },
+    methods: {
+      alterarRacas() {
+            if (this.animalModal.especie == 1) {
+                this.racas = this.$tm('formAnimalMsg.racas_caes')
+            } else {
+                this.racas = this.$tm('formAnimalMsg.racas_gatos')
+            }
+        },
+
+        publicarAnimal() {
+          console.log(this.animalModal)
+          this.axios.post("/publicaranimal", this.animalModal, {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+        },
+
+        atualizaFotografia(event) {
+            this.animalModal.fotografia = event.target.files[0]
+        },
+    }
 }
 
 </script>
