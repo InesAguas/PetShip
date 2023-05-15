@@ -13,6 +13,7 @@ import PageMensagens from '../components/mensagens/PageMensagens'
 import PageAnimal from '../components/animais/PageAnimal'
 import EditarPerfil from '../components/perfil/EditarPerfil'
 import GestaoAnimais from '../components/dashboard/GestaoAnimais'
+import PasswordEsquecida from '../components/PasswordEsquecida'
 
 //import App from '../App'
 
@@ -38,6 +39,12 @@ const routes = [
         path: '/login',
         name: 'login',
         component: FormLogin,
+        beforeEnter: [deslogado]
+    },
+    {
+        path: '/password-esquecida',
+        name: 'password-esquecida',
+        component: PasswordEsquecida,
         beforeEnter: [deslogado]
     },
     {
@@ -116,6 +123,7 @@ const routes = [
         component: GestaoAnimais,
         beforeEnter: [logado]
     },
+    
 ]
 
 const router = createRouter({

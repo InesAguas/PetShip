@@ -21,7 +21,7 @@
                         <button class="btn px-5 text-white fw-bold mb-4" style="background-color:#FD7E14;" type="button"
                             v-on:click="login">Login</button>
 
-                        <p><router-link to="" style="color:#ADB5BD;text-decoration: none;">{{ $t('loginMsg.esqueceuPass') }}</router-link></p>
+                        <p><router-link to="password-esquecida" style="color:#ADB5BD;text-decoration: none;">{{ $t('loginMsg.esqueceuPass') }}</router-link></p>
                         <p style="color:#ADB5BD;">{{ $t('loginMsg.semConta') }}<router-link to="/registar" class="fw-bold"
                                 style="color:#6c757d;text-decoration: none;">{{ $t('loginMsg.registar') }}</router-link></p>
 
