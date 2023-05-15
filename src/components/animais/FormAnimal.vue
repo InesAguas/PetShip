@@ -115,7 +115,7 @@ export default {
 
             this.erro = false;
 
-            this.axios.post("/anunciaranimal", this.animal, {
+            this.axios.post("/novoanuncio", this.animal, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + localStorage.getItem('token')

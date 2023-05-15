@@ -12,6 +12,7 @@ import PaginaInicial from '../components/PaginaInicial'
 import PageMensagens from '../components/mensagens/PageMensagens'
 import PageAnimal from '../components/animais/PageAnimal'
 import EditarPerfil from '../components/perfil/EditarPerfil'
+import GestaoAnimais from '../components/dashboard/GestaoAnimais'
 
 //import App from '../App'
 
@@ -108,7 +109,13 @@ const routes = [
         name: 'editarPerfil',
         component: EditarPerfil,
         beforeEnter: [logado]
-    }
+    },
+    {
+        path: '/dashboard/animais',
+        name: 'dashboardAnimais',
+        component: GestaoAnimais,
+        beforeEnter: [logado]
+    },
 ]
 
 const router = createRouter({
