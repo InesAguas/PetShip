@@ -94,5 +94,11 @@ export const pt = {
         alterarFoto: "Alterar Foto",
         editar: "Editar",
         telefone: "Telefone",
+    },
+    paginaEditarPerfilAss: {
+        fechado: "Fechado",
+        abertura: "Abertura",
+        encerramento: "Encerramento",
+        horario: "Horário",
     }
 }
