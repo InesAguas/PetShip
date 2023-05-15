@@ -69,13 +69,13 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Instagram</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                    v-bind:placeholder="utilizador.instagram ? utilizador.instagram : 'Instagram'"
+                                        v-bind:placeholder="utilizador.instagram ? utilizador.instagram : 'Instagram'"
                                         v-model="utilizadorEditado.instagram">
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Facebook</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                    v-bind:placeholder="utilizador.facebook ? utilizador.facebook : 'Facebook'"
+                                        v-bind:placeholder="utilizador.facebook ? utilizador.facebook : 'Facebook'"
                                         v-model="utilizadorEditado.facebook">
                                 </div>
 
@@ -95,7 +95,8 @@
                     <div class="row">
                         <h3 class="fw-bold mt-2" style="color: #653208">{{ $t('paginaEditarPerfilAss.horario') }}</h3>
                     </div>
-                    <DiaSemana v-for="dia in $tm('perfilAssMsg.dias')" :key="dia" :dia="dia"></DiaSemana>
+                    <DiaSemana v-for="dia in $tm('perfilAssMsg.dias')" :key="dia" :dia="dia"
+                        @atualizarHorario="atualizarHorario"></DiaSemana>
                 </div>
             </div>
         </div>
@@ -123,6 +124,15 @@ export default {
                 website: this.utilizador.website,
                 instagram: this.utilizador.instagram,
                 facebook: this.utilizador.facebook,
+                horario: {
+                    segunda: [],
+                    terca: [],
+                    quarta: [],
+                    quinta: [],
+                    sexta: [],
+                    sabado: [],
+                    domingo: []
+                }
             },
             preview: this.utilizador.fotografia,
 
@@ -131,10 +141,50 @@ export default {
     mounted() {
 
     },
-    methods:{
-        alterarFoto(e){
+    methods: {
+        alterarFoto(e) {
             this.utilizadorEditado.fotografia = e.target.files[0]
             this.preview = URL.createObjectURL(this.utilizadorEditado.fotografia)
+        },
+        atualizarHorario(valor) {
+            switch (valor[0]) {
+                case 'Segunda-feira':
+                    this.utilizadorEditado.horario.segunda[0] = valor[1] //aberto ou fechado
+                    this.utilizadorEditado.horario.segunda[1] = valor[2] //hora de abertura
+                    this.utilizadorEditado.horario.segunda[2] = valor[3] //hora de encerramento
+                    break
+                case 'Terça-feira':
+                    this.utilizadorEditado.horario.terca[0] = valor[1]
+                    this.utilizadorEditado.horario.terca[1] = valor[2]
+                    this.utilizadorEditado.horario.terca[2] = valor[3]
+                    break
+                case 'Quarta-feira':
+                    this.utilizadorEditado.horario.quarta[0] = valor[1]
+                    this.utilizadorEditado.horario.quarta[1] = valor[2]
+                    this.utilizadorEditado.horario.quarta[2] = valor[3]
+                    break
+                case 'Quinta-feira':
+                    this.utilizadorEditado.horario.quinta[0] = valor[1]
+                    this.utilizadorEditado.horario.quinta[1] = valor[2]
+                    this.utilizadorEditado.horario.quinta[2] = valor[3]
+                    break
+                case 'Sexta-feira':
+                    this.utilizadorEditado.horario.sexta[0] = valor[1]
+                    this.utilizadorEditado.horario.sexta[1] = valor[2]
+                    this.utilizadorEditado.horario.sexta[2] = valor[3]
+                    break
+                case 'Sábado':
+                    this.utilizadorEditado.horario.sabado[0] = valor[1]
+                    this.utilizadorEditado.horario.sabado[1] = valor[2]
+                    this.utilizadorEditado.horario.sabado[2] = valor[3]
+                    break
+                case 'Domingo':
+                    this.utilizadorEditado.horario.domingo[0] = valor[1]
+                    this.utilizadorEditado.horario.domingo[1] = valor[2]
+                    this.utilizadorEditado.horario.domingo[2] = valor[3]
+                    break
+            }
+            console.log(this.utilizadorEditado.horario)
         }
     }
 }
