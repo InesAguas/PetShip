@@ -15,7 +15,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="$emit('close')">Cancelar</button>
-          <button type="button" class="btn text-white" style="background-color:#FD7E14">Remover</button>
+          <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14">Ok</button>
         </div>
       </div>
     </div>
