@@ -8,11 +8,10 @@
                 <h3 class="fw-bold" style="color: #653208">{{ $t('paginaEditarPerfil.dadosPessoais') }}</h3>
             </div>
             <div class="row mb-3">
-                <div class="col-4">
-                    <img :src="preview == null ? require('../../assets/default_user.jpg') : preview"
-                        alt="Avatar" id="avatar" class="rounded-circle ms-4"
-                        style="width: 150px;height: 150px;object-fit:cover;">
-                    <div class="mt-2 text-center">
+                <div class="col">
+                    <img :src="preview == null ? require('../../assets/default_user.jpg') : preview" alt="Avatar"
+                        id="avatar" class="rounded-circle ms-3 " style="width: 150px;height: 150px;object-fit:cover;">
+                    <div class="mt-2 ms-4 ps-2">
                         <label class="btn btn-sm" style="background-color:#FD7E14; color: white;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-upload me-2" viewBox="0 0 16 16">
@@ -24,10 +23,8 @@
                             <input type="file" style="display: none;" v-on:change="alterarFoto">
                         </label>
                     </div>
-                </div>
-                <div class="col mb-3">
                     <form>
-                        <div class="mb-3">
+                        <div class=" mt-2 mb-3">
                             <label for="name" class="form-label">{{ $t('registarMsg.nome') }}</label>
                             <input type="text" class="form-control" id="name" aria-describedby="name"
                                 v-bind:placeholder="utilizador.nome" v-model="utilizadorEditado.nome">
@@ -37,6 +34,10 @@
                             <input type="email" class="form-control" id="email" aria-describedby="email"
                                 v-bind:placeholder="utilizador.email" v-model="utilizadorEditado.email">
                         </div>
+                    </form>
+                </div>
+                <div class="col mb-3">
+                    <form>
                         <div class="mb-3">
                             <label for="telefone" class="form-label">{{ $t('paginaEditarPerfil.telefone') }}</label>
                             <input type="text" class="form-control" id="telefone" aria-describedby="telefone"
@@ -49,7 +50,23 @@
                                 v-bind:placeholder="utilizador.localizacao ? utilizador.localizacao : $t('perfilMsg.localizacao')"
                                 v-model="utilizadorEditado.localizacao">
                         </div>
-                        <div class="text-end">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="exampleFormControlInput1" class="form-label">Distrito</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected value="">{{ $t('pageAdotar.qualquer') }}</option>
+                                    <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{
+                                        distrito }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="codPostal" class="form-label">Código Postal</label>
+                                <input type="text" class="form-control" id="codPostal" aria-describedby="codPostal"
+                                    placeholder="0000-000">
+                            </div>
+                        </div>
+                        <div class="text-end pt-5">
                             <button @click="editarPerfil" type="button" class="btn btn-lg"
                                 style="background-color:#FD7E14; color: white;">{{ $t('paginaEditarPerfil.editar')
                                 }}</button>
@@ -70,6 +87,7 @@ export default {
     ],
     data() {
         return {
+            distritos: ["Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo", "Vila Real", "Viseu"],
             utilizadorEditado: {
                 nome: this.utilizador.nome,
                 email: this.utilizador.email,
@@ -83,22 +101,22 @@ export default {
     methods: {
         editarPerfil() {
             console.log(this.utilizadorEditado)
-            this.axios.post('/editarperfil',this.utilizadorEditado, {
+            this.axios.post('/editarperfil', this.utilizadorEditado, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
-                
+
             }).then(response => {
                 console.log(response.data)
                 localStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
-                
+
                 alert("Perfil editado com sucesso!")
             }).catch(error => {
                 console.log(error)
             })
         },
-        alterarFoto(e){
+        alterarFoto(e) {
             this.utilizadorEditado.fotografia = e.target.files[0]
             this.preview = URL.createObjectURL(this.utilizadorEditado.fotografia)
         }

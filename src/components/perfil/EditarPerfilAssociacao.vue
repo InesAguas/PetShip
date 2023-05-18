@@ -48,6 +48,22 @@
                                         v-bind:placeholder="utilizador.localizacao ? utilizador.localizacao : $t('perfilMsg.localizacao')"
                                         v-model="utilizadorEditado.localizacao">
                                 </div>
+                                <div class="row mb-3">
+                            <div class="col">
+                                <label for="exampleFormControlInput1" class="form-label">Distrito</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected value="">{{ $t('pageAdotar.qualquer') }}</option>
+                                    <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{
+                                        distrito }}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="codPostal" class="form-label">Código Postal</label>
+                                <input type="text" class="form-control" id="codPostal" aria-describedby="codPostal"
+                                    placeholder="0000-000">
+                            </div>
+                        </div>
                             </form>
                         </div>
                         <div class="col-6">
@@ -79,7 +95,7 @@
                                         v-model="utilizadorEditado.facebook">
                                 </div>
 
-                                <div class="text-end pt-5">
+                                <div class="text-end " style="padding-top:40%;">
                                     <button @click="editarPerfil" type="button" class="btn btn-lg"
                                         style="background-color:#FD7E14; color: white;">{{ $t('paginaEditarPerfil.editar')
                                         }}</button>
@@ -119,6 +135,7 @@ export default {
     },
     data() {
         return {
+            distritos: ["Aveiro", "Beja", "Braga", "Bragança", "Castelo Branco", "Coimbra", "Évora", "Faro", "Guarda", "Leiria", "Lisboa", "Portalegre", "Porto", "Santarém", "Setúbal", "Viana do Castelo", "Vila Real", "Viseu"],
             utilizadorEditado: {
                 nome: this.utilizador.nome,
                 email: this.utilizador.email,
