@@ -1,5 +1,5 @@
 <template>
-    <ModalCandidatura v-if="showModal" :utilizadorLogado="utilizadorLogado" ></ModalCandidatura>
+    <ModalCandidatura v-if="utilizadorLogado" :utilizadorLogado="utilizadorLogado" ></ModalCandidatura>
     <NavBar></NavBar>
     <div class="container mt-5">
         <div class="row">
