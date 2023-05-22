@@ -77,6 +77,9 @@ export default {
                     if (error.response.status == 422) {
                         this.mensagemErro = "Email ou password incorretos."
                         this.erro = true;
+                    } else if (error.response.status == 403) {
+                        this.mensagemErro = "Verifique o seu email."
+                        this.erro = true;
                     }
                 });
 
