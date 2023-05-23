@@ -1,6 +1,6 @@
 <template>
   <ModalInformacoesAnimal @close="modalInformacoesVisible = false" :animal="animalSelecionado" />
-  <ModalAdicionarAnimal @close="modalAdicionarAnimalVisible = false" @novoAnimal="novoAnimal" :animal="animalSelecionado"/>
+  <ModalAdicionarAnimal @close="modalAdicionarAnimalVisible = false" @novoAnimal="novoAnimal" @editarAnimal="editarAnimal" :animal="animalSelecionado"/>
   <!-- Modal para apagar um animal -->
   <div class="modal" tabindex="-1" id="modalApagar" @close="modalRemoverAnimalVisible = false">
     <div class="modal-dialog">
@@ -226,6 +226,11 @@ export default {
     novoAnimal(data) {
       console.log(data)
       this.animais.unshift(data)
+    },
+
+    editarAnimal(data) {
+      let index = this.animais.indexOf(this.animalSelecionado)
+      this.animais.splice(index, 1, data)
     }
 
     

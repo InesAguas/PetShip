@@ -181,6 +181,7 @@ export default {
     watch: {
         animal(novoAnimal) {
             this.animalModal = novoAnimal
+            this.editar = false
             if (novoAnimal.id) {
                 this.axios.get('associacao/animal/num/' + novoAnimal.id, {
                     headers: {
@@ -188,6 +189,7 @@ export default {
                     }
                 }).then(response => {
                     this.animalModal = response.data.animal
+                    this.editar = true;
                 })
                     .catch((error) => {
                         console.log(error)
@@ -198,13 +200,15 @@ export default {
     data() {
         return {
             racas: this.$tm('formAnimalMsg.racas_caes'),
-            animalModal: this.animal
+            animalModal: this.animal,
+            editar: false,
         }
     },
 
     methods: {
         publicarAnimal() {
-            console.log(this.animalModal)
+            if(!this.editar) {
+               console.log("novo animal")
             this.axios.post("/publicaranimal", this.animalModal, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -218,6 +222,28 @@ export default {
                 .catch((error) => {
                     console.log(error)
                 });
+            } else {
+                if(this.animalModal.fotografia == this.animal.fotografia) {
+                    this.animalModal.fotografia = null
+                }
+                
+                this.axios.post('editaranimal/' + this.animalModal.id, this.animalModal, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }).then(response => {
+                this.$emit('editarAnimal', response.data.animal)
+                console.log("eloo")
+                console.log(response.data.animal)
+                alert("Animal editado com sucesso!")
+                this.$emit('close')
+            })
+                .catch((error) => {
+                    console.log(error)
+                });
+            }
+            
         },
 
         alterarRacas() {
