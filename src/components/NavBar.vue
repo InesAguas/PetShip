@@ -29,7 +29,7 @@
             <router-link class="nav-link text-white" aria-current="page" to="/petsitting">Pet Sitting</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">About</a>
+            <router-link class="nav-link text-white" aria-current="page" to="/dashboard/animais">Dashboard</router-link>
           </li>
         </ul>
         <div class="d-flex justify-content-end">

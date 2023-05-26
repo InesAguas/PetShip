@@ -123,7 +123,7 @@ export default {
             })
                 .then(function (response) {
                     console.log(response.data.sucesso);
-                    alert(response.data.sucesso);
+                    alert("Anuncio criado com sucesso")
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
