@@ -13,6 +13,9 @@ import PageMensagens from '../components/mensagens/PageMensagens'
 import PageAnimal from '../components/animais/PageAnimal'
 import EditarPerfil from '../components/perfil/EditarPerfil'
 import GestaoAnimais from '../components/dashboard/GestaoAnimais'
+import PasswordEsquecida from '../components/PasswordEsquecida'
+import NovaPassword from '../components/NovaPassword'
+import GestaoAnuncios from '../components/dashboard/GestaoAnuncios'
 
 //import App from '../App'
 
@@ -28,6 +31,15 @@ function deslogado() {
     }
 }
 
+function isTipo2() {
+    if (localStorage.getItem('utilizador') != null) {
+        let utilizador = JSON.parse(localStorage.getItem('utilizador'))
+        if (utilizador.tipo != 2) {
+            return '/'
+        }
+    }
+}
+
 const routes = [
     {
         path: '/',
@@ -38,6 +50,18 @@ const routes = [
         path: '/login',
         name: 'login',
         component: FormLogin,
+        beforeEnter: [deslogado]
+    },
+    {
+        path: '/password-esquecida',
+        name: 'password-esquecida',
+        component: PasswordEsquecida,
+        beforeEnter: [deslogado]
+    },
+    {
+        path: '/novapassword/:token',
+        name: 'novapassword',
+        component: NovaPassword,
         beforeEnter: [deslogado]
     },
     {
@@ -114,8 +138,16 @@ const routes = [
         path: '/dashboard/animais',
         name: 'dashboardAnimais',
         component: GestaoAnimais,
-        beforeEnter: [logado]
+        beforeEnter: [logado, isTipo2]
     },
+    {
+        path: '/dashboard/anuncios',
+        name: 'dashboardAnuncios',
+        component: GestaoAnuncios,
+        beforeEnter: [logado]
+    }
+
+    
 ]
 
 const router = createRouter({

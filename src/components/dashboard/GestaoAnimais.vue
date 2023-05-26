@@ -1,5 +1,28 @@
 <template>
-  <ModalInformacoesAnimal @close="modalInformacoesVisible = false" :animal="animalSelecionado"/>
+  <ModalInformacoesAnimal @close="modalInformacoesVisible = false" :animal="animalSelecionado" />
+  <ModalAdicionarAnimal @close="modalAdicionarAnimalVisible = false" @novoAnimal="novoAnimal" @editarAnimal="editarAnimal" :animal="animalSelecionado"/>
+  <!-- Modal para apagar um animal -->
+  <div class="modal" tabindex="-1" id="modalApagar" @close="modalRemoverAnimalVisible = false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Remover animal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>  
+        <div class="modal-body">
+          Tem a certeza que pretende remover o animal :
+          {{ animalSelecionado.nome }}
+          <p>Se tiver um anuncio publicado, este também será removido</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14"
+            @click="remover">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <NavBar></NavBar>
   <div class="container-fluid ms-0">
     <div class="row flex-nowrap">
@@ -10,7 +33,7 @@
             <h2 class="fw-bold" style="color: #653208;">Animais</h2>
           </div>
           <div class="col">
-            <button type="button" class="btn text-white fw-bold float-end" style="background-color: #FD7E14;"
+            <button type="button" class="btn text-white fw-bold float-end" style="background-color: #FD7E14;"  @click="abrirModalAdicionar"
               data-bs-toggle="modal" data-bs-target="#formRegisto">Adicionar</button>
           </div>
         </div>
@@ -27,10 +50,11 @@
               <th scope="col">Ações</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-if="animais">
             <tr v-for="animal in animais" :key="animal">
               <td style="width:10%">
-                <img v-if="animal.fotografia" :src="animal.fotografia" class="rounded-circle" style="width:50px; height:50px; object-fit:cover">  {{ animal.nome }}
+                <img v-if="animal.fotografia" :src="animal.fotografia" class="rounded-circle"
+                  style="width:50px; height:50px; object-fit:cover"> {{ animal.nome }}
               </td>
               <td style="width:10%">{{ animal.especie }}</td>
               <td style="width:10%">{{ animal.sexo }}</td>
@@ -55,7 +79,8 @@
                     d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                   <path fill-rule="evenodd"
                     d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                  <rect class="btn" x="0" y="0" width="24" height="24" fill="transparent" onclick="alert('click!')" />
+                  <rect class="btn" x="0" y="0" width="24" height="24" fill="transparent" @click="abrirEditar(animal)" data-bs-toggle="modal"
+                  data-bs-target="#formRegisto" />
 
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" class="bi bi-trash me-3"
@@ -64,200 +89,21 @@
                     d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
                   <path
                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
-                  <rect class="btn" x="0" y="0" width="24" height="24" fill="transparent" data-bs-toggle="modal"
-                    data-bs-target="#modalApagar" />
+                  <rect class="btn" x="0" y="0" width="24" height="24" fill="transparent"
+                    @click="abrirModalRemover(animal)" data-bs-toggle="modal" data-bs-target="#modalApagar" />
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="green" class="bi bi-eye"
                   viewBox="0 0 16 16">
                   <path
                     d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
                   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                  <rect class="btn" x="0" y="0" width="24" @click="abrirModalInformacoes(animal)"  data-bs-toggle="modal"
-                  data-bs-target="#modalInformativo" height="24" fill="transparent" />
+                  <rect class="btn" x="0" y="0" width="24" @click="abrirModalInformacoes(animal)" data-bs-toggle="modal"
+                    data-bs-target="#modalInformativo" height="24" fill="transparent" />
                 </svg>
-
-                <!-- Modal para apagar um animal -->
-                <div class="modal" tabindex="-1" id="modalApagar">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Remover animal</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn text-white" style="background-color:#FD7E14">Remover</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </td>
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-    
-    <!-- Modal para criar um animal -->
-    <div class="modal modal-lg" id="formRegisto" tabindex="-1" aria-labelledby="exampleModalLabel"
-      data-bs-backdrop="static" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Registar Animal</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="data_recolha" class="form-label mb-0">Data de recolha*</label>
-                  <input type="date" id="data_recolha" class="form-control" v-model="animalModal.data_recolha">
-                </div>
-                <div class="col">
-                  <label for="formFile" class="form-label mb-0">Fotografia</label>
-                  <input class="form-control" type="file" id="formFile" accept="image/*" @change="atualizaFotografia">
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-6">
-                  <label for="local" class="form-label mb-0">Local de captura</label>
-                  <input type="text" id="local" class="form-control" v-model="animalModal.local_captura">
-                </div>
-                <div class="col">
-                  <label class="form-label mb-0">Animal ferido*</label><br>
-                  <div class="form-check form-check-inline" id="checkferido">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"
-                      v-model="animalModal.ferido">
-                    <label class="form-check-label" for="inlineRadio1">Sim</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="0"
-                      v-model="animalModal.ferido">
-                    <label class="form-check-label" for="inlineRadio2">Não</label>
-                  </div>
-                </div>
-
-              </div>
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="nome" class="form-label mb-0">Nome*</label>
-                  <input type="text" id="nome" class="form-control" v-model="animalModal.nome">
-                </div>
-                <div class="col">
-                  <label class="form-label mb-0">Comportamento agressivo*</label><br>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio3" value="1"
-                      v-model="animalModal.agressivo">
-                    <label class="form-check-label" for="inlineRadio3">Sim</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4"
-                      value="0" v-model="animalModal.agressivo">
-                    <label class="form-check-label" for="inlineRadio4">Não</label>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="porte" class="form-label mb-0">{{ $t('formAnimalMsg.porte') }}*</label>
-                  <select class="form-select" id="porte" v-model="animalModal.porte">
-                    <option v-for="(item, index) in $tm('formAnimalMsg.portes')" :key="item" :value="index + 1">{{ item }}
-                    </option>
-                  </select>
-                </div>
-                <div class="col">
-                  <label for="sexo" class="form-label mb-0">Sexo*</label>
-                  <select class="form-select" id="sexo" v-model="animalModal.sexo">
-                    <option v-bind:value="1">{{ $t('formAnimalMsg.sexos[0]') }}</option>
-                    <option v-bind:value="2">{{ $t('formAnimalMsg.sexos[1]') }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="especie" class="form-label mb-0">Especie*</label>
-                  <select class="form-select" id="especie" v-model="animalModal.especie" v-on:change="alterarRacas">
-                    <option v-bind:value="1">{{ $t('formAnimalMsg.especies[0]') }}</option>
-                    <option v-bind:value="2">{{ $t('formAnimalMsg.especies[1]') }}</option>
-                  </select>
-                </div>
-                <div class="col">
-                  <label for="raca" class="form-label mb-0">{{ $t('formAnimalMsg.raca') }}*</label>
-                  <select class="form-select" id="raca" v-model="animalModal.raca">
-                    <option v-for="(item, index) in racas" :key="item" :value="index + 1">{{ item }}</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="idade" class="form-label mb-0">{{ $t('formAnimalMsg.idade') }}*</label>
-                  <select class="form-select" id="idade" v-model="animalModal.idade">
-                    <option v-for="(item, index) in $tm('formAnimalMsg.idades')" :key="item" :value="index + 1">{{ item }}
-                    </option>
-                  </select>
-                </div>
-                <div class="col">
-                  <label for="cor" class="form-label mb-0">{{ $t('formAnimalMsg.cor') }}*</label>
-                  <select class="form-select" id="cor" v-model="animalModal.cor">
-                    <option v-for="(item, index) in $tm('formAnimalMsg.cores')" :key="item" :value="index + 1">{{ item }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col">
-
-                  <label class="form-label mb-0">Identificação eletrónica*</label><br>
-                  <div class="input-group">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio5"
-                        value="1" v-model="animalModal.identificacao">
-                      <label class="form-check-label" for="inlineRadio5">Sim</label>
-                    </div>
-
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio6"
-                        value="0" v-model="animalModal.identificacao">
-                      <label class="form-check-label" for="inlineRadio6">Não</label>
-                    </div>
-                    <label for="identificacao" class="form-label mb-0">Nº de chip</label>
-                    <input type="text" id="identificacao" class="form-control" v-model="animalModal.chip">
-                  </div>
-                </div>
-
-                <div class="col">
-                  <label for="desparasitacao" class="form-label mb-0">Desparasitação</label>
-                  <input type="date" id="desparasitacao" class="form-control" v-model="animalModal.desparasitacao">
-                </div>
-              </div>
-
-              <div class="row mb-3">
-                <div class="col">
-                  <label for="temperatura" class="form-label mb-0">Temperatura rectal</label>
-                  <div class="input-group">
-                    <input type="number" id="temperatura" class="form-control" v-model="animalModal.temperatura">
-                    <span class="input-group-text">ºC</span>
-                  </div>
-                </div>
-                <div class="col">
-                  <label for="medicacao" class="form-label mb-0">Medicação</label>
-                  <input type="text" id="medicacao" class="form-control" v-model="animalModal.medicacao">
-                </div>
-              </div>
-              <div>* Campos obrigatórios</div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn text-white" style="background-color: #FD7E14;"
-              @click="publicarAnimal">Confirmar</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -266,17 +112,20 @@
 import NavBar from '../NavBar.vue';
 import PainelDashboard from './PainelDashboard.vue';
 import ModalInformacoesAnimal from './ModalInformacoesAnimal.vue';
+import ModalAdicionarAnimal from './ModalAdicionarAnimal.vue';
 
 export default {
   name: 'GestaAnimais',
   components: {
     NavBar,
     PainelDashboard,
-    ModalInformacoesAnimal
+    ModalInformacoesAnimal,
+    ModalAdicionarAnimal
   },
   data() {
     return {
-      animalModal: {
+      animais: [],
+      animalSelecionado: {
         nome: null,
         sexo: 1,
         especie: 1,
@@ -295,28 +144,9 @@ export default {
         medicacao: null,
         fotografia: null
       },
-      racas: this.$tm('formAnimalMsg.racas_caes'),
-      animais: [],
       modalInformacoesVisible: false,
-      animalSelecionado:  {
-        nome: null,
-        sexo: null,
-        especie: null,
-        raca: null,
-        idade: null,
-        cor: null,
-        porte: null,
-        data_recolha: null,
-        local_captura: null,
-        ferido: null,
-        agressivo: null,
-        identificacao: null,
-        chip: null,
-        desparasitacao: null,
-        temperatura: null,
-        medicacao: null,
-        fotografia: null
-      }
+      modalRemoverAnimalVisible: false,
+      modalAdicionarAnimalVisible: false,
     }
   },
   mounted() {
@@ -330,48 +160,80 @@ export default {
     console.log(localStorage.getItem('token'))
   },
   methods: {
-    alterarRacas() {
-      if (this.animalModal.especie == 1) {
-        this.racas = this.$tm('formAnimalMsg.racas_caes')
-      } else {
-        this.racas = this.$tm('formAnimalMsg.racas_gatos')
-      }
-    },
-
-    publicarAnimal() {
-      console.log(this.animalModal)
-      this.axios.post("/publicaranimal", this.animalModal, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }).then(function (response) {
-                    console.log(response.data.sucesso);
-                    alert(response.data.sucesso);
-                })
-                .catch((error) => {
-                    console.log(error)
-                });
-    },
-
-    atualizaFotografia(event) {
-      this.animalModal.fotografia = event.target.files[0]
-      console.log(this.animalModal)
-    },
-
-    editarAnimal(index) {
-      console.log(index);
-    },
-
-    apagarAnimal(index) {
-      console.log(index);
-    },
-
     abrirModalInformacoes(data) {
       this.animalSelecionado = data
       this.modalInformacoesVisible = true
+    },
+
+    abrirModalRemover(data) {
+      this.animalSelecionado = data
+      this.modalRemoverAnimalVisible = true
+    },
+
+    abrirEditar(data) {
+      console.log("teste")
+      console.log(data)
+      this.animalSelecionado = data
+      console.log(this.animalSelecionado)
+      this.modalAdicionarAnimalVisible = true
+    },
+
+    abrirModalAdicionar() {
+      this.animalSelecionado = {
+        nome: null,
+        sexo: 1,
+        especie: 1,
+        raca: 1,
+        idade: 1,
+        cor: 1,
+        porte: 1,
+        data_recolha: null,
+        local_captura: null,
+        ferido: 0,
+        agressivo: 0,
+        identificacao: 0,
+        chip: null,
+        desparasitacao: null,
+        temperatura: null,
+        medicacao: null,
+        fotografia: null
+      }
+      this.modalAdicionarAnimalVisible = true
+
+    },
+
+    remover() {
+      console.log(this.animais)
+
+      this.axios.delete('removeranimal/' + this.animalSelecionado.id, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+
+      }).then(response => {
+        console.log(response)
+        let index = this.animais.indexOf(this.animalSelecionado)
+        this.animais.splice(index, 1)
+        this.modalRemoverAnimalVisible = false
+        alert("Animal removido com sucesso!")
+        console.log(this.animais)
+      })
+        .catch((error) => {
+          console.log(error)
+        });
+    },
+
+    novoAnimal(data) {
+      console.log(data)
+      this.animais.unshift(data)
+    },
+
+    editarAnimal(data) {
+      let index = this.animais.indexOf(this.animalSelecionado)
+      this.animais.splice(index, 1, data)
     }
+
+    
   }
 }
-
 </script>
