@@ -10,7 +10,9 @@
             <div class="col-3 overflow-y-scroll">
                 <CardPessoa v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)" :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa>
             </div>
-                <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas != null" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
+            <div  v-if="conversas?.length > 0" >
+                <CardConversa  @mensagemEnviada="atualizaConversa" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
+            </div>
         </div>
     </div>
 </template>

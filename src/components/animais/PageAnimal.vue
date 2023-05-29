@@ -150,13 +150,22 @@ export default {
     },
     methods: {
         mandarMensagem() {
-            this.$router.push({
+            if(localStorage.getItem('token') == null || localStorage.getItem('utilizador') == null){
+                this.$router.push({name: "login"})
+            }
+
+            if(this.utilizador.id == JSON.parse(localStorage.getItem('utilizador')).id){
+               alert("Não pode enviar mensagens a si mesmo")
+            } else {
+                this.$router.push({
             name: "mensagens", //use name for router push
             params: {
                 id: this.utilizador.id,
                 nome: this.utilizador.nome,
             }
             });
+            }
+            
         }
     }
 }
