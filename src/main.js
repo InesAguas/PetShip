@@ -44,7 +44,8 @@ app.use(VueGoogleMaps, {
 
 app.use(new VueSocketIO({
     debug: true,
-    connection: 'http://127.0.0.1:3000',
+    //connection: 'http://127.0.0.1:3000',
+    connection: 'https://petship-websockets-fsafa.ondigitalocean.app/',
     //withCredentials: true,
 }))
 
