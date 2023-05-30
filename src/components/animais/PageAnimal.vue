@@ -87,8 +87,7 @@
                        
                             <button @click="adotar" type="button" class="btn mt-3 ms-2"
                                 style="background-color:#FD7E14; color:white" data-bs-toggle="modal" data-bs-target="#exampleModal">Adotar</button>
-                                
-                        </div>
+                            
                     </div>
                     <div class="row">
                         <p class="mt-3">{{ $t('paginaAnimalMsg.anuncioCriado') }} <span>{{ animal.created_at }}</span></p>
@@ -172,7 +171,7 @@ export default {
                 nome: this.utilizador.nome,
             }
             });
-        },
+        }},
         adotar() {
             this.showModal = true
         }
