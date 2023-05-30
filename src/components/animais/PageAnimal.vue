@@ -1,4 +1,5 @@
 <template>
+    <ModalCandidatura v-if="utilizadorLogado" :utilizadorLogado="utilizadorLogado" ></ModalCandidatura>
     <NavBar></NavBar>
     <div class="container mt-5">
         <div class="row">
@@ -10,17 +11,16 @@
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner" v-if="animal.fotografias">
                     <div class="carousel-item active">
-                        <img :src="animal.fotografias.length == 0 ? require('../../assets/default_animal.png') : animal.fotografias[0] "
+                        <img :src="animal.fotografias.length == 0 ? require('../../assets/default_animal.png') : animal.fotografias[0]"
                             class="d-block w-100" height="400" style="object-fit:scale-down;" alt="...">
                     </div>
                     <div class="carousel-item" v-for="(imagem) in animal.fotografias.slice(1)" :key="imagem">
-                        <img :src=imagem
-                            class="d-block w-100" height="400" style="object-fit:scale-down;" alt="...">
+                        <img :src=imagem class="d-block w-100" height="400" style="object-fit:scale-down;" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"  aria-hidden="true" ></span>
-                    <span class="visually-hidden" >Previous</span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
@@ -85,6 +85,10 @@
                                 </svg>Enviar mensagem</button>
                                 </div>
                        
+                            <button @click="adotar" type="button" class="btn mt-3 ms-2"
+                                style="background-color:#FD7E14; color:white" data-bs-toggle="modal" data-bs-target="#exampleModal">Adotar</button>
+                                
+                        </div>
                     </div>
                     <div class="row">
                         <p class="mt-3">{{ $t('paginaAnimalMsg.anuncioCriado') }} <span>{{ animal.created_at }}</span></p>
@@ -96,16 +100,16 @@
                     <div class="text-start">
                         <h4 class="fw-bold">{{ $t('paginaAnimalMsg.carateristicas') }}</h4>
                         <p class="fw-bold fs-6">
-                            {{ $t('formAnimalMsg.especie') }}: <span class="fw-normal">{{animal.especie}}</span><br>
-                            {{ $t('formAnimalMsg.raca') }}: <span class="fw-normal">{{animal.raca}}</span><br>
-                            {{ $t('formAnimalMsg.sexo') }}: <span class="fw-normal">{{animal.sexo}}</span><br>
-                            {{ $t('paginaAnimalMsg.tamanho') }}: <span class="fw-normal">{{animal.porte}}</span><br>
-                            {{ $t('formAnimalMsg.idade') }}: <span class="fw-normal">{{animal.idade}}</span><br>
-                            {{ $t('formAnimalMsg.cor') }}: <span class="fw-normal">{{animal.cor}}</span><br>
+                            {{ $t('formAnimalMsg.especie') }}: <span class="fw-normal">{{ animal.especie }}</span><br>
+                            {{ $t('formAnimalMsg.raca') }}: <span class="fw-normal">{{ animal.raca }}</span><br>
+                            {{ $t('formAnimalMsg.sexo') }}: <span class="fw-normal">{{ animal.sexo }}</span><br>
+                            {{ $t('paginaAnimalMsg.tamanho') }}: <span class="fw-normal">{{ animal.porte }}</span><br>
+                            {{ $t('formAnimalMsg.idade') }}: <span class="fw-normal">{{ animal.idade }}</span><br>
+                            {{ $t('formAnimalMsg.cor') }}: <span class="fw-normal">{{ animal.cor }}</span><br>
                         </p>
                         <h4 class="fw-bold">{{ $t('formAnimalMsg.descricao') }}</h4>
                         <p>
-                            {{animal.descricao}}
+                            {{ animal.descricao }}
                         </p>
                     </div>
                 </div>
@@ -116,28 +120,32 @@
 <style>
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: #FD7E14;
+    background-color: #FD7E14;
 }
-
 </style>
 <script>
 
 import NavBar from '../NavBar.vue'
+import ModalCandidatura from './ModalCandidatura.vue'
 export default {
 
     name: 'PagePetSitting',
     components: {
         NavBar,
+        ModalCandidatura,
 
     },
     data() {
         return {
             animal: [],
             utilizador: [],
+            showModal: false,
+            utilizadorLogado: null,
         }
 
     },
     mounted() {
+        this.utilizadorLogado = JSON.parse(localStorage.getItem('utilizador'));
         this.axios.get('animal/' + this.$route.params.id)
             .then(response => {
                 this.animal = response.data.animal
@@ -164,8 +172,9 @@ export default {
                 nome: this.utilizador.nome,
             }
             });
-            }
-            
+        },
+        adotar() {
+            this.showModal = true
         }
     }
 }
