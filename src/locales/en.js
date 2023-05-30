@@ -44,6 +44,16 @@ export const en = {
         titulo : "Adopt",
         qualquer: "Any",
         pesquisar: "Search",
+        distrito: "District",
+        especie: "Species",
+        raca: "Breed",
+        caes_opcao: "DOGS",
+        gatos_opcao: "CATS",
+        idade: "Age",
+        sexo: "Sex",
+        porte: "Size",
+        cor: "Color",
+
     },
     perfilAssMsg: {
         dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -76,6 +86,10 @@ export const en = {
         encontreAssociacao: "Find a shelter near you",
         ajudarTexto: "Can't adopt a pet? You can still help them!",
         textAjudas: "With our website, you can help by becoming a petsitter, volunteering at a shelter or donating to a shelter near you.",
+        idade: "Age",
+        sexo: "Sex",
+        distrito: "District",
+        
     },
     paginaAnimalMsg: {
         anunciado: "Announced by",
@@ -99,6 +113,11 @@ export const en = {
         abertura: "Opening",
         encerramento: "Closing",
         horario: "Schedule",
-    }
+    },
+    paginaMensagens: {
+        titulo: "Messages",
+        mensagem: "Message",
+        semMensagens: "No messages to show",
+    },
     
 }

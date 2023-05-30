@@ -44,6 +44,15 @@ export const pt = {
         titulo : "Adotar",
         qualquer: "Qualquer",
         pesquisar: "Pesquisar",
+        distrito: "Distrito",
+        especie: "Espécie",
+        raca: "Raça",
+        caes_opcao: "CÃES",
+        gatos_opcao: "GATOS",
+        idade: "Idade",
+        sexo: "Sexo",
+        porte: "Porte",
+        cor: "Cor",
 
     },
     perfilAssMsg: {
@@ -100,5 +109,10 @@ export const pt = {
         abertura: "Abertura",
         encerramento: "Encerramento",
         horario: "Horário",
-    }
+    },
+    paginaMensagens: {
+        titulo: "Mensagens",
+        mensagem: "Mensagem",
+        semMensagens: "Ainda não tem mensagens",
+    },
 }

@@ -14,7 +14,7 @@
         </div>
         <div class="row pt-2">
             <div class="input-group my-auto ms-2" style="width:95%">
-                <input type="text" class="form-control" placeholder="Mensagem" aria-label="Mensagem"
+                <input type="text" class="form-control" :placeholder="$t('paginaMensagens.mensagem')" aria-label="Mensagem"
                     aria-describedby="button-addon2" @keydown.enter="enviarMensagem" v-model="mensagem" id="mensagemInput">
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2" @click="enviarMensagem"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
