@@ -49,9 +49,9 @@ app.use(new VueSocketIO({
     //withCredentials: true,
 }))
 
-axios.defaults.baseURL = "https://petship-api-67yif.ondigitalocean.app/api"
+//axios.defaults.baseURL = "https://petship-api-67yif.ondigitalocean.app/api"
 
-//axios.defaults.baseURL = "http://127.0.0.1:8000/api"
+axios.defaults.baseURL = "http://127.0.0.1:8000/api"
 app.config.globalProperties.axios=axios
 
 app.mount('#app')

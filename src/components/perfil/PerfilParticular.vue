@@ -107,19 +107,24 @@ export default {
         },
         eliminarConta() {
             console.log(this.utilizadorLogado.id);
-            this.axios.delete("eliminarconta/"+this.utilizadorLogado.id,{
+            this.axios.delete("eliminarconta/" + this.utilizadorLogado.id, {
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             })
-            .then(response => {
-                console.log(response);
-                //ir para o login
-                
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(response => {
+                    console.log(response);
+                    //ir para o login
+                    this.mostrarModal = false;
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('utilizador');
+
+                    this.$router.push('/login');
+
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
 }
