@@ -69,10 +69,12 @@
                     </div>
                     <div class="row">
                         
-                            <a :href="`http://www.facebook.com/sharer/sharer.php?u=localhost:8080/animal/${animal.id}&title=hello`" class="me-1"><img class="mt-3" src="../../assets/facebook.png" height="300px"></a>
-                        
+                        <div class="col-1 m-1">
+                            
+                            <a href='https://www.facebook.com/sharer/sharer.php?u=#petship-8xfjf.ondigitalocean.app/animal/5&title=hello' target='_blank' class="me-1"><img class="mt-3" src="../../assets/facebook.png" height="30px"></a>
+                        </div>
                             <div class="col-1 m-1">
-                            <a href="https://www.instagram.com/" class="me-1 mt-4"><img class="mt-3" src="../../assets/instagram.png" height="30px"></a>
+                            <a href="https://www.instagram.com/" target='_blank' class="me-1 mt-4"><img class="mt-3" src="../../assets/instagram.png" height="30px"></a>
                         </div>
                             <div class="col">
                             <button @click="mandarMensagem" type="button" class="btn mt-3 ms-2" style="background-color:#FD7E14; color:white"><svg
