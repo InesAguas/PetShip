@@ -2,9 +2,8 @@
     <NavBar></NavBar>
     <div class="container mt-5">
         <div class="row">
-            <h1 class="fw-bold" style="color: #653208">{{ animal.nome }} <small><small><small><small
-                                class="badge rounded-pill" style="background-color: #FD7E14">{{ animal.etiqueta
-                                }}</small></small></small></small></h1>
+            <h1 class="fw-bold" style="color: #653208">{{ animal.nome }} <small><small><small><small class="badge rounded-pill" style="background-color: #FD7E14">{{ animal.etiqueta}}</small></small></small></small></h1>
+            
         </div>
         <div class="row">
             <div id="carouselExample" class="carousel slide">
@@ -69,15 +68,14 @@
                     </div>
                     <div class="row">
                         
-                        <div class="col-1 m-1">
-                            
-                            <a href='https://www.facebook.com/sharer/sharer.php?u=#petship-8xfjf.ondigitalocean.app/animal/5&title=hello' target='_blank' class="me-1"><img class="mt-3" src="../../assets/facebook.png" height="30px"></a>
+                        <div class="col-1 m-1" v-if="utilizador.facebook">
+                            <a  :href="utilizador.facebook" target='_blank' class="me-1"><img class="mt-3" src="../../assets/facebook.png" height="30"></a>
                         </div>
-                            <div class="col-1 m-1">
-                            <a href="https://www.instagram.com/" target='_blank' class="me-1 mt-4"><img class="mt-3" src="../../assets/instagram.png" height="30px"></a>
+                            <div class="col-1 m-1" v-if="utilizador.instagram">
+                            <a  :href="utilizador.instagram" target='_blank' class="me-1 mt-4"><img class="mt-3" src="../../assets/instagram.png" height="30"></a>
                         </div>
                             <div class="col">
-                            <button @click="mandarMensagem" type="button" class="btn mt-3 ms-2" style="background-color:#FD7E14; color:white"><svg
+                            <button @click="mandarMensagem" type="button" class="btn mt-3" style="background-color:#FD7E14; color:white"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white"
                                     class="bi bi-chat-dots me-2" viewBox="0 0 16 16">
                                     <path
@@ -94,9 +92,18 @@
                 </div>
             </div>
             <div class="col">
-                <div class="container mt-3 p-3 pt-3 rounded-3 border" style=" background-color:white;">
+                <div class=" mt-3 p-3 pt-3 rounded-3 border" style=" background-color:white;">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="fw-bold text-start">{{ $t('paginaAnimalMsg.carateristicas') }}</h4>
+                        </div>
+                        <div class="col-1">
+                            <a href='https://www.facebook.com/sharer/sharer.php?u=#petship-8xfjf.ondigitalocean.app/animal/5&title=hello' target='_blank' class="text-end p-0 m-0"><img class="img p-0 m-0" src="../../assets/facebook.png" height="30" width="30"></a>
+                        </div>  
+                    </div>
+                   
                     <div class="text-start">
-                        <h4 class="fw-bold">{{ $t('paginaAnimalMsg.carateristicas') }}</h4>
+                        
                         <p class="fw-bold fs-6">
                             {{ $t('formAnimalMsg.especie') }}: <span class="fw-normal">{{animal.especie}}</span><br>
                             {{ $t('formAnimalMsg.raca') }}: <span class="fw-normal">{{animal.raca}}</span><br>
@@ -110,6 +117,9 @@
                             {{animal.descricao}}
                         </p>
                     </div>
+
+                    
+                    
                 </div>
             </div>
         </div>
