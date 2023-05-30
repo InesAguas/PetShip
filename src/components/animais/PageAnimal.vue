@@ -101,8 +101,8 @@
                             <h4 class="fw-bold text-start">{{ $t('paginaAnimalMsg.carateristicas') }}</h4>
                         </div>
                         <div class="col-1">
-                            <a href='https://www.facebook.com/sharer/sharer.php?u=#petship-8xfjf.ondigitalocean.app/animal/5&title=hello' target='_blank' class="text-end p-0 m-0"><img class="img p-0 m-0" src="../../assets/facebook.png" height="30" width="30"></a>
-                        </div>  
+                            
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://petship-8xfjf.ondigitalocean.app/animal/6" target="_blank" rel="noopener"><img class="img p-0 m-0" src="../../assets/facebook.png" height="30" width="30"></a>                        </div>  
                     </div>
                    
                     <div class="text-start">
