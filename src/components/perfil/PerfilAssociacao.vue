@@ -55,24 +55,24 @@
                         <button @click="mostrarModal = true"
                             v-if="utilizadorLogado != null && utilizador.id == utilizadorLogado.id" type="button"
                             class="btn btn-sm mt-3 btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar"
-                            style="color:white">Eliminar conta</button>
+                            style="color:white">{{ $t('paginaEliminar.titulo') }}</button>
                         <!-- Modal -->
                         <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Conta</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $t('paginaEliminar.titulo') }}</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Deseja realmente excluir sua conta?</p>
+                                        <p>{{ $t('paginaEliminar.texto') }}</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Voltar</button>
+                                            data-bs-dismiss="modal">{{ $t('paginaEliminar.cancelar') }}</button>
                                         <button type="button" class="btn btn-danger"
-                                            @click="eliminarConta">Eliminar</button>
+                                            @click="eliminarConta">{{ $t('paginaEliminar.eliminar') }}</button>
                                     </div>
                                 </div>
                             </div>

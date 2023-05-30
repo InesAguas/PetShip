@@ -100,5 +100,11 @@ export const pt = {
         abertura: "Abertura",
         encerramento: "Encerramento",
         horario: "Horário",
-    }
+    },
+    paginaEliminar: {
+        titulo: "Eliminar Conta",
+        texto: "Tem a certeza que pretende eliminar a sua conta?",
+        eliminar: "Eliminar",
+        cancelar: "Cancelar",
+    },
 }

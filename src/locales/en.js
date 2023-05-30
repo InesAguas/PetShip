@@ -99,6 +99,12 @@ export const en = {
         abertura: "Opening",
         encerramento: "Closing",
         horario: "Schedule",
-    }
+    },
+    paginaEliminar: {
+        titulo: "Delete Account",
+        texto: "Are you sure you want to delete your account?",
+        cancelar: "Cancel",
+        eliminar: "Delete",
+    },
     
 }
