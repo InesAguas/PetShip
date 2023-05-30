@@ -3,16 +3,16 @@
     <div class="container h-75" >
         <div class="row" style="height:10%; backgroud-color:#F8F9FA">
             <div class="col ps-0">
-                <h1 class="fw-bold" style="color: #653208">Mensagens</h1>
+                <h1 class="fw-bold" style="color: #653208">{{$t('paginaMensagens.titulo')}}</h1>
             </div>
         </div>
         <div class="row bg-white shadow-sm" style="height:90%;">
             <div class="col-3 overflow-y-scroll">
+            <div v-if="conversas.length <= 0">{{$t('paginaMensagens.semMensagens')}}</div>
                 <CardPessoa v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)" :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa>
             </div>
-            <div  v-if="conversas?.length > 0" >
-                <CardConversa  @mensagemEnviada="atualizaConversa" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
-            </div>
+            <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas.length > 0" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
+
         </div>
     </div>
 </template>
@@ -42,7 +42,7 @@ export default ({
     data() {
         return {
             utilizador: null,
-            conversas: null,
+            conversas: [],
             selected : 0
         }
     },
@@ -56,10 +56,8 @@ export default ({
                 console.log(response.data.conversas);
                  this.conversas = response.data.conversas;
                  console.log(this.conversas);
-                 console.log("teste");
-
-                 console.log(this.conversas);  
                  
+
                  if(this.$route.params.id != null && this.$route.params.id != this.utilizador.id) {
                     var index = this.conversas.findIndex(x => x.id_envia == this.$route.params.id || x.id_recebe == this.$route.params.id);
                     if(index >= 0) {

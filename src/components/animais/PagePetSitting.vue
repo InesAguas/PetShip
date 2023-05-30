@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-2 mt-3">
                 <div class="mb-2">
-                    <label for="exampleFormControlInput1" class="form-label">Distrito</label>
+                    <label for="exampleFormControlInput1" class="form-label">{{$t('pageAdotar.distrito')}}</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroDistrito">"
                         <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
                         <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{ distrito }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
-                    <label for="exampleFormControlInput1" class="form-label">Espécie</label>
+                    <label for="exampleFormControlInput1" class="form-label">{{$t('pageAdotar.especie')}}</label>
                     <select class="form-select" aria-label="Default select example"  v-model="filtroEspecie">
                         <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
                         <option v-bind:value="$t('formAnimalMsg.especies[0]')">{{ $t('formAnimalMsg.especies[0]') }}</option>
@@ -57,8 +57,17 @@ export default {
         }
 
     },
+    watch: {
+        '$i18n.locale': function () {
+            this.loadAnimais();
+        }
+    },
     mounted() {
-        this.axios.get('/petsitting')
+        this.loadAnimais();
+    },
+    methods: {
+        loadAnimais() {
+            this.axios.get('/petsitting?lang=' + this.$i18n.locale)
             .then(response => {
                 console.log(response.data)
                 this.todosAnimais = response.data.animais
@@ -66,8 +75,8 @@ export default {
                 console.log(this.animais)
                 
             })
-    },
-    methods: {
+        },
+
         filtrar() {
             this.animais = this.todosAnimais.filter((animal) => {
                 return (this.filtroDistrito != "" ? animal.distrito === this.filtroDistrito : true)
