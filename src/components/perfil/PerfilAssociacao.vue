@@ -1,5 +1,5 @@
 <template>
-    <div class="container mt-5 p-5 pt-3 rounded-3 border" style="max-width: 1000px; background-color:white;">
+    <div class="container mt-5 p-5 pt-3 rounded-3 border" style="max-width: 1000px; background-color:white;" v-if="utilizador">
         <div>
             <h2 class="fw-bold mb-4" style="color: #653208;">{{utilizador.nome}}</h2>
         </div>
