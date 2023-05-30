@@ -112,9 +112,9 @@
                         <h3 class="fw-bold mt-2" style="color: #653208">{{ $t('paginaEditarPerfilAss.horario') }}</h3>
                     </div>
                     <DiaSemana v-for="(dia, index) in $tm('perfilAssMsg.dias')" :key="dia" :dia="dia"
-                        :isChecked="utilizador.horario[index] != null ? utilizador.horario[index][0] : false"
-                        :abertura="utilizador.horario[index] != null && utilizador.horario[index].length > 1 ? utilizador.horario[index][1] : null"
-                        :encerramento="utilizador.horario[index] != null && utilizador.horario[index].length > 2 ? utilizador.horario[index][2] : null"
+                        :isChecked="utilizador.horario && utilizador.horario[index] != null ? utilizador.horario[index][0] : false"
+                        :abertura="utilizador.horario && utilizador.horario[index] != null && utilizador.horario[index].length > 1 ? utilizador.horario[index][1] : null"
+                        :encerramento="utilizador.horario && utilizador.horario[index] != null && utilizador.horario[index].length > 2 ? utilizador.horario[index][2] : null"
                         @atualizarHorario="atualizarHorario"></DiaSemana>
                 </div>
             </div>
@@ -144,7 +144,7 @@ export default {
                 website: this.utilizador.website,
                 instagram: this.utilizador.instagram,
                 facebook: this.utilizador.facebook,
-                horario: [
+                horario: this.utilizador.horario ? [
                     this.utilizador.horario[0],
                     this.utilizador.horario[1],
                     this.utilizador.horario[2],
@@ -152,14 +152,19 @@ export default {
                     this.utilizador.horario[4],
                     this.utilizador.horario[5],
                     this.utilizador.horario[6],
+                ] : [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
                 ]
             },
             preview: this.utilizador.fotografia,
 
         }
-    },
-    mounted() {
-
     },
     methods: {
         alterarFoto(e) {
@@ -214,13 +219,13 @@ export default {
             console.log(this.utilizadorEditado.horario)
         },
         editarPerfil() {
-            for(let i =0 ; i < this.utilizadorEditado.horario.length; i++){
-               if(this.utilizadorEditado.horario[i][0] == false){
-                  if(this.utilizadorEditado.horario[i][1] == null || this.utilizadorEditado.horario[i][2] == null){
-                    alert("Preencha os horários de abertura e encerramento")
-                    return
-                  }
-               }
+            for (let i = 0; i < this.utilizadorEditado.horario.length; i++) {
+                if (this.utilizadorEditado.horario[i][0] == false) {
+                    if (this.utilizadorEditado.horario[i][1] == null || this.utilizadorEditado.horario[i][2] == null) {
+                        alert("Preencha os horários de abertura e encerramento")
+                        return
+                    }
+                }
             }
             console.log(this.utilizadorEditado)
             this.utilizadorEditado.horario = JSON.stringify(this.utilizadorEditado.horario);

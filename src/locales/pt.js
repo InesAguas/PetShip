@@ -115,4 +115,10 @@ export const pt = {
         mensagem: "Mensagem",
         semMensagens: "Ainda não tem mensagens",
     },
+    paginaEliminar: {
+        titulo: "Eliminar Conta",
+        texto: "Tem a certeza que pretende eliminar a sua conta?",
+        eliminar: "Eliminar",
+        cancelar: "Cancelar",
+    },
 }
