@@ -1,8 +1,9 @@
 <template>
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
-        <ul class="nav nav-pills flex-column mb-auto">
+        <ul class="nav nav-pills flex-column mb-auto" id="menu">
             <li class="nav-item">
-                <a class="nav-link" :class="{ 'active': activeSection === 'dashboard' }" @click="setActiveSection('dashboard')">
+                <a class="nav-link" :class="{ 'active': activeSection === 'dashboard' }"
+                    @click="setActiveSection('dashboard')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-grid-1x2" viewBox="0 0 16 16">
                         <path
@@ -23,8 +24,8 @@
                 </a>
             </li>
             <li>
-                <router-link to="/dashboard/anuncios" class="nav-link link-body-emphasis" :class="{ active: activeSection === 'anuncios' }"
-                    @click="setActiveSection('anuncios')">
+                <router-link to="/dashboard/anuncios" class="nav-link link-body-emphasis"
+                    :class="{ active: activeSection === 'anuncios' }" @click="setActiveSection('anuncios')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layers"
                         viewBox="0 0 16 16">
                         <path
@@ -45,8 +46,8 @@
                 </a>
             </li>
             <li>
-                <router-link to="/dashboard/animais" class="nav-link link-body-emphasis" :class="{ active: activeSection === 'animais' }"
-                    @click="setActiveSection('animais')">
+                <router-link to="/dashboard/animais" class="nav-link link-body-emphasis"
+                    :class="{ active: activeSection === 'animais' }" @click="setActiveSection('animais')">
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#people-circle"></use>
                     </svg>
@@ -115,11 +116,12 @@ export default {
 
 </script>
 <style>
-.nav-link.active {
-  background-color: #FD7E14 !important;
-  color:white !important;
+#menu .nav-link.active {
+    background-color: #FD7E14 !important;
+    color: white !important;
 }
-.nav-link{
+
+#menu .nav-link {
     color: black !important;
 
 }

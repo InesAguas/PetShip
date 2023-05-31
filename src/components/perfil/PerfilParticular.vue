@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('paginaEliminar.cancelar') }}</button>
-                                    <button type="button" class="btn btn-danger" @click="eliminarConta">{{ $t('paginaEliminar.eliminar') }}</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" @click="eliminarConta">{{ $t('paginaEliminar.eliminar') }}</button>
                                 </div>
                             </div>
                         </div>
