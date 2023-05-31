@@ -47,9 +47,17 @@ export default {
     name: 'ModalAdicionarStock',
     data(){
         return{
-            
+            produto: {
+                nomeProduto: '',
+                descricao: '',
+                quantAtual: '',
+                quantMin: '',
+                observacoes: ''
+            }
         }
     },
-    
+    methods: {
+       
+    }
 }
 </script>
