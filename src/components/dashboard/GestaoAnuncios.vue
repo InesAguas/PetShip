@@ -1,20 +1,20 @@
 <template>
 <ModalAdicionarAnuncio @anuncioCriado="anuncioCriado" @anuncioEditado="anuncioEditado" :anuncioSelecionado="anuncioSelecionado"></ModalAdicionarAnuncio>
-    <div class="modal" tabindex="-1" id="modalApagar" v-if="anuncioSelecionado">
+    <div class="modal" tabindex="-1" id="modalApagar" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Remover anuncio</h5>
+              <h5 class="modal-title">{{$t('dashboardAnuncios.modalRemover')}}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>  
             <div class="modal-body">
-              Tem a certeza que pretende remover o anuncio do animal:
+              {{$t('dashboardAnuncios.modalRemoverTexto')}}
               {{ anuncioSelecionado.nome }}
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{$t('dashboardAnuncios.modalRemoverCancelar')}}</button>
               <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14"
-                @click="remover">Remover</button>
+                @click="remover">{{$t('dashboardAnuncios.modalRemoverConfirmar')}}</button>
             </div>
           </div>
         </div>
@@ -27,31 +27,31 @@
         <div class="col-8">
             <div class="row my-3">
                 <div class="col">
-                  <h2 class="fw-bold" style="color: #653208;">Anúncios</h2>
+                  <h2 class="fw-bold" style="color: #653208;">{{$t('dashboardAnuncios.titulo')}}</h2>
                 </div>
                 <div class="col">
-                  <button type="button" class="btn text-white fw-bold float-end" style="background-color: #FD7E14;" @click="anuncioSelecionado = null"
-                    data-bs-toggle="modal" data-bs-target="#formRegisto">Anunciar</button>
+                  <button type="button" class="btn text-white fw-bold float-end" style="background-color: #FD7E14;" @click="abrirModalAdicionar()"
+                    data-bs-toggle="modal" data-bs-target="#formRegisto">{{$t('dashboardAnuncios.botaoAdicionar')}}</button>
                 </div>
               </div>
 
               <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Espécie</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Tamanho</th>
-                    <th scope="col">Idade</th>
-                    <th scope="col">Etiqueta</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">{{$t('dashboardAnuncios.nome')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.especie')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.sexo')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.porte')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.idade')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.etiqueta')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.estado')}}</th>
+                    <th scope="col">{{$t('dashboardAnuncios.acoes')}}</th>
                   </tr>
                 </thead>
                 <tbody v-if="anuncios">
                   <tr v-for="animal in anuncios" :key="animal">
                     <td style="width:10%">
-                      <img v-if="animal.fotografia" :src="animal.fotografia" class="rounded-circle"
+                      <img v-if="animal.fotografias" :src="animal.fotografias[0]" class="rounded-circle"
                         style="width:50px; height:50px; object-fit:cover"> {{ animal.nome }}
                     </td>
                     <td style="width:10%">{{ animal.especie }}</td>
@@ -59,7 +59,9 @@
                     <td style="width:10%">{{ animal.porte }}</td>
                     <td style="width:10%">{{ animal.idade }}</td>
                     <td style="width:10%">{{ animal.etiqueta }}</td>
-                    <td style="width:10%">sadsad</td>
+                    <td style="width:10%">
+                      <button v-if="animal.estado == ('Ativo' || 'Active')" type="button" class="btn btn-success" :title="$t('dashboardAnuncios.desativar')" @click.once="alterarEstado(animal); " > {{ animal.estado}}</button>
+                      <button v-else type="button" class="btn btn-danger" :title="$t('dashboardAnuncios.ativar')" @click.once="alterarEstado(animal)"> {{ animal.estado}}</button> </td>
                     <td style="width:10%">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="orange"
                         class="bi bi-pencil-square me-3" viewBox="0 0 16 16">
@@ -126,21 +128,50 @@ export default {
         descricao: null,
         fotografias: [],
         created_at: null,
-      }
+      },
     }
   },
+  watch: {
+        '$i18n.locale': function () {
+            this.loadAnimais();
+        }
+    },
   mounted() {
-    this.axios.get("utilizador/anuncios", {
+    this.loadAnimais();
+    
+  },
+
+  methods: {
+    loadAnimais() {
+      this.axios.get("utilizador/anuncios?lang=" + this.$i18n.locale, {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     }).then(response => {
       this.anuncios = response.data.anuncios
     })
-    console.log(localStorage.getItem('token'))
-  },
+      .catch((error) => {
+        console.log(error)
+      });
+    },
 
-  methods: {
+    abrirModalAdicionar() {
+      this.anuncioSelecionado = {
+        nome: null,
+        sexo: 1,
+        especie: 1,
+        raca: 1,
+        porte: 1,
+        idade: 1,
+        cor: 1,
+        distrito: 'Aveiro',
+        etiqueta: 1,
+        descricao: null,
+        fotografias: [],
+        created_at: null,
+      }
+    },
+
     abrirModalRemover(animal) {
         this.anuncioSelecionado = animal
     },
@@ -173,6 +204,22 @@ export default {
     anuncioEditado(anuncio) {
         let index = this.anuncios.indexOf(this.anuncioSelecionado)
          this.anuncios.splice(index, 1, anuncio)
+    },
+
+    alterarEstado(anuncio) {
+      this.axios.post('anuncio/estado/' + anuncio.id + '?lang=' + this.$i18n.locale, "", {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      }).then(response => {
+        console.log(response)
+        let index = this.anuncios.indexOf(anuncio)
+        this.anuncios.splice(index, 1, response.data.anuncio)
+        alert("Estado alterado com sucesso!")
+      })
+        .catch((error) => {
+          console.log(error)
+        });
     }
   }
 }

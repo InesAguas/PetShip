@@ -6,18 +6,18 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Remover animal</h5>
+          <h5 class="modal-title">{{$t('dashboardAnimais.modalRemover')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>  
         <div class="modal-body">
-          Tem a certeza que pretende remover o animal :
+          {{$t('dashboardAnimais.modalRemoverTexto')}}
           {{ animalSelecionado.nome }}
-          <p>Se tiver um anuncio publicado, este também será removido</p>
+          <p>{{$t('dashboardAnimais.modalRemoverTexto2')}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{$t('dashboardAnimais.modalRemoverCancelar')}}</button>
           <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14"
-            @click="remover">Remover</button>
+            @click="remover">{{$t('dashboardAnimais.modalRemoverConfirmar')}}</button>
         </div>
       </div>
     </div>
@@ -30,24 +30,24 @@
       <div class="col-8">
         <div class="row my-3">
           <div class="col">
-            <h2 class="fw-bold" style="color: #653208;">Animais</h2>
+            <h2 class="fw-bold" style="color: #653208;">{{$t('dashboardAnimais.titulo')}}</h2>
           </div>
           <div class="col">
             <button type="button" class="btn text-white fw-bold float-end" style="background-color: #FD7E14;"  @click="abrirModalAdicionar"
-              data-bs-toggle="modal" data-bs-target="#formRegisto">Adicionar</button>
+              data-bs-toggle="modal" data-bs-target="#formRegisto">{{$t('dashboardAnimais.botaoAdicionar')}}</button>
           </div>
         </div>
 
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Espécie</th>
-              <th scope="col">Sexo</th>
-              <th scope="col">Idade</th>
-              <th scope="col">Chip</th>
-              <th scope="col">Anunciado</th>
-              <th scope="col">Ações</th>
+              <th scope="col">{{$t('dashboardAnimais.nome')}}</th>
+              <th scope="col">{{$t('dashboardAnimais.especie')}}</th>
+              <th scope="col">{{$t('dashboardAnimais.sexo')}}</th>
+              <th scope="col">{{$t('dashboardAnimais.idade')}}</th>
+              <th scope="col">{{$t('dashboardAnimais.chip')}}</th>
+              <th scope="col">{{$t('dashboardAnimais.anunciado')}}</th>
+              <th scope="col">{{$t('dashboardAnimais.acoes')}}</th>
             </tr>
           </thead>
           <tbody v-if="animais">
@@ -59,7 +59,7 @@
               <td style="width:10%">{{ animal.especie }}</td>
               <td style="width:10%">{{ animal.sexo }}</td>
               <td style="width:10%">{{ animal.idade }}</td>
-              <td style="width:10%">{{ animal.chip ? 'yes' : 'no' }}</td>
+              <td style="width:10%">{{ animal.chip ? animal.chip : $t('dashboardAnimais.semChip') }}</td>
               <td style="width:10%">
                 <svg v-if="animal.anunciado" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="green"
                   class="bi bi-check-circle-fill" viewBox="0 0 16 16">
@@ -149,17 +149,27 @@ export default {
       modalAdicionarAnimalVisible: false,
     }
   },
+  watch: {
+        '$i18n.locale': function () {
+            this.loadAnimais();
+        }
+    },
   mounted() {
-    this.axios.get("associacao/animais", {
+    this.loadAnimais();
+  },
+  methods: {
+    loadAnimais() {
+      this.axios.get("associacao/animais?lang=" + this.$i18n.locale, {
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     }).then(response => {
       this.animais = response.data.animais
+      console.log(this.animais)
+    }).catch(error => {
+      console.log(error)
     })
-    console.log(localStorage.getItem('token'))
-  },
-  methods: {
+    },
     abrirModalInformacoes(data) {
       this.animalSelecionado = data
       this.modalInformacoesVisible = true
