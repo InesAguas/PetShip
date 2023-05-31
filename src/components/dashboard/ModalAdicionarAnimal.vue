@@ -17,7 +17,7 @@
                                     v-model="animalModal.data_recolha">
                             </div>
                             <div class="col">
-                                <label for="formFile" class="form-label mb-0">{{$t('modalAdicionarAnimal.Fotografia')}}</label>
+                                <label for="formFile" class="form-label mb-0">{{$t('modalAdicionarAnimal.fotografia')}}</label>
                                 <input class="form-control" type="file" id="formFile" accept="image/*"
                                     @change="atualizaFotografia">
                             </div>

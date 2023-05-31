@@ -161,5 +161,23 @@ export const en = {
         cancelar: "Cancel",
         confirmar: "Confirm",
     },
+    dashboardAnuncios: {
+        titulo: "My Ads",
+        modalRemover: "Remove Ad",
+        modalRemoverTexto: "Are you sure you want to remove the ad for this animal: ",
+        modalRemoverConfirmar: "Remove",
+        modalRemoverCancelar: "Cancel",
+        botaoAdicionar: "New Ad",
+        nome: "Name",
+        especie: "Species",
+        sexo: "Sex",
+        porte: "Size",
+        idade: "Age",
+        etiqueta: "Label",
+        estado: "Status",
+        acoes: "Actions",
+        ativar: "Enable Ad",
+        desativar: "Disable Ad",
+    },
     
 }

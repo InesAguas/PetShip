@@ -101,7 +101,7 @@ export default {
         anuncioSelecionado(novoAnimal) {
             this.animal = novoAnimal
             this.editar = false
-            if (novoAnimal) {
+            if (novoAnimal.id != null) {
                 this.axios.get('anuncio/num/' + novoAnimal.id, {
                     headers: {
                         'Authorization': 'Bearer ' + localStorage.getItem('token')
