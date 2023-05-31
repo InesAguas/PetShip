@@ -14,18 +14,18 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">{{ $t('registarMsg.nome') }}</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                        v-bind:placeholder="utilizadorLogado.nome" v-bind:value="utilizadorLogado.nome">
+                                        v-bind:placeholder="utilizadorLogado.nome" v-bind:value="utilizadorLogado.nome" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="mb-3">
                                     <label for="cc" class="form-label">Cartão de cidadão</label>
                                     <input type="text" class="form-control" id="cc" aria-describedby="cc"
-                                        placeholder="Cartão de Cidadão">
+                                        placeholder="Cartão de Cidadão" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefone" class="form-label">Telefone</label>
                                     <input type="text" class="form-control" id="telefone" aria-describedby="telefone"
                                         v-bind:placeholder="utilizadorLogado.telefone"
-                                        v-bind:value="utilizadorLogado.telefone">
+                                        v-bind:value="utilizadorLogado.telefone" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div>
                                     <p class="fw-bold">*Campos Obrigatórios</p>
@@ -38,12 +38,13 @@
                                     <label for="morada" class="form-label">Morada</label>
                                     <input type="text" class="form-control" id="morada" aria-describedby="morada"
                                         v-bind:placeholder="utilizadorLogado.localizacao"
-                                        v-bind:value="utilizadorLogado.localizacao">
+                                        v-bind:value="utilizadorLogado.localizacao" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
                                         <label for="exampleFormControlInput1" class="form-label">Distrito</label>
-                                        <select class="form-select" aria-label="Default select example">
+                                        <select class="form-select" aria-label="Default select example"
+                                            v-model="utilizadorDistrito">
                                             <option selected value="">{{ $t('pageAdotar.qualquer') }}</option>
                                             <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{
                                                 distrito }}
@@ -53,13 +54,14 @@
                                     <div class="col">
                                         <label for="codPostal" class="form-label">Código Postal</label>
                                         <input type="text" class="form-control" id="codPostal" aria-describedby="codPostal"
-                                            placeholder="0000-000">
+                                            v-bind:placeholder="utilizadorLogado.codigo_postal ? utilizadorLogado.codigo_postal : '0000-000'"
+                                            v-bind:value="utilizadorLogado.codigo_postal" @input="verificarCamposPreenchidos">
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" class="form-control" id="email" aria-describedby="email"
-                                        v-bind:placeholder="utilizadorLogado.email" v-bind:value="utilizadorLogado.email">
+                                        v-bind:placeholder="utilizadorLogado.email" v-bind:value="utilizadorLogado.email" @input="verificarCamposPreenchidos">
                                 </div>
                             </form>
 
@@ -112,7 +114,7 @@ Aceita que os seus dados pessoais sejam utilizados afim de receber informações
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-if="first">Cancelar</button>
                     <button type="button" class="btn btn-secondary" @click="prev" v-if="!first">Voltar</button>
-                    <button type="button" class="btn btn-primary" style="background-color:#FD7E14;" @click="next"
+                    <button type="button" class="btn btn-primary" id="seguinte" style="background-color:#FD7E14; display: none;" @click="next"
                         v-if="first">Seguinte</button>
                     <button type="button" class="btn btn-primary" style="background-color:#FD7E14;"
                         v-if="!first && checkboxesSelecionadas">Confirmar</button>
@@ -138,6 +140,8 @@ export default {
             aceitouResponsabilidade: false,
             aceitouCondicoes: false,
             aceitouDadosPessoais: false,
+            utilizadorDistrito: this.utilizadorLogado.distrito,
+            camposPreenchidos: false,
         }
     },
     computed: {
@@ -147,9 +151,11 @@ export default {
     },
     methods: {
         next() {
-            this.conteudoCurrent++;
-            if (this.conteudoCurrent == 2) {
-                this.first = false;
+            if (this.camposPreenchidos) {
+                this.conteudoCurrent++;
+                if (this.conteudoCurrent == 2) {
+                    this.first = false;
+                }
             }
         },
         prev() {
@@ -157,6 +163,18 @@ export default {
             if (this.conteudoCurrent == 1) {
                 this.first = true;
             }
+
+        },
+        verificarCamposPreenchidos() {
+            const nomePreenchido = this.utilizadorLogado.nome && this.utilizadorLogado.nome.trim() !== '';
+            const ccPreenchido = document.getElementById('cc').value.trim() !== '';
+            const telefonePreenchido = this.utilizadorLogado.telefone && this.utilizadorLogado.telefone.trim() !== '';
+            const moradaPreenchida = this.utilizadorLogado.localizacao && this.utilizadorLogado.localizacao.trim() !== '';
+            const distritoPreenchido = this.utilizadorDistrito && this.utilizadorDistrito.trim() !== '';
+            const codPostalPreenchido = document.getElementById('codPostal').value.trim() !== '';
+            const emailPreenchido = this.utilizadorLogado.email && this.utilizadorLogado.email.trim() !== '';
+            document.getElementById('seguinte').style.display = (nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido) ? 'block' : 'none';
+            this.camposPreenchidos = nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido;
         },
     }
 }
