@@ -51,7 +51,17 @@
             <tr v-for="produto in produtos" :key="produto">
               <td>{{ produto.nome }}</td>
               <td>{{ produto.descricao }}</td>
-              <td>{{ produto.qnt_atual }}</td>
+              <td style="width: 15%;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="button">-</button>
+                  </div>
+                  <input type="number" class="form-control" id="quantAtual" :placeholder="produto.qnt_atual" min="0">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button">+</button>
+                  </div>
+                </div>
+              </td>
               <td>{{ produto.qnt_min }}</td>
               <td>{{ produto.observacoes }}</td>
               <td>
