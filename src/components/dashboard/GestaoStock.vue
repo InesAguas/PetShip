@@ -1,5 +1,26 @@
 <template>
+  <!--Modal Adicionar-->
   <ModalAdicionarStock @produtoAdicionado="produtoCriado"></ModalAdicionarStock>
+
+  <!--Modal Remover-->
+  <div class="modal" tabindex="-1" id="modalApagar">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Remover anuncio</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Tem a certeza que pretende remover o produto:
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14"
+            @click="remover">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <NavBar></NavBar>
   <div class="container-fluid ms-0">
     <div class="row flex-nowrap">
@@ -33,6 +54,17 @@
               <td>{{ produto.qnt_atual }}</td>
               <td>{{ produto.qnt_min }}</td>
               <td>{{ produto.observacoes }}</td>
+              <td>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" class="bi bi-trash me-3"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                  <path
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                  <rect class="btn" x="0" y="0" width="24" height="24" fill="transparent"
+                    @click="abrirModalRemover(produto)" data-bs-toggle="modal" data-bs-target="#modalApagar" />
+                </svg>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -56,6 +88,7 @@ export default {
   data() {
     return {
       produtos: [],
+      produtoSelecionado: null,
     }
   },
   mounted() {
@@ -72,6 +105,27 @@ export default {
   methods: {
     produtoCriado(produto) {
       this.produtos.unshift(produto)
+    },
+    abrirModalRemover(produto) {
+      this.produtoSelecionado = produto
+    },
+    remover() {
+      if (this.produtoSelecionado) {
+        this.axios.delete('removerstock/' + this.produtoSelecionado.id, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        }).then(response => {
+          console.log(response)
+          const index = this.produtos.indexOf(this.produtoSelecionado);
+          if (index > -1) {
+            this.produtos.splice(index, 1);
+          }
+          this.produtoSelecionado = null;
+        }).catch(error => {
+          console.log(error)
+        });
+      }
     }
   }
 }
