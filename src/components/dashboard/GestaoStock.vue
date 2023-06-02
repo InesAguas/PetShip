@@ -54,11 +54,14 @@
               <td style="width: 15%;">
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary" type="button">-</button>
+                    <button class="btn btn-outline-secondary" type="button"
+                      @click="decrementarQuantidade(produto)">-</button>
                   </div>
-                  <input type="number" class="form-control" id="quantAtual" :placeholder="produto.qnt_atual" min="0">
+                  <input type="number" class="form-control" id="quantAtual" :placeholder="produto.qnt_atual"
+                    :value="produto.qnt_atual" min="0" readonly>
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">+</button>
+                    <button class="btn btn-outline-secondary" type="button"
+                      @click="incrementarQuantidade(produto)">+</button>
                   </div>
                 </div>
               </td>
@@ -99,6 +102,7 @@ export default {
     return {
       produtos: [],
       produtoSelecionado: null,
+      timeoutId: null,
     }
   },
   mounted() {
@@ -136,6 +140,34 @@ export default {
           console.log(error)
         });
       }
+    },
+    incrementarQuantidade(produto) {
+      produto.qnt_atual++
+      this.atualizarQuantidade(produto)
+    },
+    decrementarQuantidade(produto) {
+      if (produto.qnt_atual >= 0) {
+        produto.qnt_atual--
+        this.atualizarQuantidade(produto)
+      }
+    },
+    atualizarQuantidade(produto) {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId)
+      }
+
+      this.timeoutId = setTimeout(() => {
+        this.axios.post('editarstock/' + produto.id, produto, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        }).then((response) => {
+          console.log(response)
+        }).catch((error) => {
+          console.log(error)
+        })
+      }, 500)
     }
   }
 }
