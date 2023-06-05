@@ -158,6 +158,12 @@ export default {
         }
     },
 
+    mounted() {
+        this.animal = this.anuncioSelecionado
+        this.animal.animal_id = this.anuncioSelecionado.animal_id
+        this.racas = this.animal.raca == 1 ? this.$tm('formAnimalMsg.racas_caes') : this.$tm('formAnimalMsg.racas_gatos')
+    },
+
     methods: {
         mostrarFotos(e) {
             this.preview = []

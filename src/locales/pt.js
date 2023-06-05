@@ -137,9 +137,12 @@ export const pt = {
         anunciado: "Anunciado",
         acoes: "Ações",
         semChip: "Sem Chip",
+        modalInfoTitulo: "Dados do animal: ",
+        
     },
     modalAdicionarAnimal: {
         titulo: "Registar Animal",
+        tituloEditar: "Editar Animal",
         dataRecolha: "Data de Recolha",
         fotografia: "Fotografia",
         localCaptura: "Local de Captura",

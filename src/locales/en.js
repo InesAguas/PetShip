@@ -141,9 +141,11 @@ export const en = {
         anunciado: "Announced",
         acoes: "Actions",
         semChip: "No chip",
+        modalInfoTitulo: "Pet Data: ",
     },
     modalAdicionarAnimal: {
         titulo: "New Pet",
+        tituloEditar: "Edit Pet",
         dataRecolha: "Date Found",
         fotografia: "Picture",
         localCaptura: "Location Found",

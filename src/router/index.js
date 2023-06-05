@@ -144,6 +144,7 @@ const routes = [
         path: '/dashboard/anuncios',
         name: 'dashboardAnuncios',
         component: GestaoAnuncios,
+        props: true,
         beforeEnter: [logado]
     }
 
