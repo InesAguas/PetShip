@@ -174,5 +174,8 @@ export const pt = {
         acoes: "Ações",
         ativar: "Ativar anúncio",
         desativar: "Desativar anúncio",
+        modalAdicionarTitulo: "Anunciar Animal",
+        modalModificarTitulo: "Modificar Anúncio",
+        modalInfoTitulo: "Informação do Anúncio",
     },
 }

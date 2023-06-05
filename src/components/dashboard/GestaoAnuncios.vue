@@ -1,5 +1,6 @@
 <template>
 <ModalAdicionarAnuncio @anuncioCriado="anuncioCriado" @anuncioEditado="anuncioEditado" :anuncioSelecionado="anuncioSelecionado"></ModalAdicionarAnuncio>
+<ModalInfoAnuncio :anuncio="anuncioSelecionado"></ModalInfoAnuncio>
     <div class="modal" tabindex="-1" id="modalApagar" >
         <div class="modal-dialog">
           <div class="modal-content">
@@ -60,7 +61,7 @@
                     <td style="width:10%">{{ animal.idade }}</td>
                     <td style="width:10%">{{ animal.etiqueta }}</td>
                     <td style="width:10%">
-                      <button v-if="animal.estado == ('Ativo' || 'Active')" type="button" class="btn btn-success" :title="$t('dashboardAnuncios.desativar')" @click.once="alterarEstado(animal); " > {{ animal.estado}}</button>
+                      <button v-if="animal.estado == 'Ativo' || animal.estado == 'Active'" type="button" class="btn btn-success" :title="$t('dashboardAnuncios.desativar')" @click.once="alterarEstado(animal); " > {{ animal.estado}}</button>
                       <button v-else type="button" class="btn btn-danger" :title="$t('dashboardAnuncios.ativar')" @click.once="alterarEstado(animal)"> {{ animal.estado}}</button> </td>
                     <td style="width:10%">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="orange"
@@ -104,6 +105,7 @@
 import NavBar from '../NavBar.vue';
 import PainelDashboard from './PainelDashboard.vue';
 import ModalAdicionarAnuncio from './ModalAdicionarAnuncio.vue';
+import ModalInfoAnuncio from './ModalInfoAnuncio.vue';
 
 export default {
     name: 'GestaoAnuncios',
@@ -111,6 +113,7 @@ export default {
         NavBar,
         PainelDashboard,
         ModalAdicionarAnuncio,
+        ModalInfoAnuncio
     },
     data() {
     return {
@@ -173,6 +176,9 @@ export default {
     },
 
     abrirModalRemover(animal) {
+        this.anuncioSelecionado = animal
+    },
+    abrirModalInformacoes(animal) {
         this.anuncioSelecionado = animal
     },
 

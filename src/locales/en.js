@@ -178,6 +178,9 @@ export const en = {
         acoes: "Actions",
         ativar: "Enable Ad",
         desativar: "Disable Ad",
+        modalAdicionarTitulo: "New Ad",
+        modalModificarTitulo: "Edit Ad",
+        modalInfoTitulo: "Ad Information",
     },
     
 }
