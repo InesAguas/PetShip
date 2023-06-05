@@ -107,6 +107,7 @@ export const en = {
         alterarFoto: "Change Picture",
         editar: "Edit",
         telefone: "Phone Number",
+        codigoPostal: "Postal Code",
     },
     paginaEditarPerfilAss: {
         fechado: "Closed",

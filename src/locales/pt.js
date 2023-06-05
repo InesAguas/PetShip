@@ -103,6 +103,7 @@ export const pt = {
         alterarFoto: "Alterar Foto",
         editar: "Editar",
         telefone: "Telefone",
+        codigoPostal: "Código Postal",
     },
     paginaEditarPerfilAss: {
         fechado: "Fechado",

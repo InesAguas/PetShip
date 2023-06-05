@@ -52,18 +52,19 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="exampleFormControlInput1" class="form-label">Distrito</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected value="">{{ $t('pageAdotar.qualquer') }}</option>
+                                <label for="exampleFormControlInput1" class="form-label">{{ $t('paginaInicialMsg.distrito') }}</label>
+                                <select class="form-select" aria-label="Default select example" v-model="utilizadorEditado.distrito">
+                                    <option  selected value="">{{ $t('pageAdotar.qualquer') }}</option>
                                     <option v-for="(distrito, index) in distritos" :key="index" :value="distrito">{{
                                         distrito }}
                                     </option>
                                 </select>
                             </div>
                             <div class="col">
-                                <label for="codPostal" class="form-label">Código Postal</label>
+                                <label for="codPostal" class="form-label">{{ $t('paginaEditarPerfil.codigoPostal') }}</label>
                                 <input type="text" class="form-control" id="codPostal" aria-describedby="codPostal"
-                                    placeholder="0000-000">
+                                v-bind:placeholder="utilizador.codigo_postal ? utilizador.codigo_postal : '0000-000'"
+                                v-model="utilizadorEditado.codigo_postal">
                             </div>
                         </div>
                         <div class="text-end pt-5">
@@ -93,7 +94,9 @@ export default {
                 email: this.utilizador.email,
                 telefone: this.utilizador.telefone,
                 fotografia: null,
-                localizacao: this.utilizador.localizacao
+                localizacao: this.utilizador.localizacao,
+                distrito: this.utilizador.distrito,
+                codigo_postal: this.utilizador.codigo_postal
             },
             preview: this.utilizador.fotografia
         }
@@ -120,13 +123,7 @@ export default {
             this.utilizadorEditado.fotografia = e.target.files[0]
             this.preview = URL.createObjectURL(this.utilizadorEditado.fotografia)
         }
-
-
-
-
-
     }
-
 }
 
 </script>
