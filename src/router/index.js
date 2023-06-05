@@ -16,6 +16,7 @@ import GestaoAnimais from '../components/dashboard/GestaoAnimais'
 import PasswordEsquecida from '../components/PasswordEsquecida'
 import NovaPassword from '../components/NovaPassword'
 import GestaoAnuncios from '../components/dashboard/GestaoAnuncios'
+import GestaoStock from '../components/dashboard/GestaoStock'
 
 //import App from '../App'
 
@@ -146,8 +147,13 @@ const routes = [
         component: GestaoAnuncios,
         props: true,
         beforeEnter: [logado]
-    }
-
+    },
+    {
+        path: '/dashboard/stock',
+        name: 'dashboardStock',
+        component: GestaoStock,
+        beforeEnter: [logado]
+    },
     
 ]
 
