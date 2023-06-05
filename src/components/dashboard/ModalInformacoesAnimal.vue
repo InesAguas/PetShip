@@ -4,7 +4,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Dados do animal: {{animal.nome}}</h5>
+          <h5 class="modal-title">{{$t('dashboardAnimais.modalInfoTitulo')}} {{animal.nome}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" @click="$emit('close')" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -22,7 +22,7 @@
         </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="$emit('close')">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="$emit('close')">{{$t('modalAdicionarAnimal.cancelar')}}</button>
           <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14">Ok</button>
         </div>
       </div>

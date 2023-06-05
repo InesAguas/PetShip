@@ -141,9 +141,11 @@ export const en = {
         anunciado: "Announced",
         acoes: "Actions",
         semChip: "No chip",
+        modalInfoTitulo: "Pet Data: ",
     },
     modalAdicionarAnimal: {
         titulo: "New Pet",
+        tituloEditar: "Edit Pet",
         dataRecolha: "Date Found",
         fotografia: "Picture",
         localCaptura: "Location Found",
@@ -178,6 +180,9 @@ export const en = {
         acoes: "Actions",
         ativar: "Enable Ad",
         desativar: "Disable Ad",
+        modalAdicionarTitulo: "New Ad",
+        modalModificarTitulo: "Edit Ad",
+        modalInfoTitulo: "Ad Information",
     },
     
 }

@@ -1,5 +1,6 @@
 <template>
 <ModalAdicionarAnuncio @anuncioCriado="anuncioCriado" @anuncioEditado="anuncioEditado" :anuncioSelecionado="anuncioSelecionado"></ModalAdicionarAnuncio>
+<ModalInfoAnuncio :anuncio="anuncioSelecionado"></ModalInfoAnuncio>
     <div class="modal" tabindex="-1" id="modalApagar" >
         <div class="modal-dialog">
           <div class="modal-content">
@@ -30,12 +31,12 @@
                   <h2 class="fw-bold" style="color: #653208;">{{$t('dashboardAnuncios.titulo')}}</h2>
                 </div>
                 <div class="col">
-                  <button type="button" class="btn text-white fw-bold float-end" style="background-color: #FD7E14;" @click="abrirModalAdicionar()"
+                  <button type="button" class="btn text-white fw-bold float-end" id="buttontest" ref="buttontest" style="background-color: #FD7E14;" @click="abrirModalAdicionar()"
                     data-bs-toggle="modal" data-bs-target="#formRegisto">{{$t('dashboardAnuncios.botaoAdicionar')}}</button>
                 </div>
               </div>
 
-              <table class="table">
+              <table class="table table-hover">
                 <thead>
                   <tr>
                     <th scope="col">{{$t('dashboardAnuncios.nome')}}</th>
@@ -52,17 +53,17 @@
                   <tr v-for="animal in anuncios" :key="animal">
                     <td style="width:10%">
                       <img v-if="animal.fotografias" :src="animal.fotografias[0]" class="rounded-circle"
-                        style="width:50px; height:50px; object-fit:cover"> {{ animal.nome }}
+                        style="width:50px; height:50px; object-fit:cover;vertical-align: middle"> {{ animal.nome }}
                     </td>
-                    <td style="width:10%">{{ animal.especie }}</td>
-                    <td style="width:10%">{{ animal.sexo }}</td>
-                    <td style="width:10%">{{ animal.porte }}</td>
-                    <td style="width:10%">{{ animal.idade }}</td>
-                    <td style="width:10%">{{ animal.etiqueta }}</td>
-                    <td style="width:10%">
-                      <button v-if="animal.estado == ('Ativo' || 'Active')" type="button" class="btn btn-success" :title="$t('dashboardAnuncios.desativar')" @click.once="alterarEstado(animal); " > {{ animal.estado}}</button>
+                    <td style="width:10%;vertical-align: middle">{{ animal.especie }}</td>
+                    <td style="width:10%;vertical-align: middle">{{ animal.sexo }}</td>
+                    <td style="width:10%;vertical-align: middle">{{ animal.porte }}</td>
+                    <td style="width:10%;vertical-align: middle">{{ animal.idade }}</td>
+                    <td style="width:10%;vertical-align: middle">{{ animal.etiqueta }}</td>
+                    <td style="width:10%;vertical-align: middle">
+                      <button v-if="animal.estado == 'Ativo' || animal.estado == 'Active'" type="button" class="btn btn-success" :title="$t('dashboardAnuncios.desativar')" @click.once="alterarEstado(animal); " > {{ animal.estado}}</button>
                       <button v-else type="button" class="btn btn-danger" :title="$t('dashboardAnuncios.ativar')" @click.once="alterarEstado(animal)"> {{ animal.estado}}</button> </td>
-                    <td style="width:10%">
+                    <td style="width:10%;vertical-align: middle">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="orange"
                         class="bi bi-pencil-square me-3" viewBox="0 0 16 16">
                         <path
@@ -104,6 +105,7 @@
 import NavBar from '../NavBar.vue';
 import PainelDashboard from './PainelDashboard.vue';
 import ModalAdicionarAnuncio from './ModalAdicionarAnuncio.vue';
+import ModalInfoAnuncio from './ModalInfoAnuncio.vue';
 
 export default {
     name: 'GestaoAnuncios',
@@ -111,6 +113,7 @@ export default {
         NavBar,
         PainelDashboard,
         ModalAdicionarAnuncio,
+        ModalInfoAnuncio
     },
     data() {
     return {
@@ -129,6 +132,7 @@ export default {
         fotografias: [],
         created_at: null,
       },
+      novo: false,
     }
   },
   watch: {
@@ -138,6 +142,43 @@ export default {
     },
   mounted() {
     this.loadAnimais();
+
+    if(this.$route.query != null && this.$route.query.animalanuncio != null ){
+
+      this.axios.get('associacao/animal/num/' + this.$route.query.animalanuncio, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    }
+                }).then(response => {
+                    console.log(response)
+
+                    this.anuncioSelecionado.nome = response.data.animal.nome
+                    this.anuncioSelecionado.sexo = response.data.animal.sexo
+                    this.anuncioSelecionado.especie = response.data.animal.especie
+                    this.anuncioSelecionado.raca = response.data.animal.raca
+                    this.anuncioSelecionado.porte = response.data.animal.porte
+                    this.anuncioSelecionado.idade = response.data.animal.idade
+                    this.anuncioSelecionado.cor = response.data.animal.cor
+                    this.anuncioSelecionado.distrito = 'Aveiro'
+                    this.anuncioSelecionado.etiqueta = 2
+                    this.anuncioSelecionado.fotografias = [],
+                    this.anuncioSelecionado.created_at = null,
+                    this.anuncioSelecionado.animal_id = response.data.animal.id
+
+                    this.novo = true
+                    console.log("hiii3")
+                    console.log(this.anuncioSelecionado)
+
+                    document.getElementById('buttontest').click();
+
+                    
+                })
+                    .catch((error) => {
+                        console.log(error)
+                    });
+            
+
+    }
     
   },
 
@@ -156,7 +197,9 @@ export default {
     },
 
     abrirModalAdicionar() {
-      this.anuncioSelecionado = {
+      if(!this.novo) {
+        console.log("hiii1")
+        this.anuncioSelecionado = {
         nome: null,
         sexo: 1,
         especie: 1,
@@ -170,9 +213,17 @@ export default {
         fotografias: [],
         created_at: null,
       }
+      }
+      console.log("hiii2")
+      console.log(this.anuncioSelecionado)
+      this.novo = false
+      
     },
 
     abrirModalRemover(animal) {
+        this.anuncioSelecionado = animal
+    },
+    abrirModalInformacoes(animal) {
         this.anuncioSelecionado = animal
     },
 

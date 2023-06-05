@@ -5,7 +5,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registar Animal</h1>
+                    <h1 v-if="editar" class="modal-title fs-5" id="exampleModalLabel">{{ $t('dashboardAnuncios.modalModificarTitulo') }}</h1>
+                    <h1 v-else class="modal-title fs-5" id="exampleModalLabel">{{ $t('dashboardAnuncios.modalAdicionarTitulo') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -72,14 +73,15 @@
                                 </div>
 
                             </div>
-                            <div>* Campos obrigatórios</div>
+                            <div>* {{ $t('modalAdicionarAnimal.camposObrigatorios') }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('modalAdicionarAnimal.cancelar') }}</button>
                     <button type="button" class="btn text-white" style="background-color: #FD7E14;" @click="anunciarAnimal"
-                        data-bs-dismiss="modal">Publicar</button>
+                        data-bs-dismiss="modal">{{ $t('modalAdicionarAnimal.confirmar') }}</button>
+                        
                 </div>
             </div>
         </div>
@@ -109,6 +111,7 @@ export default {
                 }).then(response => {
                     this.animal = response.data.anuncio
                     this.editar = true;
+                    this.animal.fotografias = []
                 })
                     .catch((error) => {
                         console.log(error)
@@ -155,9 +158,16 @@ export default {
         }
     },
 
+    mounted() {
+        this.animal = this.anuncioSelecionado
+        this.animal.animal_id = this.anuncioSelecionado.animal_id
+        this.racas = this.animal.raca == 1 ? this.$tm('formAnimalMsg.racas_caes') : this.$tm('formAnimalMsg.racas_gatos')
+    },
+
     methods: {
         mostrarFotos(e) {
             this.preview = []
+            this.animal.fotografias = []
             for (let i = 0; i < e.target.files.length; i++) {
                 this.preview.push(URL.createObjectURL(e.target.files[i]))
                 this.animal.fotografias.push(e.target.files[i])
@@ -194,7 +204,7 @@ export default {
                             this.mensagemErro = error.response.data.message
                             this.erro = true;
                         }
-                        console.log(this.mensagemErro)
+                        console.log(error.response)
                     });
             } else {
                 this.axios.post("/novoanuncio", this.animal, {
