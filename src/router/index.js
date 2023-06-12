@@ -17,24 +17,26 @@ import PasswordEsquecida from '../components/PasswordEsquecida'
 import NovaPassword from '../components/NovaPassword'
 import GestaoAnuncios from '../components/dashboard/GestaoAnuncios'
 import GestaoStock from '../components/dashboard/GestaoStock'
+import PaginaDashboard from '../components/dashboard/PaginaDashboard'
+import GestaoEscalas from '../components/dashboard/GestaoEscalas'
 
 //import App from '../App'
 
 function logado() {
-    if (localStorage.getItem('utilizador') == null) {
+    if (sessionStorage.getItem('utilizador') == null) {
         return '/login'
     }
 }
 
 function deslogado() {
-    if (localStorage.getItem('utilizador') != null) {
+    if (sessionStorage.getItem('utilizador') != null) {
         return '/adotar'
     }
 }
 
 function isTipo2() {
-    if (localStorage.getItem('utilizador') != null) {
-        let utilizador = JSON.parse(localStorage.getItem('utilizador'))
+    if (sessionStorage.getItem('utilizador') != null) {
+        let utilizador = JSON.parse(sessionStorage.getItem('utilizador'))
         if (utilizador.tipo != 2) {
             return '/'
         }
@@ -122,7 +124,7 @@ const routes = [
         component: PageAnimal
     },
     {
-        path:'/mensagens',
+        path:'/dashboard/mensagens',
         name: 'mensagens',
         props: true,
         component: PageMensagens,
@@ -152,8 +154,20 @@ const routes = [
         path: '/dashboard/stock',
         name: 'dashboardStock',
         component: GestaoStock,
+        beforeEnter: [logado, isTipo2]
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: PaginaDashboard,
         beforeEnter: [logado]
     },
+    {
+        path: '/dashboard/escalas',
+        name: 'dashboardEscalas',
+        component: GestaoEscalas,
+        beforeEnter: [logado, isTipo2]
+    }
     
 ]
 

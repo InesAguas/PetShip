@@ -71,7 +71,6 @@ export default {
                 this.axios.post('/adicionarstock', this.produto, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
                     alert('Produto adicionado com sucesso!')

@@ -107,17 +107,15 @@ export default {
         },
         eliminarConta() {
             console.log(this.utilizadorLogado.id);
-            this.axios.delete("eliminarconta/" + this.utilizadorLogado.id, {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            })
+            this.axios.delete("eliminarconta/" + this.utilizadorLogado.id)
                 .then(response => {
                     console.log(response);
                     //ir para o login
                     this.mostrarModal = false;
                     localStorage.removeItem('token');
                     localStorage.removeItem('utilizador');
+                    sessionStorage.removeItem('token');
+                    sessionStorage.removeItem('utilizador');
 
                     this.$router.push('/login');
 

@@ -1,6 +1,6 @@
 <template>
-    <div v-if="utilizador">
     <NavBar></NavBar>
+    <div v-if="utilizador">
     <PerfilParticular v-if="utilizador.tipo == 1" :utilizador="utilizador" :utilizadorLogado="utilizadorLogado"></PerfilParticular>
     <PerfilAssociacao v-if="utilizador.tipo == 2" :utilizador="utilizador" :utilizadorLogado="utilizadorLogado"></PerfilAssociacao>
 </div>
@@ -25,7 +25,7 @@ export default {
         }
     },
     mounted() {
-        this.utilizadorLogado = JSON.parse(localStorage.getItem('utilizador'));
+        this.utilizadorLogado = JSON.parse(sessionStorage.getItem('utilizador'));
         console.log(this.utilizadorLogado);
 
         if(this.$route.params.id == null) {

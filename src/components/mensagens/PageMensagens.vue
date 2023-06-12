@@ -1,6 +1,9 @@
 <template>
     <NavBar></NavBar>
-    <div class="container h-75" >
+    <div class="container-fluid ms-0">
+        <div class="row flex-nowrap">
+    <PainelDashboard :isActive="'mensagens'"></PainelDashboard>
+    <div class="col-8" style="height:600px">
         <div class="row" style="height:10%; backgroud-color:#F8F9FA">
             <div class="col ps-0">
                 <h1 class="fw-bold" style="color: #653208">{{$t('paginaMensagens.titulo')}}</h1>
@@ -13,25 +16,29 @@
             </div>
             <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas.length > 0" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
 
-        </div>
     </div>
+</div>
+    </div>
+</div>
 </template>
 <script>
 
 import NavBar from '../NavBar.vue';
 import CardPessoa from './CardPessoa.vue';
 import CardConversa from './CardConversa.vue';
+import PainelDashboard from '../dashboard/PainelDashboard.vue';
 
 export default ({
     name: 'PageMensagens',
     components: {
         NavBar,
         CardPessoa,
-        CardConversa
+        CardConversa,
+        PainelDashboard
     },
     mounted() {
-        this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
-        console.log(localStorage.getItem('token'));
+        this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
+        console.log(sessionStorage.getItem('token'));
         this.getConversas();
 
         this.$socket.emit('authenticate', {token: this.utilizador.id});
@@ -48,11 +55,7 @@ export default ({
     },
     methods: {
         getConversas() {
-            this.axios.get('conversasativas', {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            }).then(response => {
+            this.axios.get('conversasativas').then(response => {
                 console.log(response.data.conversas);
                  this.conversas = response.data.conversas;
                  console.log(this.conversas);

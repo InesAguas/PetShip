@@ -24,7 +24,7 @@
   <NavBar></NavBar>
   <div class="container-fluid ms-0">
     <div class="row flex-nowrap">
-      <PainelDashboard></PainelDashboard>
+      <PainelDashboard :isActive="'stock'"></PainelDashboard>
       <div class="col-8">
         <div class="row my-3">
           <div class="col">
@@ -106,11 +106,7 @@ export default {
     }
   },
   mounted() {
-    this.axios.get("utilizador/stock", {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-      }
-    }).then(response => {
+    this.axios.get("utilizador/stock").then(response => {
       this.produtos = response.data.stocks
       console.log(this.produtos)
     })
@@ -125,11 +121,7 @@ export default {
     },
     remover() {
       if (this.produtoSelecionado) {
-        this.axios.delete('removerstock/' + this.produtoSelecionado.id, {
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-          }
-        }).then(response => {
+        this.axios.delete('removerstock/' + this.produtoSelecionado.id).then(response => {
           console.log(response)
           const index = this.produtos.indexOf(this.produtoSelecionado);
           if (index > -1) {
@@ -157,12 +149,7 @@ export default {
       }
 
       this.timeoutId = setTimeout(() => {
-        this.axios.post('editarstock/' + produto.id, produto, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-          }
-        }).then((response) => {
+        this.axios.post('editarstock/' + produto.id, produto).then((response) => {
           console.log(response)
         }).catch((error) => {
           console.log(error)

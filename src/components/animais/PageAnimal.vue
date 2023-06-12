@@ -162,7 +162,7 @@ export default {
 
     },
     mounted() {
-        this.utilizadorLogado = JSON.parse(localStorage.getItem('utilizador'));
+        this.utilizadorLogado = JSON.parse(sessionStorage.getItem('utilizador'));
         this.axios.get('animal/' + this.$route.params.id)
             .then(response => {
                 this.animal = response.data.animal
@@ -175,11 +175,11 @@ export default {
     },
     methods: {
         mandarMensagem() {
-            if (localStorage.getItem('token') == null || localStorage.getItem('utilizador') == null) {
+            if (sessionStorage.getItem('token') == null || sessionStorage.getItem('utilizador') == null) {
                 this.$router.push({ name: "login" })
             }
 
-            if (this.utilizador.id == JSON.parse(localStorage.getItem('utilizador')).id) {
+            if (this.utilizador.id == JSON.parse(sessionStorage.getItem('utilizador')).id) {
                 alert("Não pode enviar mensagens a si mesmo")
             } else {
                 this.$router.push({

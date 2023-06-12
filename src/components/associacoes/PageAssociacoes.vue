@@ -5,7 +5,7 @@
             <h1 class="fw-bold" style="color: #653208">{{ $t('pageAssociacoes.titulo') }}</h1>
         </div>
         <div class="row">
-            <CardAssociacao v-for="(row) in associacoes" :key="row" :associacao="row" class="col-auto m-2"></CardAssociacao>
+            <CardAssociacao v-for="(row) in associacoes" :key="row" :associacao="row" v-on:click="paginaAssociacao(row)" class="col-auto m-2" style="cursor:pointer"></CardAssociacao>
         </div>
     </div>
     
@@ -31,6 +31,11 @@ export default {
                 console.log(response.data.associacoes)
                 this.associacoes = response.data.associacoes
             })
+        },
+        methods: {
+            paginaAssociacao(associacao) {
+                this.$router.push({ name: 'perfilOutro', params: { id: associacao.id } })
+            }
         }
 }
 

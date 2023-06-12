@@ -107,12 +107,11 @@ export default {
             this.axios.post('/editarperfil', this.utilizadorEditado, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
 
             }).then(response => {
                 console.log(response.data)
-                localStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
+                sessionStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
 
                 alert("Perfil editado com sucesso!")
             }).catch(error => {

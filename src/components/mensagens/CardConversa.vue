@@ -53,11 +53,7 @@ export default ({
     },
     methods: {
         obterMensagens() {
-            this.axios.get('mensagens/' + this.id, {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            }).then(
+            this.axios.get('mensagens/' + this.id).then(
                 response => {
                     console.log("hi");
                     console.log(response.data);
@@ -74,11 +70,7 @@ export default ({
                 return;
             }
             console.log(this.mensagem)
-            this.axios.post('enviarmensagem', {id_recebe: this.id, mensagem: this.mensagem}, {
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            }
-            }).then(
+            this.axios.post('enviarmensagem', {id_recebe: this.id, mensagem: this.mensagem}).then(
                 response => {
                     console.log(response.data.mensagem);
                     this.mensagens.unshift(response.data.mensagem);

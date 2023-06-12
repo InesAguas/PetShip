@@ -185,11 +185,7 @@ export default {
             this.chipSelecionado = 0
             this.editar = false
             if (novoAnimal.id) {
-                this.axios.get('associacao/animal/num/' + novoAnimal.id, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then(response => {
+                this.axios.get('associacao/animal/num/' + novoAnimal.id).then(response => {
                     this.animalModal = response.data.animal
                     this.chipSelecionado = this.animalModal.chip ? 1 : 0
                     this.editar = true;
@@ -213,12 +209,7 @@ export default {
         publicarAnimal() {
             if(!this.editar) {
                console.log("novo animal")
-            this.axios.post("/publicaranimal", this.animalModal, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            }).then(response => {
+            this.axios.post("/publicaranimal", this.animalModal).then(response => {
                 this.$emit('novoAnimal', response.data.animal)
                 alert("Animal inserido com sucesso!")
                 this.$emit('close')
@@ -234,7 +225,6 @@ export default {
                 this.axios.post('editaranimal/' + this.animalModal.id, this.animalModal, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
             }).then(response => {
                 this.$emit('editarAnimal', response.data.animal)

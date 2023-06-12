@@ -24,7 +24,7 @@
     <NavBar></NavBar>
     <div class="container-fluid ms-0">
       <div class="row flex-nowrap">
-        <PainelDashboard></PainelDashboard>
+        <PainelDashboard :isActive="'anuncios'"></PainelDashboard>
         <div class="col-8">
             <div class="row my-3">
                 <div class="col">
@@ -145,11 +145,8 @@ export default {
 
     if(this.$route.query != null && this.$route.query.animalanuncio != null ){
 
-      this.axios.get('associacao/animal/num/' + this.$route.query.animalanuncio, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then(response => {
+      this.axios.get('associacao/animal/num/' + this.$route.query.animalanuncio)
+                .then(response => {
                     console.log(response)
 
                     this.anuncioSelecionado.nome = response.data.animal.nome
@@ -184,11 +181,7 @@ export default {
 
   methods: {
     loadAnimais() {
-      this.axios.get("utilizador/anuncios?lang=" + this.$i18n.locale, {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-      }
-    }).then(response => {
+      this.axios.get("utilizador/anuncios?lang=" + this.$i18n.locale).then(response => {
       this.anuncios = response.data.anuncios
     })
       .catch((error) => {
@@ -232,11 +225,7 @@ export default {
     },
 
     remover() {
-        this.axios.delete('removeranuncio/' + this.anuncioSelecionado.id, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }).then(response => {
+        this.axios.delete('removeranuncio/' + this.anuncioSelecionado.id).then(response => {
         console.log(response)
         let index = this.anuncios.indexOf(this.anuncioSelecionado)
         this.anuncios.splice(index, 1)
@@ -258,11 +247,7 @@ export default {
     },
 
     alterarEstado(anuncio) {
-      this.axios.post('anuncio/estado/' + anuncio.id + '?lang=' + this.$i18n.locale, "", {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      }).then(response => {
+      this.axios.post('anuncio/estado/' + anuncio.id + '?lang=' + this.$i18n.locale, "").then(response => {
         console.log(response)
         let index = this.anuncios.indexOf(anuncio)
         this.anuncios.splice(index, 1, response.data.anuncio)
