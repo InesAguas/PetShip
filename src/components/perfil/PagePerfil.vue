@@ -1,6 +1,6 @@
 <template>
-    <div v-if="utilizador">
     <NavBar></NavBar>
+    <div v-if="utilizador">
     <PerfilParticular v-if="utilizador.tipo == 1" :utilizador="utilizador" :utilizadorLogado="utilizadorLogado"></PerfilParticular>
     <PerfilAssociacao v-if="utilizador.tipo == 2" :utilizador="utilizador" :utilizadorLogado="utilizadorLogado"></PerfilAssociacao>
 </div>

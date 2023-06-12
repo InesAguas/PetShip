@@ -1,5 +1,6 @@
 <template>
     <NavBar></NavBar>
+    <PainelDashboard :isActive="'mensagens'"></PainelDashboard>
     <div class="container h-75" >
         <div class="row" style="height:10%; backgroud-color:#F8F9FA">
             <div class="col ps-0">
@@ -21,13 +22,15 @@
 import NavBar from '../NavBar.vue';
 import CardPessoa from './CardPessoa.vue';
 import CardConversa from './CardConversa.vue';
+import PainelDashboard from '../dashboard/PainelDashboard.vue';
 
 export default ({
     name: 'PageMensagens',
     components: {
         NavBar,
         CardPessoa,
-        CardConversa
+        CardConversa,
+        PainelDashboard
     },
     mounted() {
         this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));

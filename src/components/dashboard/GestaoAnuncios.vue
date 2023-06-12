@@ -24,7 +24,7 @@
     <NavBar></NavBar>
     <div class="container-fluid ms-0">
       <div class="row flex-nowrap">
-        <PainelDashboard></PainelDashboard>
+        <PainelDashboard :isActive="'anuncios'"></PainelDashboard>
         <div class="col-8">
             <div class="row my-3">
                 <div class="col">

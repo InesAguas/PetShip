@@ -122,7 +122,7 @@ const routes = [
         component: PageAnimal
     },
     {
-        path:'/mensagens',
+        path:'/dashboard/mensagens',
         name: 'mensagens',
         props: true,
         component: PageMensagens,

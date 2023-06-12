@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg  navbar-expand-md bg-body-tertiary pb-0 pt-0" style="background-color: #FD7E14;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/" style="color:white; font-family:Coiny;">
+      <a class="navbar-brand" href="/" style="color:#ffffff; font-family:Coiny;">
         <img src="../assets/logo_site_smaller.png" alt="Logo" width="42" height="48" class="">
         <b>PetShip</b>
       </a>
@@ -29,30 +29,23 @@
             <router-link class="nav-link text-white" aria-current="page" to="/petsitting">Pet Sitting</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/dashboard/animais">Dashboard</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/dashboard/anuncios">Dashboard</router-link>
           </li>
         </ul>
         <div class="d-flex justify-content-end">
-          <div class="dropdown" v-if="utilizador">
+          <div v-if="utilizador">
           <span class="text-white">{{ utilizador.nome }}</span>
-          
-            <button type="button" class="btn p-0 m-0" data-bs-toggle="dropdown" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-circle"
+          <a href="/perfil">
+            <img v-if="utilizador && utilizador.fotografia != null" :src="utilizador.fotografia" alt="Foto" width="30" height="30" class="rounded-circle ms-1 me-1">
+            <svg v-else xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-person-circle"
               viewBox="0 0 16 16" style="margin-left:10px;margin-right:10px;">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
               <path fill-rule="evenodd"
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
             </svg>
-          </button>
-            <ul class="dropdown-menu dropdown-menu-center">
-              <li><a class="dropdown-item" href="/perfil">Perfil</a></li>
-              <li><a class="dropdown-item" href="/anunciar">Publicar animal</a></li>
-              <li><a class="dropdown-item" href="/mensagens">Mensagens</a></li>
-              <li><a class="dropdown-item" href="/animal">Animal</a></li>
-              <li><a class="dropdown-item" href="#" v-on:click="logout">logout</a></li>
-            </ul>
+          </a>
           </div>
-          <div v-if="!utilizador">
+          <div v-else>
               <router-link class="nav-link text-white me-2" aria-current="page" to="/login">Login</router-link>
           </div>
   
@@ -85,16 +78,6 @@ export default {
     setLocale(locale) {
       this.$i18n.locale = locale
       this.axios.defaults.headers.common['Accept-Language'] = this.$i18n.locale
-    },
-
-    logout() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('utilizador');
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('utilizador');
-
-      this.$router.push('/login');
-      //pedido a api para logout para apagar token???
     }
   },
   mounted() {
