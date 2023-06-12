@@ -47,12 +47,12 @@
 
         </div>
         <div class="row justify-content-center">
-            <div class="col-auto z-0 d-flex justify-content-center align-items-end"><a href="/adotar"><img 
-                src="../assets/dog.jpg" id="imagem" width="200px" height="200px" style="object-fit:cover;"></a>
+            <div class="col-auto z-0 d-flex justify-content-center align-items-end"><img @click="filtroEspecie = $t('formAnimalMsg.especies[0]'); procurarAnimais();"
+                src="../assets/dog.jpg" id="imagem" width="200" height="200" style="object-fit:cover;">
                         <!--<h2 class="fw-bold z-1 position-absolute" style="color:white">{{$t('paginaInicialMsg.caes')}}</h2>-->
             </div>
-            <div class="col-auto z-0 d-flex justify-content-center align-items-end"><a href="/adotar"><img
-                        src="../assets/cat.jpg" id="imagem" width="200px" height="200px" style="object-fit:cover;"></a>
+            <div class="col-auto z-0 d-flex justify-content-center align-items-end"><img @click="filtroEspecie = $t('formAnimalMsg.especies[1]'); procurarAnimais();"
+                        src="../assets/cat.jpg" id="imagem" width="200" height="200" style="object-fit:cover;">
                 <!--<h2 class="fw-bold z-1 position-absolute" style="color:white">{{$t('paginaInicialMsg.gatos')}}</h2>-->
             </div>
         </div>

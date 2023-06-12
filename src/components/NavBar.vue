@@ -78,6 +78,7 @@ export default {
     setLocale(locale) {
       this.$i18n.locale = locale
       this.axios.defaults.headers.common['Accept-Language'] = this.$i18n.locale
+      sessionStorage.setItem('locale', locale)
     }
   },
   mounted() {

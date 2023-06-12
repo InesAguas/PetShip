@@ -26,7 +26,7 @@ const languages = {
 }
 
 const i18n = createI18n({
-    locale: 'pt',
+    locale: sessionStorage.getItem('locale') != null ? sessionStorage.getItem('locale') : 'pt',
     fallbacklocale: 'pt',
     messages: languages
 })
