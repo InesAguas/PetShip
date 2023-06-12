@@ -1,7 +1,9 @@
 <template>
     <NavBar></NavBar>
+    <div class="container-fluid ms-0">
+        <div class="row flex-nowrap">
     <PainelDashboard :isActive="'mensagens'"></PainelDashboard>
-    <div class="container h-75" >
+    <div class="col-8" style="height:600px">
         <div class="row" style="height:10%; backgroud-color:#F8F9FA">
             <div class="col ps-0">
                 <h1 class="fw-bold" style="color: #653208">{{$t('paginaMensagens.titulo')}}</h1>
@@ -14,8 +16,10 @@
             </div>
             <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas.length > 0" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
 
-        </div>
     </div>
+</div>
+    </div>
+</div>
 </template>
 <script>
 

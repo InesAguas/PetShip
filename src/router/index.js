@@ -154,7 +154,7 @@ const routes = [
         path: '/dashboard/stock',
         name: 'dashboardStock',
         component: GestaoStock,
-        beforeEnter: [logado]
+        beforeEnter: [logado, isTipo2]
     },
     {
         path: '/dashboard',
@@ -166,7 +166,7 @@ const routes = [
         path: '/dashboard/escalas',
         name: 'dashboardEscalas',
         component: GestaoEscalas,
-        beforeEnter: [logado]
+        beforeEnter: [logado, isTipo2]
     }
     
 ]

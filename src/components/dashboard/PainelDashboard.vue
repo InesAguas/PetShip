@@ -34,7 +34,7 @@
                     Anúncios
                 </router-link>
             </li>
-            <li>
+            <li v-if="utilizador.tipo == 2">
                 <router-link to="/dashboard/stock" class="nav-link link-body-emphasis" :class="{ active: activeSection === 'stock' }"
                     @click="setActiveSection('stock')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box"
@@ -45,16 +45,14 @@
                     Stock
                 </router-link>
             </li>
-            <li>
+            <li v-if="utilizador.tipo == 2">
                 <router-link to="/dashboard/animais" class="nav-link link-body-emphasis"
                     :class="{ active: activeSection === 'animais' }" @click="setActiveSection('animais')">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#people-circle"></use>
-                    </svg>
+                    <img :src="require('../../assets/paws.png')" alt="animal" height="20" width="20"/>
                     Animais
                 </router-link>
             </li>
-            <li>
+            <li v-if="utilizador.tipo == 2">
                 <router-link to="/dashboard/escalas" class="nav-link link-body-emphasis" :class="{ active: activeSection === 'escalas' }"
                     @click="setActiveSection('escalas')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -68,7 +66,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="perfil" class="nav-link link-body-emphasis" :class="{ active: activeSection === 'perfil' }"
+                <router-link to="/perfil" class="nav-link link-body-emphasis" :class="{ active: activeSection === 'perfil' }"
                     @click="setActiveSection('perfil')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
                         viewBox="0 0 16 16">
@@ -105,7 +103,8 @@ export default {
     ],
     data() {
         return {
-            activeSection: this.isActive ? this.isActive : 'dashboard'
+            activeSection: this.isActive ? this.isActive : 'dashboard',
+            utilizador: JSON.parse(sessionStorage.getItem('utilizador'))
         }
     },
     mounted() {
