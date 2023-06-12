@@ -18,9 +18,12 @@
                         <div class="mb-3">
                             <input type="password" class="form-control" v-bind:placeholder="$t('loginMsg.pass')" v-model="utilizador.password">
                         </div>
+                        <div class="mb-3 form-check text-start">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="lembrar">
+                            <label class="form-check-label" for="exampleCheck1">{{ $t('loginMsg.lembrar') }}</label>
+                          </div>
                         <button class="btn px-5 text-white fw-bold mb-4" style="background-color:#FD7E14;" type="button"
                             v-on:click="login">Login</button>
-
                         <p><router-link to="password-esquecida" style="color:#ADB5BD;text-decoration: none;">{{ $t('loginMsg.esqueceuPass') }}</router-link></p>
                         <p style="color:#ADB5BD;">{{ $t('loginMsg.semConta') }}<router-link to="/registar" class="fw-bold"
                                 style="color:#6c757d;text-decoration: none;">{{ $t('loginMsg.registar') }}</router-link></p>
@@ -45,7 +48,8 @@ export default {
                 password: null
             },
             erro: false,
-            mensagemErro: null
+            mensagemErro: null,
+            lembrar: false
 
         }
     },
@@ -61,24 +65,31 @@ export default {
                 this.erro = true;
                 return;
             }
-           
 
-            this.axios.post("/login", this.utilizador)
+
+            this.axios.post("/login?lang=" + this.$i18n.locale, this.utilizador)
                 .then((response) => {
-                    //aqui tem de receber o token e guardar na localstorage
-                    //depois convem dar redirect para a pagina inicial com o login feito
-                    localStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
-                    localStorage.setItem('token', response.data.token);
-                    this.axios.defaults.headers.common['Authorization'] = 'token' + response.data.token;
-                    console.log(this.$store.state.utilizador.nome);
+                    //guardar o token na localstorage se tiver o remember me ? e depois meter na session storage???
+                    //guardar na session storage se não tiver o remember me ?
+                    if(this.lembrar){
+                        localStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
+                        localStorage.setItem('token', response.data.token);
+
+                    }
+                    
+                    sessionStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
+                    sessionStorage.setItem('token', response.data.token);
+
+                    this.axios.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('token')
                     this.$router.push('/');
                 })
                 .catch((error) => {
+                    console.log(error)
                     if (error.response.status == 422) {
-                        this.mensagemErro = "Email ou password incorretos."
+                        this.mensagemErro = error.response.data.message;
                         this.erro = true;
                     } else if (error.response.status == 403) {
-                        this.mensagemErro = "Verifique o seu email."
+                        this.mensagemErro = error.response.data.message;
                         this.erro = true;
                     }
                 });

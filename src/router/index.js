@@ -21,20 +21,20 @@ import GestaoStock from '../components/dashboard/GestaoStock'
 //import App from '../App'
 
 function logado() {
-    if (localStorage.getItem('utilizador') == null) {
+    if (sessionStorage.getItem('utilizador') == null) {
         return '/login'
     }
 }
 
 function deslogado() {
-    if (localStorage.getItem('utilizador') != null) {
+    if (sessionStorage.getItem('utilizador') != null) {
         return '/adotar'
     }
 }
 
 function isTipo2() {
-    if (localStorage.getItem('utilizador') != null) {
-        let utilizador = JSON.parse(localStorage.getItem('utilizador'))
+    if (sessionStorage.getItem('utilizador') != null) {
+        let utilizador = JSON.parse(sessionStorage.getItem('utilizador'))
         if (utilizador.tipo != 2) {
             return '/'
         }

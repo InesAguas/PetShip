@@ -167,9 +167,6 @@ export default {
   methods: {
     loadAnimais() {
       this.axios.get("associacao/animais?lang=" + this.$i18n.locale, {
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-      }
     }).then(response => {
       this.animais = response.data.animais
       console.log(this.animais)
@@ -223,9 +220,6 @@ export default {
       console.log(this.animais)
 
       this.axios.delete('removeranimal/' + this.animalSelecionado.id, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
 
       }).then(response => {
         console.log(response)

@@ -3,7 +3,8 @@ export const pt = {
         pass: "Palavra-passe",
         esqueceuPass: "Esqueceu-se da palavra-passe?",
         semConta: "Ainda não tens conta?",
-        registar: "Registar"
+        registar: "Registar",
+        lembrar: "Lembrar-me",
     },
     registarMsg: {
         registar: "Registar",

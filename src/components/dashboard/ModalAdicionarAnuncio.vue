@@ -104,11 +104,7 @@ export default {
             this.animal = novoAnimal
             this.editar = false
             if (novoAnimal.id != null) {
-                this.axios.get('anuncio/num/' + novoAnimal.id, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    }
-                }).then(response => {
+                this.axios.get('anuncio/num/' + novoAnimal.id).then(response => {
                     this.animal = response.data.anuncio
                     this.editar = true;
                     this.animal.fotografias = []
@@ -189,7 +185,6 @@ export default {
                 this.axios.post('editaranuncio/' + this.animal.id, this.animal, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 }).then((response) => {
                     console.log(response.data.anuncio)
@@ -210,7 +205,6 @@ export default {
                 this.axios.post("/novoanuncio", this.animal, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
                     }
                 })
                     .then((response) => {

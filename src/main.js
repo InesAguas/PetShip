@@ -49,9 +49,17 @@ app.use(new VueSocketIO({
     //withCredentials: true,
 }))
 
-axios.defaults.baseURL = "https://petship-api-67yif.ondigitalocean.app/api"
+//axios.defaults.baseURL = "https://petship-api-67yif.ondigitalocean.app/api"
 
-//axios.defaults.baseURL = "http://127.0.0.1:8000/api"
+if(localStorage.getItem('token') != null && localStorage.getItem('utilizador') != null){ 
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+    sessionStorage.setItem('utilizador', localStorage.getItem('utilizador'))
+    sessionStorage.setItem('token', localStorage.getItem('token'))
+}
+
+axios.defaults.headers.common['Accept-Language'] = i18n.global.locale
+
+axios.defaults.baseURL = "http://127.0.0.1:8000/api"
 app.config.globalProperties.axios=axios
 
 app.mount('#app')

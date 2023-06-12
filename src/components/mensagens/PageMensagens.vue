@@ -30,8 +30,8 @@ export default ({
         CardConversa
     },
     mounted() {
-        this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
-        console.log(localStorage.getItem('token'));
+        this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
+        console.log(sessionStorage.getItem('token'));
         this.getConversas();
 
         this.$socket.emit('authenticate', {token: this.utilizador.id});
@@ -48,11 +48,7 @@ export default ({
     },
     methods: {
         getConversas() {
-            this.axios.get('conversasativas', {
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                }
-            }).then(response => {
+            this.axios.get('conversasativas').then(response => {
                 console.log(response.data.conversas);
                  this.conversas = response.data.conversas;
                  console.log(this.conversas);

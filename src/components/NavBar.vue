@@ -84,18 +84,21 @@ export default {
   methods: {
     setLocale(locale) {
       this.$i18n.locale = locale
+      this.axios.defaults.headers.common['Accept-Language'] = this.$i18n.locale
     },
 
     logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('utilizador');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('utilizador');
 
       this.$router.push('/login');
       //pedido a api para logout para apagar token???
     }
   },
   mounted() {
-    this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
+    this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
     console.log(this.utilizador);
   }
 }

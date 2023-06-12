@@ -25,7 +25,7 @@ export default {
         }
     },
     mounted() {
-        this.utilizadorLogado = JSON.parse(localStorage.getItem('utilizador'));
+        this.utilizadorLogado = JSON.parse(sessionStorage.getItem('utilizador'));
         console.log(this.utilizadorLogado);
 
         if(this.$route.params.id == null) {

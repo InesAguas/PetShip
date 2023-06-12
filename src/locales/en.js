@@ -3,7 +3,8 @@ export const en = {
         pass: "Password",
         esqueceuPass: "Forgot your password?",
         semConta: "Don't have an account yet?",
-        registar: "Sign up"
+        registar: "Sign up",
+        lembrar: "Remember me",
     },
     registarMsg: {
         registar: "Sign up",

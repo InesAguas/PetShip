@@ -26,7 +26,7 @@ export default {
         }
     },
     mounted() {
-        this.utilizador = JSON.parse(localStorage.getItem('utilizador'));
+        this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
         console.log(this.utilizador);
     }
 }
