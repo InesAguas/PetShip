@@ -17,6 +17,8 @@ import PasswordEsquecida from '../components/PasswordEsquecida'
 import NovaPassword from '../components/NovaPassword'
 import GestaoAnuncios from '../components/dashboard/GestaoAnuncios'
 import GestaoStock from '../components/dashboard/GestaoStock'
+import PaginaDashboard from '../components/dashboard/PaginaDashboard'
+import GestaoEscalas from '../components/dashboard/GestaoEscalas'
 
 //import App from '../App'
 
@@ -154,6 +156,18 @@ const routes = [
         component: GestaoStock,
         beforeEnter: [logado]
     },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: PaginaDashboard,
+        beforeEnter: [logado]
+    },
+    {
+        path: '/dashboard/escalas',
+        name: 'dashboardEscalas',
+        component: GestaoEscalas,
+        beforeEnter: [logado]
+    }
     
 ]
 
