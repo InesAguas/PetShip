@@ -11,7 +11,7 @@ export default {
         }
     },
     mounted() {
-        alert("Aviso: As imagens são apagadas ao fazer update do site, faça update se necessário. Se tiver erros tente fazer logout e login novamente.")
+       
     }
 }
 </script>
