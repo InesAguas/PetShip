@@ -16,7 +16,7 @@
                 {{animal.distrito}}, {{ animal.created_at }}
             </p>
                 
-            <a href="" class="fw-semibold" style="text-decoration: none; color: #fd7e14">{{$t('cardMsg.verMais')}}</a>
+            <router-link :to="'/animal/' + animal.id" class="fw-semibold" style="text-decoration: none; color: #fd7e14">{{$t('cardMsg.verMais')}}</router-link>
         </div>
     </div>
 </template>

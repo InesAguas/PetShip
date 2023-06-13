@@ -249,6 +249,11 @@ export default {
         },
 
         atualizaFotografia(event) {
+            var dot = event.target.files[0].name.lastIndexOf('.');
+            var extension = event.target.files[0].name.substring(dot + 1);
+            if (extension != "jpg" && extension != "jpeg" && extension != "png") {
+               alert("Formato de ficheiro inválido!")
+            }
             this.animalModal.fotografia = event.target.files[0]
             console.log(this.animalModal)
         },
