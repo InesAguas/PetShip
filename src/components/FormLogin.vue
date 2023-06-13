@@ -61,16 +61,14 @@ export default {
             console.log(this.$store.state.utilizador)
 
             if (this.utilizador.email == null || this.utilizador.password == null) {
-                this.mensagemErro = "Não pode deixar campos vazios."
+                this.mensagemErro = this.$t('mensagens.camposVazios');
                 this.erro = true;
                 return;
             }
 
 
-            this.axios.post("/login?lang=" + this.$i18n.locale, this.utilizador)
+            this.axios.post("/login", this.utilizador)
                 .then((response) => {
-                    //guardar o token na localstorage se tiver o remember me ? e depois meter na session storage???
-                    //guardar na session storage se não tiver o remember me ?
                     if(this.lembrar){
                         localStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
                         localStorage.setItem('token', response.data.token);
@@ -84,14 +82,8 @@ export default {
                     this.$router.push('/');
                 })
                 .catch((error) => {
-                    console.log(error)
-                    if (error.response.status == 422) {
-                        this.mensagemErro = error.response.data.message;
+                    this.mensagemErro = error.response.data.message;
                         this.erro = true;
-                    } else if (error.response.status == 403) {
-                        this.mensagemErro = error.response.data.message;
-                        this.erro = true;
-                    }
                 });
 
         }

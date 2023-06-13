@@ -48,11 +48,11 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-auto z-0 d-flex justify-content-center align-items-end"><img @click="filtroEspecie = $t('formAnimalMsg.especies[0]'); procurarAnimais();"
-                src="../assets/dog.jpg" id="imagem" width="200" height="200" style="object-fit:cover;">
+                src="../assets/dog.jpg" id="imagem" width="200" height="200" style="object-fit:cover;cursor:pointer;">
                         <!--<h2 class="fw-bold z-1 position-absolute" style="color:white">{{$t('paginaInicialMsg.caes')}}</h2>-->
             </div>
             <div class="col-auto z-0 d-flex justify-content-center align-items-end"><img @click="filtroEspecie = $t('formAnimalMsg.especies[1]'); procurarAnimais();"
-                        src="../assets/cat.jpg" id="imagem" width="200" height="200" style="object-fit:cover;">
+                        src="../assets/cat.jpg" id="imagem" width="200" height="200" style="object-fit:cover;cursor:pointer;">
                 <!--<h2 class="fw-bold z-1 position-absolute" style="color:white">{{$t('paginaInicialMsg.gatos')}}</h2>-->
             </div>
         </div>
@@ -93,8 +93,6 @@ export default {
     mounted() {
         this.loadAnimais();
         navigator.geolocation.getCurrentPosition(function (position) {
-            console.log("Latitude is :", position.coords.latitude);
-            console.log("Longitude is :", position.coords.longitude);
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
         });
@@ -125,10 +123,8 @@ export default {
         loadAnimais() {
             this.axios.get('/adotar')
             .then(response => {
-                console.log(response.data)
                 this.animais = response.data.animais
                 this.animais = this.animais.slice(-4)
-                console.log(this.animais)
             });
         
         },
@@ -145,8 +141,6 @@ export default {
             name: "adotar", //use name for router push
             params: filtros
       });
-
-            //console.log(filtros);
         }
     }
 }

@@ -63,30 +63,26 @@ export default {
         registar() {
 
             if (this.utilizador.nome == null || this.utilizador.email == null || this.utilizador.password == null) {
-                this.mensagemErro = "Não podem existir campos vazios."
+                this.mensagemErro = this.$t('mensagens.camposVazios');
                 this.erro = true;
                 return;
             }
 
             if (this.utilizador.tipo != 1 && this.utilizador.tipo != 2) {
-                this.mensagemErro = "Selecione um tipo de conta."
+                this.mensagemErro = this.$t('mensagens.tipoConta');
                 this.erro = true;
                 return;
             }
 
-
             this.axios.post("/registar", this.utilizador)
-                .then(function (response) {
-                    console.log(response);
-                    //aqui ou diz que o registo foi feito e existe a verificaçao de email
-                    //ou entao faz diretamente login...
+                .then(() => {
+                    alert(this.$t('mensagens.emailRegistoEnviado'))
+                    this.$router.push('/login')
                 })
                 .catch((error) => {
-                    if (error.response.status == 422) {
-                        //aqui temos de modificar a mensagem de erro, talvez meter a mensagem que o servidor envia???
-                        this.mensagemErro = "????"
-                        this.erro = true;
-                    }
+                    var dot = error.response.data.message.indexOf('.');
+                    this.mensagemErro = error.response.data.message.substring(0, dot + 1);
+                    this.erro = true;
                 });
         }
     }

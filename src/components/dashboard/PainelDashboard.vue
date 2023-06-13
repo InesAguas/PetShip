@@ -20,7 +20,7 @@
                         <path
                             d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882l-6-3.2ZM15 7.383l-4.778 2.867L15 13.117V7.383Zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765l6-3.2Z" />
                     </svg>
-                    Mensagens
+                    {{$t('painelDashboard.mensagens')}}
                 </router-link>
             </li>
             <li>
@@ -31,7 +31,7 @@
                         <path
                             d="M8.235 1.559a.5.5 0 0 0-.47 0l-7.5 4a.5.5 0 0 0 0 .882L3.188 8 .264 9.559a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882L12.813 8l2.922-1.559a.5.5 0 0 0 0-.882l-7.5-4zm3.515 7.008L14.438 10 8 13.433 1.562 10 4.25 8.567l3.515 1.874a.5.5 0 0 0 .47 0l3.515-1.874zM8 9.433 1.562 6 8 2.567 14.438 6 8 9.433z" />
                     </svg>
-                    Anúncios
+                    {{$t('painelDashboard.anuncios')}}
                 </router-link>
             </li>
             <li v-if="utilizador.tipo == 2">
@@ -49,7 +49,7 @@
                 <router-link to="/dashboard/animais" class="nav-link link-body-emphasis"
                     :class="{ active: activeSection === 'animais' }" @click="setActiveSection('animais')">
                     <img :src="require('../../assets/paws.png')" alt="animal" height="20" width="20"/>
-                    Animais
+                    {{$t('painelDashboard.animais')}}
                 </router-link>
             </li>
             <li v-if="utilizador.tipo == 2">
@@ -62,7 +62,7 @@
                         <path
                             d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
                     </svg>
-                    Escalas
+                    {{$t('painelDashboard.escalas')}}
                 </router-link>
             </li>
             <li>
@@ -73,7 +73,7 @@
                         <path
                             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
                     </svg>
-                    Perfil
+                    {{$t('painelDashboard.perfil')}}
                 </router-link>
             </li>
             <li>

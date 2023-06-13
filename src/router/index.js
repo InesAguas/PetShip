@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
 import FormLogin from '../components/FormLogin'
 import FormRegisto from '../components/FormRegisto'
 import PageAdotar from '../components/animais/PageAdotar'
@@ -66,12 +65,6 @@ const routes = [
         name: 'novapassword',
         component: NovaPassword,
         beforeEnter: [deslogado]
-    },
-    {
-        path: '/teste',
-        name: 'teste',
-        component: HelloWorld,
-        beforeEnter: [logado]
     },
     {
         path: '/registar',

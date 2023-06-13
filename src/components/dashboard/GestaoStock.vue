@@ -138,7 +138,7 @@ export default {
       this.atualizarQuantidade(produto)
     },
     decrementarQuantidade(produto) {
-      if (produto.qnt_atual >= 0) {
+      if (produto.qnt_atual > 0) {
         produto.qnt_atual--
         this.atualizarQuantidade(produto)
       }

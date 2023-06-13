@@ -1,4 +1,10 @@
 export const pt = {
+    navbarMsg: {
+        inicio: "Início",
+        adotar: "Adotar",
+        associacoes: "Associações",
+        desaparecidos: "Desaparecidos",
+    },
     loginMsg: {
         pass: "Palavra-passe",
         esqueceuPass: "Esqueceu-se da palavra-passe?",
@@ -183,4 +189,34 @@ export const pt = {
         modalModificarTitulo: "Modificar Anúncio",
         modalInfoTitulo: "Informação do Anúncio",
     },
+    recuperarPassword: {
+        tituloRecuperar: "Recuperar Password",
+        recuperar: "Recuperar",
+        cancelar: "Cancelar",
+        tituloNova: "Nova Password",
+        confirmePassword: "Confirme a Password",
+        alterar: "Alterar password",
+    },
+    painelDashboard: {
+        mensagens: "Mensagens",
+        anuncios: "Anúncios",
+        animais: "Animais",
+        escalas: "Escalas",
+        perfil: "Perfil",
+
+    },
+    gestaoStock: {
+
+    },
+    mensagens: {
+        camposVazios: "Não pode deixar campos vazios",
+        envioEmailPassword: "Foi enviado um email para o seu endereço de email com as instruções para recuperar a sua password.",
+        passwordNaoCoincide: "A password não coincide",
+        passwordLength: "A password tem de ter pelo menos 8 caracteres",
+        passwordAlterada: "A sua password foi alterada com sucesso",
+        tipoConta: "Tem de escolher o tipo de conta",
+        emailRegistoEnviado: "Registo efetuado com sucesso. Verifique o seu email para ativar a sua conta.",
+        erroEnvioMensagem: "Ocorreu um erro ao enviar a mensagem",
+    }
+    
 }

@@ -14,19 +14,19 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/">Home</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/">{{$t('navbarMsg.inicio')}}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/adotar">Adotar</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/adotar">{{$t('navbarMsg.adotar')}}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/associacoes">Associações</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/associacoes">{{$t('navbarMsg.associacoes')}}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/desaparecido">Desaparecidos</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/desaparecido">{{$t('navbarMsg.desaparecidos')}}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link text-white" aria-current="page" to="/petsitting">Pet Sitting</router-link>
+            <router-link class="nav-link text-white" aria-current="page" to="/petsitting">Petsitting</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link text-white" aria-current="page" to="/dashboard/anuncios">Dashboard</router-link>
