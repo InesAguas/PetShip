@@ -1,4 +1,10 @@
 export const en = {
+    navbarMsg: {
+        inicio: "Home",
+        adotar: "Adopt",
+        associacoes: "Shelters",
+        desaparecidos: "Missing",
+    },
     loginMsg: {
         pass: "Password",
         esqueceuPass: "Forgot your password?",
@@ -12,7 +18,7 @@ export const en = {
         pass: "Password",
         tipoConta: "Chose your account type",
         particular: "Private",
-        associacao: "Society / Kennel",
+        associacao: "Shelter / Kennel",
         temConta: "Already have an account?"
     },
     formAnimalMsg: {
@@ -60,7 +66,7 @@ export const en = {
         dias: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     },
     pageAssociacoes: {
-        titulo : "Associations"
+        titulo : "Shelters"
 
     },
     perfilMsg: {
@@ -83,7 +89,7 @@ export const en = {
         caes: "Dogs",
         gatos: "Cats",
         ultimosAnuncios: "Last announcements",
-        associacoesPerto: "Associations near you",
+        associacoesPerto: "Animal shelters near you",
         encontreAssociacao: "Find a shelter near you",
         ajudarTexto: "Can't adopt a pet? You can still help them!",
         textAjudas: "With our website, you can help by becoming a petsitter, volunteering at a shelter or donating to a shelter near you.",
@@ -186,5 +192,55 @@ export const en = {
         modalModificarTitulo: "Edit Ad",
         modalInfoTitulo: "Ad Information",
     },
+    recuperarPassword: {
+        tituloRecuperar: "Password Recovery",
+        recuperar: "Recover",
+        cancelar: "Cancel",
+        tituloNova: "New Password",
+        confirmePassword: "Confirm Password",
+        alterar: "Change password"
+    },
+    painelDashboard: {
+        mensagens: "Messages",
+        anuncios: "Ads",
+        animais: "Pets",
+        escalas: "Time Scales",
+        perfil: "Profile",
+    },
+    gestaoStock: {
+        botaoAdicionar: "New Product",
+        nome: "Product name",
+        descricao: "Description",
+        quantidadeAtual: "Current quantity",
+        quantidadeMinima: "Minimum quantity",
+        observacoes: "Observations",
+        cancelar: "Cancel",
+        adicionar: "Add",
+        removerProduto: "Remove Product",
+        removerProdutoTexto: "Are you sure you want to remove this product: ",
+        remover: "Remove",
+        acoes: "Actions",
+    },
+    mensagens: {
+        camposVazios: "Please fill in all fields",
+        envioEmailPassword: "An email was sent to your email address with instructions to recover your password.",
+        passwordNaoCoincide: "Passwords do not match",
+        passwordLength: "Password must have at least 8 characters",
+        passwordAlterada: "Password changed successfully",
+        tipoConta: "Select the type of account you want to create",
+        emailRegistoEnviado: "Account created. An email was sent to your email address with instructions to activate your account.",
+        erroEnvioMensagem: "Error sending message",
+        sucessoProduto: "Product added successfully",
+        camposObrigatorios: "Please fill in all required fields",
+        anuncioEditado: "Add edited successfully",
+        anuncioCriado: "Add created successfully",
+        anuncioRemovido: "Add removed successfully",
+        estadoAlterado: "Status changed successfully",
+        animalCriado: "Pet added successfully",
+        animalEditado: "Pet edited successfully",
+        animalRemovido: "Pet removed successfully",
+        fotografiaInvalida: "Invalid photo format",
+        erro: "An error has occurred",
+    }
     
 }

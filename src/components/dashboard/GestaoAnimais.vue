@@ -166,12 +166,9 @@ export default {
   },
   methods: {
     loadAnimais() {
-      this.axios.get("associacao/animais?lang=" + this.$i18n.locale, {
+      this.axios.get("associacao/animais", {
     }).then(response => {
       this.animais = response.data.animais
-      console.log(this.animais)
-    }).catch(error => {
-      console.log(error)
     })
     },
     abrirModalInformacoes(data) {
@@ -185,10 +182,7 @@ export default {
     },
 
     abrirEditar(data) {
-      console.log("teste")
-      console.log(data)
       this.animalSelecionado = data
-      console.log(this.animalSelecionado)
       this.modalAdicionarAnimalVisible = true
     },
 
@@ -217,25 +211,20 @@ export default {
     },
 
     remover() {
-      console.log(this.animais)
-
       this.axios.delete('removeranimal/' + this.animalSelecionado.id, {
 
-      }).then(response => {
-        console.log(response)
+      }).then(() => {
         let index = this.animais.indexOf(this.animalSelecionado)
         this.animais.splice(index, 1)
         this.modalRemoverAnimalVisible = false
-        alert("Animal removido com sucesso!")
-        console.log(this.animais)
+        alert(this.$t('mensagens.animalRemovido'))
       })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          alert(this.$t('mensagens.erro'))
         });
     },
 
     novoAnimal(data) {
-      console.log(data)
       this.animais.unshift(data)
     },
 
@@ -249,3 +238,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.modal-backdrop {
+  height:100%;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>

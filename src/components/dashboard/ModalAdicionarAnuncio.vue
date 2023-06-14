@@ -12,6 +12,11 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="mb-0">
+                                <div class="alert alert-danger" role="alert" style="padding:5px" v-show="erro">
+                                    {{ this.mensagemErro }}
+                                </div>
+                            </div>
                             <div class="col">
                                 <label for="nome" class="form-label">{{ $t('formAnimalMsg.nome') }}</label>
                                 <input type="text" id="nome" class="form-control"
@@ -60,8 +65,8 @@
                                         :value="index + 1">{{ item }}</option>
                                 </select>
                                 <label for="descricao" class="form-label">{{ $t('formAnimalMsg.descricao') }}</label>
-                                <textarea id="descricao" class="form-control" placeholder="Desccrição"
-                                    v-model="animal.descricao"></textarea>
+                                <textarea id="descricao" class="form-control" :placeholder="$t('formAnimalMsg.descricao')"
+                                    v-model="animal.descricao"></textarea>  
                                 <label for="imagens" class="form-label">{{ $t('formAnimalMsg.fotografias') }}</label>
                                 <input type="file" class="form-control" id="imagens" accept="image/*" multiple
                                     v-on:change="mostrarFotos">
@@ -78,9 +83,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('modalAdicionarAnimal.cancelar') }}</button>
-                    <button type="button" class="btn text-white" style="background-color: #FD7E14;" @click="anunciarAnimal"
-                        data-bs-dismiss="modal">{{ $t('modalAdicionarAnimal.confirmar') }}</button>
+                    <button type="button" id="btnClose" class="btn btn-secondary" data-bs-dismiss="modal">{{ $t('modalAdicionarAnimal.cancelar') }}</button>
+                    <button type="button" class="btn text-white" style="background-color: #FD7E14;" @click="anunciarAnimal">{{ $t('modalAdicionarAnimal.confirmar') }}</button>
                         
                 </div>
             </div>
@@ -165,6 +169,15 @@ export default {
             this.preview = []
             this.animal.fotografias = []
             for (let i = 0; i < e.target.files.length; i++) {
+                var dot = e.target.files[i].name.lastIndexOf('.');
+                var extension = e.target.files[i].name.substring(dot + 1);
+                if (extension != "jpg" && extension != "jpeg" && extension != "png") {
+                if(this.$i18n.locale == "pt") {
+                    alert("Ficheiro com formato inválido!")
+                } else {
+                    alert("Invalid file format!")
+                }
+            }
                 this.preview.push(URL.createObjectURL(e.target.files[i]))
                 this.animal.fotografias.push(e.target.files[i])
             }
@@ -173,7 +186,7 @@ export default {
         anunciarAnimal() {
 
             if (this.animal.nome == null || this.animal.nome == "") {
-                this.mensagemErro = "O nome do animal é obrigatório"
+                this.mensagemErro = this.$t('mensagens.camposObrigatorios')
                 this.erro = true;
                 return;
             }
@@ -187,19 +200,14 @@ export default {
                         'Content-Type': 'multipart/form-data',
                     }
                 }).then((response) => {
-                    console.log(response.data.anuncio)
-                    alert("Animal editado com sucesso")
+                    alert(this.$t('mensagens.anuncioEditado'))
                     this.$emit('anuncioEditado', response.data.anuncio);
+                    document.getElementById('btnClose').click()
                 })
                     .catch((error) => {
-                        if (error.response.status == 422) {
-                            this.mensagemErro = error.response.data.message
-                            this.erro = true;
-                        } else {
-                            this.mensagemErro = error.response.data.message
-                            this.erro = true;
-                        }
-                        console.log(error.response)
+                        var dot = error.response.data.message.indexOf('.');
+                        this.mensagemErro = error.response.data.message.substring(0, dot + 1);
+                        this.erro = true
                     });
             } else {
                 this.axios.post("/novoanuncio", this.animal, {
@@ -208,18 +216,14 @@ export default {
                     }
                 })
                     .then((response) => {
-                        alert("Anuncio criado com sucesso")
+                        alert(this.$t('mensagens.anuncioCriado'))
                         this.$emit('anuncioCriado', response.data.anuncio);
+                        document.getElementById('btnClose').click()
                     })
                     .catch((error) => {
-                        if (error.response.status == 422) {
-                            this.mensagemErro = error.response.data.message
-                            this.erro = true;
-                        } else {
-                            this.mensagemErro = error.response.data.message
-                            this.erro = true;
-                        }
-                        console.log(this.mensagemErro)
+                        var dot = error.response.data.message.indexOf('.');
+                        this.mensagemErro = error.response.data.message.substring(0, dot + 1);
+                        this.erro = true
                     });
             }
 

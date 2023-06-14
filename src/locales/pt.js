@@ -1,4 +1,10 @@
 export const pt = {
+    navbarMsg: {
+        inicio: "Início",
+        adotar: "Adotar",
+        associacoes: "Associações",
+        desaparecidos: "Desaparecidos",
+    },
     loginMsg: {
         pass: "Palavra-passe",
         esqueceuPass: "Esqueceu-se da palavra-passe?",
@@ -183,4 +189,59 @@ export const pt = {
         modalModificarTitulo: "Modificar Anúncio",
         modalInfoTitulo: "Informação do Anúncio",
     },
+    recuperarPassword: {
+        tituloRecuperar: "Recuperar Password",
+        recuperar: "Recuperar",
+        cancelar: "Cancelar",
+        tituloNova: "Nova Password",
+        confirmePassword: "Confirme a Password",
+        alterar: "Alterar password",
+    },
+    painelDashboard: {
+        mensagens: "Mensagens",
+        anuncios: "Anúncios",
+        animais: "Animais",
+        escalas: "Escalas",
+        perfil: "Perfil",
+
+    },
+    gestaoStock: {
+        botaoAdicionar: "Adicionar produto",
+        nome: "Nome do produto",
+        descricao: "Descrição",
+        quantidadeAtual: "Quantidade atual",
+        quantidadeMinima: "Quantidade mínima",
+        observacoes: "Observações",
+        cancelar: "Cancelar",
+        adicionar: "Adicionar",
+        removerProduto: "Remover produto",
+        removerProdutoTexto: "Tem a certeza que pretende remover o produto: ",
+        remover: "Remover",
+        acoes: "Ações",
+
+
+
+    },
+    mensagens: {
+        camposVazios: "Não pode deixar campos vazios",
+        envioEmailPassword: "Foi enviado um email para o seu endereço de email com as instruções para recuperar a sua password.",
+        passwordNaoCoincide: "A password não coincide",
+        passwordLength: "A password tem de ter pelo menos 8 caracteres",
+        passwordAlterada: "A sua password foi alterada com sucesso",
+        tipoConta: "Tem de escolher o tipo de conta",
+        emailRegistoEnviado: "Registo efetuado com sucesso. Verifique o seu email para ativar a sua conta.",
+        erroEnvioMensagem: "Ocorreu um erro ao enviar a mensagem",
+        sucessoProduto: "Produto adicionado com sucesso",
+        camposObrigatorios: "Tem de preencher todos os campos obrigatórios",
+        anuncioEditado: "Anuncio editado com sucesso",
+        anuncioCriado: "Anuncio criado com sucesso",
+        anuncioRemovido: "Anuncio removido com sucesso",
+        estadoAlterado: "Estado alterado com sucesso",
+        animalCriado: "Animal inserido com sucesso",
+        animalEditado: "Animal editado com sucesso",
+        animalRemovido: "Animal removido com sucesso",
+        fotografiaInvalida: "Formato de fotografia inválido",
+        erro: "Ocorreu um erro",
+    }
+    
 }

@@ -55,43 +55,30 @@ export default ({
         obterMensagens() {
             this.axios.get('mensagens/' + this.id).then(
                 response => {
-                    console.log("hi");
-                    console.log(response.data);
                     this.mensagens = response.data.mensagens;
                 }
-            ).catch(error => {
-                console.log(error);
-            })
+            )
         },
 
-        enviarMensagem() {
-            
+        enviarMensagem() { 
             if(this.mensagem == null || this.mensagem == "") {
                 return;
             }
-            console.log(this.mensagem)
-            this.axios.post('enviarmensagem', {id_recebe: this.id, mensagem: this.mensagem}).then(
-                response => {
-                    console.log(response.data.mensagem);
+            this.axios.post('enviarmensagem', {id_recebe: this.id, mensagem: this.mensagem})
+            .then( response => {
                     this.mensagens.unshift(response.data.mensagem);
                     this.$socket.emit('message', response.data.mensagem)
                     this.$emit('mensagemEnviada', response.data.mensagem)
                     this.mensagem = null;
                     document.getElementById("mensagemInput").value = "";
-                    
                 }
-            ).catch(error => {
-                console.log(error);
+            ).catch( () => {
+                alert(this.$t('mensagens.erroEnvioMensagem'))
             })
         }
     },
     sockets: {
-        connection() {
-            console.log('socket connected')
-        },
         message(data) {
-            console.log("Card conversa")
-            console.log(data)
             if(data.id_envia == this.id) {
                 this.mensagens.unshift(data);
             }

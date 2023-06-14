@@ -60,6 +60,22 @@ if(sessionStorage.getItem('token') != null && sessionStorage.getItem('utilizador
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('token')
 }
 
+axios.interceptors.response.use(function (response) {
+    // Do something with response data
+    return response;
+  }, function (error) {
+    // Do something with response error
+    if(error.response.status == 401){
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('utilizador')
+        localStorage.removeItem('token')
+        localStorage.removeItem('utilizador')
+        router.push('/login')
+        alert('Sessão expirada, por favor faça login novamente')
+    }
+    return Promise.reject(error);
+  });
+
 axios.defaults.baseURL = "https://api.petship.pt/api"
 
 axios.defaults.headers.common['Accept-Language'] = i18n.global.locale

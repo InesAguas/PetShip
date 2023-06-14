@@ -40,11 +40,7 @@ export default ({
         this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
         console.log(sessionStorage.getItem('token'));
         this.getConversas();
-
         this.$socket.emit('authenticate', {token: this.utilizador.id});
-
-        
-
     },
     data() {
         return {
@@ -56,11 +52,7 @@ export default ({
     methods: {
         getConversas() {
             this.axios.get('conversasativas').then(response => {
-                console.log(response.data.conversas);
                  this.conversas = response.data.conversas;
-                 console.log(this.conversas);
-                 
-
                  if(this.$route.params.id != null && this.$route.params.id != this.utilizador.id) {
                     var index = this.conversas.findIndex(x => x.id_envia == this.$route.params.id || x.id_recebe == this.$route.params.id);
                     if(index >= 0) {
@@ -74,10 +66,6 @@ export default ({
                         this.conversas.unshift(conversa);
                     }
         }
-                
-            console.log(this.conversas);
-            }).catch(error => {
-                    console.log(error);
             });          
         },
 
@@ -93,13 +81,7 @@ export default ({
         }
     },
     sockets: {
-        connection() {
-            console.log('socket connected')
-        },
         message(data) {
-            console.log("Page conversa");
-            console.log(data)
-
             //procurar o cardpessoa que corresponde a mensagem
             var index = this.conversas.findIndex(x => x.id_envia == data.id_envia || x.id_recebe == data.id_envia);
 

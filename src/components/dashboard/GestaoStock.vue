@@ -7,16 +7,16 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Remover anuncio</h5>
+          <h5 class="modal-title">{{$t('gestaoStock.removerProduto')}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Tem a certeza que pretende remover o produto:
+          {{$t('gestaoStock.removerProdutoTexto')}}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{$t('gestaoStock.cancelar')}}</button>
           <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color:#FD7E14"
-            @click="remover">Remover</button>
+            @click="remover">{{$t('gestaoStock.remover')}}</button>
         </div>
       </div>
     </div>
@@ -39,12 +39,12 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">Qnt atual</th>
-              <th scope="col">Qnt minima</th>
-              <th scope="col">Observações</th>
-              <th scope="col">Ações</th>
+              <th scope="col">{{$t('gestaoStock.nome')}}</th>
+              <th scope="col">{{$t('gestaoStock.descricao')}}</th>
+              <th scope="col">{{$t('gestaoStock.quantidadeAtual')}}</th>
+              <th scope="col">{{$t('gestaoStock.quantidadeMinima')}}</th>
+              <th scope="col">{{$t('gestaoStock.observacoes')}}</th>
+              <th scope="col">{{$t('gestaoStock.acoes')}}</th>
             </tr>
           </thead>
           <tbody v-if="produtos">
@@ -108,9 +108,7 @@ export default {
   mounted() {
     this.axios.get("utilizador/stock").then(response => {
       this.produtos = response.data.stocks
-      console.log(this.produtos)
     })
-    console.log(localStorage.getItem('token'))
   },
   methods: {
     produtoCriado(produto) {
@@ -121,16 +119,14 @@ export default {
     },
     remover() {
       if (this.produtoSelecionado) {
-        this.axios.delete('removerstock/' + this.produtoSelecionado.id).then(response => {
-          console.log(response)
+        this.axios.delete('removerstock/' + this.produtoSelecionado.id)
+        .then(() => {
           const index = this.produtos.indexOf(this.produtoSelecionado);
           if (index > -1) {
             this.produtos.splice(index, 1);
           }
           this.produtoSelecionado = null;
-        }).catch(error => {
-          console.log(error)
-        });
+        })
       }
     },
     incrementarQuantidade(produto) {
@@ -138,7 +134,7 @@ export default {
       this.atualizarQuantidade(produto)
     },
     decrementarQuantidade(produto) {
-      if (produto.qnt_atual >= 0) {
+      if (produto.qnt_atual > 0) {
         produto.qnt_atual--
         this.atualizarQuantidade(produto)
       }
@@ -159,3 +155,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.modal-backdrop {
+  height:100%;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>
