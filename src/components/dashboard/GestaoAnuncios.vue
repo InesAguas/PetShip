@@ -163,15 +163,10 @@ export default {
                     this.anuncioSelecionado.animal_id = response.data.animal.id
 
                     this.novo = true
-                    console.log("hiii3")
-                    console.log(this.anuncioSelecionado)
-
                     document.getElementById('buttontest').click();
-
-                    
                 })
-                    .catch((error) => {
-                        console.log(error)
+                    .catch(() => {
+                        alert(this.$t('mensagens.erro'))
                     });
             
 
@@ -181,17 +176,13 @@ export default {
 
   methods: {
     loadAnimais() {
-      this.axios.get("utilizador/anuncios?lang=" + this.$i18n.locale).then(response => {
+      this.axios.get("utilizador/anuncios").then(response => {
       this.anuncios = response.data.anuncios
     })
-      .catch((error) => {
-        console.log(error)
-      });
     },
 
     abrirModalAdicionar() {
       if(!this.novo) {
-        console.log("hiii1")
         this.anuncioSelecionado = {
         nome: null,
         sexo: 1,
@@ -207,8 +198,6 @@ export default {
         created_at: null,
       }
       }
-      console.log("hiii2")
-      console.log(this.anuncioSelecionado)
       this.novo = false
       
     },
@@ -225,19 +214,17 @@ export default {
     },
 
     remover() {
-        this.axios.delete('removeranuncio/' + this.anuncioSelecionado.id).then(response => {
-        console.log(response)
+        this.axios.delete('removeranuncio/' + this.anuncioSelecionado.id).then(() => {
         let index = this.anuncios.indexOf(this.anuncioSelecionado)
         this.anuncios.splice(index, 1)
-        alert("Anuncio removido com sucesso!")
+        alert(this.$t('mensagens.anuncioRemovido'))
       })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          alert(this.$t('mensagens.erro'))
         });
     },
 
     anuncioCriado(anuncio) {
-        console.log(anuncio)
         this.anuncios.unshift(anuncio)
     },
 
@@ -247,16 +234,23 @@ export default {
     },
 
     alterarEstado(anuncio) {
-      this.axios.post('anuncio/estado/' + anuncio.id + '?lang=' + this.$i18n.locale, "").then(response => {
-        console.log(response)
+      this.axios.post('anuncio/estado/' + anuncio.id, "").then(response => {
         let index = this.anuncios.indexOf(anuncio)
         this.anuncios.splice(index, 1, response.data.anuncio)
-        alert("Estado alterado com sucesso!")
+        alert(this.$t('mensagens.estadoAlterado'))
       })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          alert(this.$t('mensagens.erro'))
         });
     }
   }
 }
 </script>
+
+<style>
+.modal-backdrop {
+  height:100%;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>

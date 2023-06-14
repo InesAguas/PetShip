@@ -208,7 +208,18 @@ export const en = {
         perfil: "Profile",
     },
     gestaoStock: {
-
+        botaoAdicionar: "New Product",
+        nome: "Product name",
+        descricao: "Description",
+        quantidadeAtual: "Current quantity",
+        quantidadeMinima: "Minimum quantity",
+        observacoes: "Observations",
+        cancelar: "Cancel",
+        adicionar: "Add",
+        removerProduto: "Remove Product",
+        removerProdutoTexto: "Are you sure you want to remove this product: ",
+        remover: "Remove",
+        acoes: "Actions",
     },
     mensagens: {
         camposVazios: "Please fill in all fields",
@@ -219,6 +230,17 @@ export const en = {
         tipoConta: "Select the type of account you want to create",
         emailRegistoEnviado: "Account created. An email was sent to your email address with instructions to activate your account.",
         erroEnvioMensagem: "Error sending message",
+        sucessoProduto: "Product added successfully",
+        camposObrigatorios: "Please fill in all required fields",
+        anuncioEditado: "Add edited successfully",
+        anuncioCriado: "Add created successfully",
+        anuncioRemovido: "Add removed successfully",
+        estadoAlterado: "Status changed successfully",
+        animalCriado: "Pet added successfully",
+        animalEditado: "Pet edited successfully",
+        animalRemovido: "Pet removed successfully",
+        fotografiaInvalida: "Invalid photo format",
+        erro: "An error has occurred",
     }
     
 }

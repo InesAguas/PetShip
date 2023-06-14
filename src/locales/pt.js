@@ -206,6 +206,20 @@ export const pt = {
 
     },
     gestaoStock: {
+        botaoAdicionar: "Adicionar produto",
+        nome: "Nome do produto",
+        descricao: "Descrição",
+        quantidadeAtual: "Quantidade atual",
+        quantidadeMinima: "Quantidade mínima",
+        observacoes: "Observações",
+        cancelar: "Cancelar",
+        adicionar: "Adicionar",
+        removerProduto: "Remover produto",
+        removerProdutoTexto: "Tem a certeza que pretende remover o produto: ",
+        remover: "Remover",
+        acoes: "Ações",
+
+
 
     },
     mensagens: {
@@ -217,6 +231,17 @@ export const pt = {
         tipoConta: "Tem de escolher o tipo de conta",
         emailRegistoEnviado: "Registo efetuado com sucesso. Verifique o seu email para ativar a sua conta.",
         erroEnvioMensagem: "Ocorreu um erro ao enviar a mensagem",
+        sucessoProduto: "Produto adicionado com sucesso",
+        camposObrigatorios: "Tem de preencher todos os campos obrigatórios",
+        anuncioEditado: "Anuncio editado com sucesso",
+        anuncioCriado: "Anuncio criado com sucesso",
+        anuncioRemovido: "Anuncio removido com sucesso",
+        estadoAlterado: "Estado alterado com sucesso",
+        animalCriado: "Animal inserido com sucesso",
+        animalEditado: "Animal editado com sucesso",
+        animalRemovido: "Animal removido com sucesso",
+        fotografiaInvalida: "Formato de fotografia inválido",
+        erro: "Ocorreu um erro",
     }
     
 }

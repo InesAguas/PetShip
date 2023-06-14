@@ -11,6 +11,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
+                        <div class="mb-0">
+                            <div class="alert alert-danger" role="alert" style="padding:5px" v-show="erro">
+                                {{ this.mensagemErro }}
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="data_recolha" class="form-label mb-0">{{$t('modalAdicionarAnimal.dataRecolha')}}*</label>
@@ -49,7 +54,7 @@
                                 <input type="text" id="nome" class="form-control" v-model="animalModal.nome">
                             </div>
                             <div class="col">
-                                <label class="form-label mb-0">C{{$t('modalAdicionarAnimal.agressivo')}}*</label><br>
+                                <label class="form-label mb-0">{{$t('modalAdicionarAnimal.agressivo')}}*</label><br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions2"
                                         id="inlineRadio3" value="1" v-model="animalModal.agressivo">
@@ -161,9 +166,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    <button type="button" id="btnClose" class="btn btn-secondary" data-bs-dismiss="modal"
                         @click="$emit('close')">{{$t('modalAdicionarAnimal.cancelar')}}</button>
-                    <button type="button" class="btn text-white" data-bs-dismiss="modal" style="background-color: #FD7E14;"
+                    <button type="button" class="btn text-white" style="background-color: #FD7E14;"
                         @click="publicarAnimal">{{$t('modalAdicionarAnimal.confirmar')}}</button>
                 </div>
             </div>
@@ -184,6 +189,7 @@ export default {
             this.animalModal = novoAnimal
             this.chipSelecionado = 0
             this.editar = false
+            this.erro = false
             if (novoAnimal.id) {
                 this.axios.get('associacao/animal/num/' + novoAnimal.id).then(response => {
                     this.animalModal = response.data.animal
@@ -202,20 +208,30 @@ export default {
             animalModal: this.animal,
             editar: false,
             chipSelecionado: 0,
+            mensagemErro: null,
+            erro: false,
         }
     },
 
     methods: {
         publicarAnimal() {
+            if(this.animal.data_recolha == null || this.animal.nome == null || this.animal.nome == '' || (this.chipSelecionado && this.animal.chip == null || this.animal.chip == '')) {
+                this.erro = true
+                this.mensagemErro = this.$t('mensagens.camposObrigatorios')
+                return
+            }
+
             if(!this.editar) {
-               console.log("novo animal")
-            this.axios.post("/publicaranimal", this.animalModal).then(response => {
+                this.axios.post("/publicaranimal", this.animalModal)
+                .then(response => {
                 this.$emit('novoAnimal', response.data.animal)
-                alert("Animal inserido com sucesso!")
-                this.$emit('close')
+                alert(this.$t('mensagens.animalCriado'))
+                document.getElementById('btnClose').click()
             })
                 .catch((error) => {
-                    console.log(error)
+                    var dot = error.response.data.message.indexOf('.');
+                        this.mensagemErro = error.response.data.message.substring(0, dot + 1);
+                        this.erro = true
                 });
             } else {
                 if(this.animalModal.fotografia == this.animal.fotografia) {
@@ -228,13 +244,14 @@ export default {
                 }
             }).then(response => {
                 this.$emit('editarAnimal', response.data.animal)
-                console.log("eloo")
-                console.log(response.data.animal)
-                alert("Animal editado com sucesso!")
-                this.$emit('close')
+                alert(this.$t('mensagens.animalEditado'))
+                document.getElementById('btnClose').click()
+
             })
                 .catch((error) => {
-                    console.log(error)
+                    var dot = error.response.data.message.indexOf('.');
+                        this.mensagemErro = error.response.data.message.substring(0, dot + 1);
+                        this.erro = true
                 });
             }
             
@@ -252,14 +269,10 @@ export default {
             var dot = event.target.files[0].name.lastIndexOf('.');
             var extension = event.target.files[0].name.substring(dot + 1);
             if (extension != "jpg" && extension != "jpeg" && extension != "png") {
-                if(this.$i18n.locale == "pt") {
-                    alert("Formato de ficheiro inválido!")
-                } else {
-                    alert("Invalid file format!")
-                }
+                this.mensagemErro = this.$t('mensagens.fotografiaInvalida')
+                this.erro = true
             }
             this.animalModal.fotografia = event.target.files[0]
-            console.log(this.animalModal)
         },
     }
 }
