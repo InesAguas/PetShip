@@ -1,5 +1,5 @@
 <template>
-    <ModalCandidatura v-if="utilizadorLogado" :utilizadorLogado="utilizadorLogado"></ModalCandidatura>
+    <ModalCandidatura v-if="utilizadorLogado" :utilizadorLogado="utilizadorLogado" :animal="animal" ></ModalCandidatura>
     <NavBar></NavBar>
     <div class="container mt-5">
         <div class="row">
@@ -158,6 +158,7 @@ export default {
             utilizador: [],
             showModal: false,
             utilizadorLogado: null,
+            
         }
 
     },

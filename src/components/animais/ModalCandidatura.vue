@@ -12,17 +12,19 @@
                         <div class="col">
                             <form>
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">{{ $t('registarMsg.nome') }}</label>
+                                    <label for="name" class="form-label">{{ $t('registarMsg.nome') }}*</label>
                                     <input type="text" class="form-control" id="name" aria-describedby="name"
-                                        v-bind:placeholder="utilizadorLogado.nome" v-bind:value="utilizadorLogado.nome" @input="verificarCamposPreenchidos">
+                                        v-bind:placeholder="utilizadorLogado.nome" v-bind:value="utilizadorLogado.nome"
+                                        @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="cc" class="form-label">Cartão de cidadão</label>
+                                    <label for="cc" class="form-label">Cartão de cidadão*</label>
                                     <input type="text" class="form-control" id="cc" aria-describedby="cc"
-                                        placeholder="Cartão de Cidadão" @input="verificarCamposPreenchidos">
+                                        placeholder="Cartão de Cidadão" v-model="candidatura.cc"
+                                        @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="telefone" class="form-label">Telefone</label>
+                                    <label for="telefone" class="form-label">Telefone*</label>
                                     <input type="text" class="form-control" id="telefone" aria-describedby="telefone"
                                         v-bind:placeholder="utilizadorLogado.telefone"
                                         v-bind:value="utilizadorLogado.telefone" @input="verificarCamposPreenchidos">
@@ -35,14 +37,14 @@
                         <div class="col">
                             <form>
                                 <div class="mb-3">
-                                    <label for="morada" class="form-label">Morada</label>
+                                    <label for="morada" class="form-label">Morada*</label>
                                     <input type="text" class="form-control" id="morada" aria-describedby="morada"
                                         v-bind:placeholder="utilizadorLogado.localizacao"
                                         v-bind:value="utilizadorLogado.localizacao" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <label for="exampleFormControlInput1" class="form-label">Distrito</label>
+                                        <label for="exampleFormControlInput1" class="form-label">Distrito*</label>
                                         <select class="form-select" aria-label="Default select example"
                                             v-model="utilizadorDistrito">
                                             <option selected value="">{{ $t('pageAdotar.qualquer') }}</option>
@@ -52,16 +54,18 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <label for="codPostal" class="form-label">Código Postal</label>
+                                        <label for="codPostal" class="form-label">Código Postal*</label>
                                         <input type="text" class="form-control" id="codPostal" aria-describedby="codPostal"
                                             v-bind:placeholder="utilizadorLogado.codigo_postal ? utilizadorLogado.codigo_postal : '0000-000'"
-                                            v-bind:value="utilizadorLogado.codigo_postal" @input="verificarCamposPreenchidos">
+                                            v-bind:value="utilizadorLogado.codigo_postal"
+                                            @input="verificarCamposPreenchidos">
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="email" class="form-label">Email*</label>
                                     <input type="text" class="form-control" id="email" aria-describedby="email"
-                                        v-bind:placeholder="utilizadorLogado.email" v-bind:value="utilizadorLogado.email" @input="verificarCamposPreenchidos">
+                                        v-bind:placeholder="utilizadorLogado.email" v-bind:value="utilizadorLogado.email"
+                                        @input="verificarCamposPreenchidos">
                                 </div>
                             </form>
 
@@ -114,10 +118,10 @@ Aceita que os seus dados pessoais sejam utilizados afim de receber informações
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-if="first">Cancelar</button>
                     <button type="button" class="btn btn-secondary" @click="prev" v-if="!first">Voltar</button>
-                    <button type="button" class="btn btn-primary" id="seguinte" style="background-color:#FD7E14; display: none;" @click="next"
-                        v-if="first">Seguinte</button>
+                    <button type="button" class="btn btn-primary" id="seguinte"
+                        style="background-color:#FD7E14; display: none;" @click="next" v-if="first">Seguinte</button>
                     <button type="button" class="btn btn-primary" style="background-color:#FD7E14;"
-                        v-if="!first && checkboxesSelecionadas">Confirmar</button>
+                        v-if="!first && checkboxesSelecionadas" @click="confirmar" data-bs-dismiss="modal">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -131,6 +135,7 @@ export default {
     name: 'ModalCandidatura',
     props: [
         'utilizadorLogado',
+        'animal'
     ],
     data() {
         return {
@@ -142,6 +147,13 @@ export default {
             aceitouDadosPessoais: false,
             utilizadorDistrito: this.utilizadorLogado.distrito,
             camposPreenchidos: false,
+            candidatura: {
+                id_anuncio: this.animal.id,
+                id_utilizador: this.utilizadorLogado.id,
+                cc: '',
+                estado: true,
+            }
+
         }
     },
     computed: {
@@ -168,14 +180,60 @@ export default {
         verificarCamposPreenchidos() {
             const nomePreenchido = this.utilizadorLogado.nome && this.utilizadorLogado.nome.trim() !== '';
             const ccPreenchido = document.getElementById('cc').value.trim() !== '';
+            const ccValido = this.candidatura.cc.length === 12;
             const telefonePreenchido = this.utilizadorLogado.telefone && this.utilizadorLogado.telefone.trim() !== '';
+            const telefoneValido = this.utilizadorLogado.telefone.length === 9;
             const moradaPreenchida = this.utilizadorLogado.localizacao && this.utilizadorLogado.localizacao.trim() !== '';
             const distritoPreenchido = this.utilizadorDistrito && this.utilizadorDistrito.trim() !== '';
             const codPostalPreenchido = document.getElementById('codPostal').value.trim() !== '';
             const emailPreenchido = this.utilizadorLogado.email && this.utilizadorLogado.email.trim() !== '';
-            document.getElementById('seguinte').style.display = (nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido) ? 'block' : 'none';
-            this.camposPreenchidos = nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido;
+            if (ccValido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido && telefoneValido) {
+                document.getElementById('seguinte').style.display = (nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido) ? 'block' : 'none';
+                this.camposPreenchidos = nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido;
+            } else {
+                document.getElementById('seguinte').style.display = 'none';
+                this.camposPreenchidos = false;
+            }
         },
+        confirmar() {
+            this.candidatura = {
+                id_anuncio: this.animal.id,
+                id_utilizador: this.utilizadorLogado.id,
+                cc: this.candidatura.cc,
+                estado: true,
+            };
+            console.log(this.candidatura);
+            this.axios.post('/candidaturainserir', this.candidatura, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                console.log(response);
+                //Reiniciar os dados do modal
+                this.conteudoCurrent = 1;
+                this.first = true;
+                this.aceitouResponsabilidade = false;
+                this.aceitouCondicoes = false;
+                this.aceitouDadosPessoais = false;
+                this.utilizadorDistrito = this.utilizadorLogado.distrito;
+                this.camposPreenchidos = false;
+                this.candidatura = {
+                    id_anuncio: this.animal.id,
+                    id_utilizador: this.utilizadorLogado.id,
+                    cc: '',
+                    estado: true,
+                }
+    
+                
+
+                //Mostrar mensagem de sucesso
+                alert("Candidatura efetuada com sucesso!");
+
+
+            }).catch(error => {
+                console.log(error);
+            });
+        }
     }
 }
 </script>
