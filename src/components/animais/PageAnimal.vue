@@ -105,7 +105,7 @@
                         </div>
                         <div class="col-1">
 
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://petship-8xfjf.ondigitalocean.app/animal/6"
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://petship.pt/animal/17"
                                 target="_blank" rel="noopener"><img class="img p-0 m-0" src="../../assets/facebook.png"
                                     height="30" width="30"></a>
                         </div>
