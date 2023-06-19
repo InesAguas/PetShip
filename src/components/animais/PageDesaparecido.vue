@@ -43,7 +43,7 @@
                     <select class="form-select" aria-label="Default select example" v-model="filtroSexo">
                         <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
                         <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[0]') }}</option>
-                        <option v-bind:value="$t('formAnimalMsg.sexos[0]')">{{ $t('formAnimalMsg.sexos[1]') }}</option>
+                        <option v-bind:value="$t('formAnimalMsg.sexos[1]')">{{ $t('formAnimalMsg.sexos[1]') }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
@@ -113,7 +113,7 @@ export default {
     },
     methods: {
         loadAnimais() {
-            this.axios.get('/desaparecido?lang=' + this.$i18n.locale)
+            this.axios.get('/desaparecido')
             .then(response => {
                 console.log(response.data)
                 this.todosAnimais = response.data.animais
@@ -130,7 +130,7 @@ export default {
                     && (this.filtroRaca != "" ? animal.raca === this.filtroRaca : true)
                     && (this.filtroIdade != "" ? animal.idade === this.filtroIdade : true)
                     && (this.filtroSexo != "" ? animal.sexo === this.filtroSexo : true)
-                    && (this.filtroTamanho != "" ? animal.tamanho === this.filtroTamanho : true)
+                    && (this.filtroTamanho != "" ? animal.porte === this.filtroTamanho : true)
                     && (this.filtroCor != "" ? animal.cor === this.filtroCor : true)
             });
 

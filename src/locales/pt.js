@@ -103,6 +103,8 @@ export const pt = {
         carateristicas: "Caraterísticas",
         tamanho: "Tamanho",
         contactos: "Contactos",
+        enviarMensagem: "Send Message",
+        adotar: "Adopt",
     },
     paginaEditarPerfil: {
         titulo: "Editar Perfil",

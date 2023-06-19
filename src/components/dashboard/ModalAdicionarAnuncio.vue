@@ -18,31 +18,31 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <label for="nome" class="form-label">{{ $t('formAnimalMsg.nome') }}</label>
+                                <label for="nome" class="form-label">{{ $t('formAnimalMsg.nome') }}*</label>
                                 <input type="text" id="nome" class="form-control"
                                     v-bind:placeholder="$t('formAnimalMsg.nome')" v-model="animal.nome" required>
-                                <label for="sexo" class="form-label">{{ $t('formAnimalMsg.sexo') }}</label>
+                                <label for="sexo" class="form-label">{{ $t('formAnimalMsg.sexo') }}*</label>
                                 <select class="form-select" id="sexo" v-model="animal.sexo">
                                     <option v-bind:value="1">{{ $t('formAnimalMsg.sexos[0]') }}</option>
                                     <option v-bind:value="2">{{ $t('formAnimalMsg.sexos[1]') }}</option>
                                 </select>
-                                <label for="especie" class="form-label">{{ $t('formAnimalMsg.especie') }}</label>
+                                <label for="especie" class="form-label">{{ $t('formAnimalMsg.especie') }}*</label>
                                 <select class="form-select" id="especie" v-model="animal.especie"
                                     v-on:change="alterarRacas">
                                     <option v-bind:value="1">{{ $t('formAnimalMsg.especies[0]') }}</option>
                                     <option v-bind:value="2">{{ $t('formAnimalMsg.especies[1]') }}</option>
                                 </select>
-                                <label for="raca" class="form-label">{{ $t('formAnimalMsg.raca') }}</label>
+                                <label for="raca" class="form-label">{{ $t('formAnimalMsg.raca') }}*</label>
                                 <select class="form-select" id="raca" v-model="animal.raca">
                                     <option v-for="(item, index) in racas" :key="item" :value="index + 1">{{ item }}</option>
                                 </select>
 
-                                <label for="idade" class="form-label">{{ $t('formAnimalMsg.idade') }}</label>
+                                <label for="idade" class="form-label">{{ $t('formAnimalMsg.idade') }}*</label>
                                 <select class="form-select" id="idade" v-model="animal.idade">
                                     <option v-for="(item, index) in $tm('formAnimalMsg.idades')" :key="item"
                                         :value="index + 1">{{ item }}</option>
                                 </select>
-                                <label for="cor" class="form-label">{{ $t('formAnimalMsg.cor') }}</label>
+                                <label for="cor" class="form-label">{{ $t('formAnimalMsg.cor') }}*</label>
                                 <select class="form-select" id="cor" v-model="animal.cor">
                                     <option v-for="(item, index) in $tm('formAnimalMsg.cores')" :key="item"
                                         :value="index + 1">{{ item }}</option>
@@ -50,16 +50,16 @@
 
                             </div>
                             <div class="col">
-                                <label for="distrito" class="form-label">{{ $t('formAnimalMsg.distrito') }}</label>
+                                <label for="distrito" class="form-label">{{ $t('formAnimalMsg.distrito') }}*</label>
                                 <select class="form-select" id="distrito" v-model="animal.distrito">
                                     <option v-for="item in distritos" :key="item" :value="item">{{ item }}</option>
                                 </select>
-                                <label for="etiqueta" class="form-label">{{ $t('formAnimalMsg.etiqueta') }}</label>
+                                <label for="etiqueta" class="form-label">{{ $t('formAnimalMsg.etiqueta') }}*</label>
                                 <select class="form-select" id="etiqueta" v-model="animal.etiqueta">
                                     <option v-for="(item, index) in $tm('formAnimalMsg.etiquetas')" :key="item"
                                         :value="index + 1">{{ item }}</option>
                                 </select>
-                                <label for="porte" class="form-label">{{ $t('formAnimalMsg.porte') }}</label>
+                                <label for="porte" class="form-label">{{ $t('formAnimalMsg.porte') }}*</label>
                                 <select class="form-select" id="porte" v-model="animal.porte">
                                     <option v-for="(item, index) in $tm('formAnimalMsg.portes')" :key="item"
                                         :value="index + 1">{{ item }}</option>

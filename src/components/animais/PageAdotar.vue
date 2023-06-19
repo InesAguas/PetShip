@@ -53,7 +53,7 @@
                     <label for="exampleFormControlInput1" class="form-label">{{$t('pageAdotar.porte')}}</label>
                     <select class="form-select" aria-label="Default select example" v-model="filtroTamanho">
                         <option selected value="">{{$t('pageAdotar.qualquer')}}</option>
-                        <option v-for="(item,index) in $tm('formAnimalMsg.portes')" :key="item" :value="index">{{ item }}</option>
+                        <option v-for="(item) in $tm('formAnimalMsg.portes')" :key="item" :value="item">{{ item }}</option>
                     </select>
                 </div>
                 <div class="mb-2">
@@ -129,9 +129,11 @@ export default {
                     && (this.filtroRaca != "" ? animal.raca === this.filtroRaca : true)
                     && (this.filtroIdade != "" ? animal.idade === this.filtroIdade : true)
                     && (this.filtroSexo != "" ? animal.sexo === this.filtroSexo : true)
-                    && (this.filtroTamanho != "" ? animal.tamanho === this.filtroTamanho : true)
+                    && (this.filtroTamanho != "" ? animal.porte === this.filtroTamanho : true)
                     && (this.filtroCor != "" ? animal.cor === this.filtroCor : true)
             });
+
+            console.log(this.animais)
 
         },
 

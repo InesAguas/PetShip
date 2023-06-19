@@ -107,6 +107,8 @@ export const en = {
         idade: "Age",
         sexo: "Sex",
         distrito: "District",
+        enviarMensagem: "Send Message",
+        adotar: "Adopt",
     },
     paginaEditarPerfil: {
         titulo: "Edit Profile",
