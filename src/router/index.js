@@ -3,7 +3,6 @@ import FormLogin from '../components/FormLogin'
 import FormRegisto from '../components/FormRegisto'
 import PageAdotar from '../components/animais/PageAdotar'
 import PageAssociacoes from '../components/associacoes/PageAssociacoes'
-import PageAnunciarAnimal from '../components/animais/PageAnunciarAnimal'
 import PagePerfil from '../components/perfil/PagePerfil'
 import PageDesaparecido from '../components/animais/PageDesaparecido'
 import PagePetSitting from '../components/animais/PagePetSitting'
@@ -83,12 +82,6 @@ const routes = [
         path: '/associacoes',
         name: 'associacoes',
         component: PageAssociacoes
-    },
-    {
-        path:'/anunciar',
-        name:'anunciar',
-        component: PageAnunciarAnimal,
-        beforeEnter: [logado]
     },
     {
         path:'/perfil',
