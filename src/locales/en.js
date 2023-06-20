@@ -4,6 +4,10 @@ export const en = {
         adotar: "Adopt",
         associacoes: "Shelters",
         desaparecidos: "Missing",
+        notifStock: "Your stock of '",
+        notifStock2: "' is running out! ",
+        notifStock3: "Current quantity: ",
+        semNotifs: "No notifications to show.",
     },
     loginMsg: {
         pass: "Password",

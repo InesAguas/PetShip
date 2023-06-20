@@ -44,6 +44,16 @@
                 d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
             </svg>
           </a>
+          
+          <svg v-if="utilizador && utilizador.tipo == 2" xmlns="http://www.w3.org/2000/svg" width="25" style="cursor:pointer" height="25" fill="white" data-bs-toggle="dropdown" class="bi bi-bell me-2" viewBox="0 0 16 16">
+            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+          </svg>
+          <div v-if="utilizador && utilizador.tipo == 2" class="dropdown">
+          <ul class="dropdown-menu dropdown-menu-lg-end" >
+           <li v-for="stock in stocks" :key="stock.id" class="" > <router-link style="width:300px; word-wrap: break-word;white-space: normal;" class="dropdown-item" to="/dashboard/stock">{{$t('navbarMsg.notifStock')}}{{ stock.nome }}{{$t('navbarMsg.notifStock2')}}{{$t('navbarMsg.notifStock3')}}{{ stock.qnt_atual }}</router-link></li>
+            <li class="dropdown-item disabled" v-if="stocks == null || stocks.length == 0">{{$t('navbarMsg.semNotifs')}}</li>
+          </ul>
+          </div>
           </div>
           <div v-else>
               <router-link class="nav-link text-white me-2" aria-current="page" to="/login">Login</router-link>
@@ -71,7 +81,8 @@ export default {
   name: 'NavBar',
   data() {
     return {
-      utilizador: []
+      utilizador: [],
+      stocks: null
     }
   },
   methods: {
@@ -79,11 +90,20 @@ export default {
       this.$i18n.locale = locale
       this.axios.defaults.headers.common['Accept-Language'] = this.$i18n.locale
       sessionStorage.setItem('locale', locale)
+
+      this.loadNotifs();
     }
   },
   mounted() {
     this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
     console.log(this.utilizador);
+    if(this.utilizador && this.utilizador.tipo == 2) {
+      this.axios.get('stock/notificacoes')
+      .then((response) => {
+        console.log(response.data)
+        this.stocks = response.data.stocks;
+      })
+    }
   }
 }
 </script>

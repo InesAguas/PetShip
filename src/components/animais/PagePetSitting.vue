@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         loadAnimais() {
-            this.axios.get('/petsitting?lang=' + this.$i18n.locale)
+            this.axios.get('/petsitting')
             .then(response => {
                 console.log(response.data)
                 this.todosAnimais = response.data.animais

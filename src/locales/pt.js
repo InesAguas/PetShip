@@ -4,6 +4,10 @@ export const pt = {
         adotar: "Adotar",
         associacoes: "Associações",
         desaparecidos: "Desaparecidos",
+        notifStock: "O seu stock de '",
+        notifStock2: "' está a acabar! ",
+        notifStock3: "Quantidade atual: ",
+        semNotifs: "Não tem notificações.",
     },
     loginMsg: {
         pass: "Palavra-passe",
