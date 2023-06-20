@@ -139,7 +139,7 @@ export default {
 
 
         loadAnimais() {
-            this.axios.get('/adotar?lang=' + this.$i18n.locale)
+            this.axios.get('/adotar')
             .then(response => {
                 console.log(response.data)
                 this.todosAnimais = response.data.animais
