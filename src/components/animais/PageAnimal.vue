@@ -105,11 +105,12 @@
                         </div>
                         <div class="col-1">
 
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=https://petship.pt/animal/17"
+                            <a :href="'https://www.facebook.com/sharer/sharer.php?u=https://petship.pt/animal/' + animal.id + '&title=' + animal.nome"
                                 target="_blank" rel="noopener"><img class="img p-0 m-0" src="../../assets/facebook.png"
                                     height="30" width="30"></a>
                         </div>
                     </div>
+                    
 
                     <div class="text-start">
 
@@ -142,6 +143,8 @@
 </style>
 <script>
 
+
+
 import NavBar from '../NavBar.vue'
 import ModalCandidatura from './ModalCandidatura.vue'
 export default {
@@ -152,6 +155,7 @@ export default {
         ModalCandidatura,
 
     },
+   
     data() {
         return {
             animal: [],
