@@ -76,11 +76,11 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 
-axios.defaults.baseURL = "https://api.petship.pt/api"
+//axios.defaults.baseURL = "https://api.petship.pt/api"
 
 axios.defaults.headers.common['Accept-Language'] = i18n.global.locale
 
-//axios.defaults.baseURL = "http://127.0.0.1:8000/api"
+axios.defaults.baseURL = "http://127.0.0.1:8000/api"
 app.config.globalProperties.axios=axios
 
 app.mount('#app')

@@ -94,7 +94,13 @@
                                         v-bind:placeholder="utilizador.facebook ? utilizador.facebook : 'Facebook'"
                                         v-model="utilizadorEditado.facebook">
                                 </div>
-
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">IBAN</label>
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="addon-wrapping">PT</span>
+                                        <input type="number" @input="checkIBAN" class="form-control" v-model="utilizadorEditado.iban">
+                                      </div>
+                                </div>
                                 <div class="text-end " style="padding-top:40%;">
                                     <button @click="editarPerfil" type="button" class="btn btn-lg"
                                         style="background-color:#FD7E14; color: white;">{{ $t('paginaEditarPerfil.editar')
@@ -121,7 +127,18 @@
         </div>
     </div>
 </template>
+    <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
     
+    input[type=number] {
+        -moz-appearance:textfield; /* Firefox */
+    }
+</style>
 <script>
 
 import DiaSemana from './DiaSemana.vue'
@@ -144,6 +161,7 @@ export default {
                 website: this.utilizador.website,
                 instagram: this.utilizador.instagram,
                 facebook: this.utilizador.facebook,
+                iban: this.utilizador.iban,
                 horario: this.utilizador.horario ? [
                     this.utilizador.horario[0],
                     this.utilizador.horario[1],
@@ -242,6 +260,14 @@ export default {
             }).catch(error => {
                 console.log(error)
             })
+        },
+
+        checkIBAN(event) {
+            const value = event.target.value
+            if (String(value).length > 25) {
+                this.utilizadorEditado.iban = String(value).slice(0, 25)
+                console.log(this.utilizadorEditado.iban)
+            } 
         }
     }
 }

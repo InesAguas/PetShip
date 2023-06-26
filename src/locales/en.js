@@ -80,6 +80,7 @@ export const en = {
         horario: "Schedule",
         vazio: "No information",
         editar: "Edit Profile",
+        doacoes: "Donations",
     },
     pageDesaparecido: {
         titulo : "Missing"

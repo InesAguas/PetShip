@@ -80,6 +80,7 @@ export const pt = {
         horario: "Horário",
         vazio: "Sem informação",
         editar: "Editar Perfil",
+        doacoes: "Doações",
     },
     pageDesaparecido: {
         titulo: "Desaparecidos"
