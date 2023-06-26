@@ -153,6 +153,11 @@ const routes = [
         name: 'dashboardEscalas',
         component: GestaoEscalas,
         beforeEnter: [logado, isTipo2]
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'notFound',
+        component: PaginaInicial
     }
     
 ]

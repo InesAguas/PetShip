@@ -14,7 +14,10 @@
             <div v-if="conversas.length <= 0">{{$t('paginaMensagens.semMensagens')}}</div>
                 <CardPessoa v-for="(row, index) in conversas" :key="row" v-on:click="troca(index)" :conversa="row" :utilizador="utilizador" :selected="selected == index ? true : false"></CardPessoa>
             </div>
-            <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas.length > 0" :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" :utilizador="utilizador" :key="selected"></CardConversa>
+            <CardConversa @mensagemEnviada="atualizaConversa" v-if="conversas.length > 0" 
+                :id="conversas[selected].id_envia == utilizador.id ? conversas[selected].id_recebe:conversas[selected].id_envia" 
+                :utilizador="utilizador" :fotografia="conversas[selected].fotografia"
+                :nome="conversas[selected].id_envia == utilizador.id ? conversas[selected].nome_recebe:conversas[selected].nome_envia"  :key="selected"></CardConversa>
 
     </div>
 </div>

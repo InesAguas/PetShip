@@ -78,19 +78,19 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Website</label>
-                                    <input type="text" class="form-control" id="name" aria-describedby="name"
+                                    <input type="url" class="form-control" id="name" aria-describedby="name"
                                         v-bind:placeholder="utilizador.website ? utilizador.website : 'Website'"
                                         v-model="utilizadorEditado.website">
-                                </div>
+                                </div>  
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Instagram</label>
-                                    <input type="text" class="form-control" id="name" aria-describedby="name"
+                                    <input type="url" class="form-control" id="name" aria-describedby="name"
                                         v-bind:placeholder="utilizador.instagram ? utilizador.instagram : 'Instagram'"
                                         v-model="utilizadorEditado.instagram">
                                 </div>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Facebook</label>
-                                    <input type="text" class="form-control" id="name" aria-describedby="name"
+                                    <input type="url" class="form-control" id="name" aria-describedby="name"
                                         v-bind:placeholder="utilizador.facebook ? utilizador.facebook : 'Facebook'"
                                         v-model="utilizadorEditado.facebook">
                                 </div>
@@ -102,6 +102,8 @@
                                       </div>
                                 </div>
                                 <div class="text-end " style="padding-top:40%;">
+                                    <router-link to="/perfil"><button  type="button" class="btn btn-lg me-3"
+                                    style="background-color:darkgrey; color: white;">{{ $t('gestaoStock.cancelar')}}</button></router-link>
                                     <button @click="editarPerfil" type="button" class="btn btn-lg"
                                         style="background-color:#FD7E14; color: white;">{{ $t('paginaEditarPerfil.editar')
                                         }}</button>
@@ -245,6 +247,26 @@ export default {
                     }
                 }
             }
+            
+            if(this.utilizador.nome == null || this.utilizador.nome == "" || this.utilizador.email == null || this.utilizador.email == ""){
+                alert("Preencha os campos obrigatórios")
+                return
+            }
+
+            if(this.utilizador.facebook != null && this.utilizador.facebook != ""){
+                if(!this.utilizador.facebook.includes("https://www.facebook.com/")){
+                    alert("O link do facebook deve começar por https://www.facebook.com/")
+                    return
+                }
+            }
+
+            if(this.utilizador.instagram != null && this.utilizador.instagram != "") {
+                if(!this.utilizador.instagram.includes("https://www.instagram.com/")){
+                    alert("O link do instagram deve começar por https://www.instagram.com/")
+                    return
+                }
+            }
+
             console.log(this.utilizadorEditado)
             this.utilizadorEditado.horario = JSON.stringify(this.utilizadorEditado.horario);
             this.axios.post('/editarperfilA', this.utilizadorEditado, {

@@ -36,9 +36,8 @@ export default {
         .then(response => {
             this.utilizador = response.data.utilizador;
         })
-        .catch(error => {
-            this.erro = true;
-            this.mensagemErro = error.response.data.message;
+        .catch(() => {
+           this.$router.push({ name: 'notFound' });
         })
         }
     }

@@ -1,8 +1,9 @@
 <template>
     <div class="col-9 " style="background-color:#F3F3F3; height:100%;">
         <div class="row mb-2 pb-2" style="height:10%">
-            <div class="col position-fixed"><img :src="require('../../assets/default_user.jpg')" class="rounded-circle"
+            <div class="col position-fixed"><img :src="fotografia ? fotografia : require('../../assets/default_user.jpg')" class="rounded-circle"
                     style="width:50px;height:50px;object-fit:cover;">
+                    <span class="fw-bold px-2">{{ nome }}</span>
             </div>
         </div>
         <div class="d-flex flex-column-reverse p-3" style="height:75%; overflow-y:scroll;" :key="mensagens">
@@ -40,7 +41,9 @@ export default ({
     },
     props: [
         'id',
-        'utilizador'
+        'utilizador',
+        'fotografia',
+        'nome'
     ],
     mounted() {
         this.obterMensagens();

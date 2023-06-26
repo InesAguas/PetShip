@@ -1,7 +1,7 @@
 <template>
         <div class="row p-1 pb-3" :style="{'background-color': selected ? '#F3F3F3':'white'}">
         <div class="col-3" >
-            <img :src="require('../../assets/default_user.jpg')" class="rounded-circle" style="width:50px;height:50px;object-fit:cover;">
+            <img :src="conversa.fotografia ? conversa.fotografia : require('../../assets/default_user.jpg')" class="rounded-circle" style="width:50px;height:50px;object-fit:cover;">
         </div>
         <div class="col-8">
             <div class="row">

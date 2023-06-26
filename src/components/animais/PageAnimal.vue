@@ -1,7 +1,7 @@
 <template>
     <ModalCandidatura v-if="utilizadorLogado" :utilizadorLogado="utilizadorLogado" :animal="animal" ></ModalCandidatura>
     <NavBar></NavBar>
-    <div class="container mt-5">
+    <div class="container mt-5" v-if="animal.nome">
         <div class="row">
             <h1 class="fw-bold" style="color: #653208">{{ animal.nome }} <small><small><small><small
                                 class="badge rounded-pill" style="background-color: #FD7E14">{{
@@ -34,8 +34,8 @@
                 <div class="container mt-3 p-3 pt-3 rounded-3 border" style="background-color:white;">
                     <div class="row">
                         <div class="col-3 me-2">
-                            <img :src="utilizador.fotografia == null ? require('../../assets/default_user.jpg') : utilizador.fotografia"
-                                class="rounded-circle" style="width:70px;height:70px;object-fit:cover;">
+                            <router-link :to="'/perfil/' + utilizador.id"><img :src="utilizador.fotografia == null ? require('../../assets/default_user.jpg') : utilizador.fotografia"
+                                class="rounded-circle" style="width:70px;height:70px;object-fit:cover;"></router-link>
                         </div>
                         <div class="col">
                             {{ $t('paginaAnimalMsg.anunciado') }}<h5>{{ utilizador.nome }}</h5>
@@ -94,7 +94,7 @@
                                     <path
                                         d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z" />
                                 </svg>{{ $t('paginaAnimalMsg.enviarMensagem') }}</button>
-                            <button @click="adotar" type="button" class="btn mt-3 ms-2"
+                            <button v-if="animal.etiqueta == 'Adoção' || animal.etiqueta == 'Adoption' "  @click="adotar" type="button" class="btn mt-3 ms-2"
                                 style="background-color:#FD7E14; color:white" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">{{ $t('paginaAnimalMsg.adotar') }}</button>
                         </div>
@@ -181,8 +181,8 @@ export default {
                 this.utilizador = response.data.utilizador
                 console.log(this.animal)
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
+                this.$router.push({ name: 'notFound' });
             })
     },
     methods: {
