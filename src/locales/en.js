@@ -213,6 +213,7 @@ export const en = {
         animais: "Pets",
         escalas: "Time Scales",
         perfil: "Profile",
+        candidaturas: "Applications",
     },
     gestaoStock: {
         botaoAdicionar: "New Product",
@@ -227,6 +228,14 @@ export const en = {
         removerProdutoTexto: "Are you sure you want to remove this product: ",
         remover: "Remove",
         acoes: "Actions",
+    },
+    dashboardCandidaturas: {
+        titulo: "Applications",
+        nomeCandidato: "Applicant's name",
+        cartaoCidadao: "Citizen Card",
+        dataCandidatura: "Application date",
+        nomeAnimal: "Animal name",
+        linkAnuncio: "Ad link",
     },
     mensagens: {
         camposVazios: "Please fill in all fields",

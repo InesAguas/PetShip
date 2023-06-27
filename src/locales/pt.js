@@ -210,6 +210,7 @@ export const pt = {
         animais: "Animais",
         escalas: "Escalas",
         perfil: "Perfil",
+        candidaturas: "Candidaturas",
 
     },
     gestaoStock: {
@@ -225,9 +226,14 @@ export const pt = {
         removerProdutoTexto: "Tem a certeza que pretende remover o produto: ",
         remover: "Remover",
         acoes: "Ações",
-
-
-
+    },
+    dashboardCandidaturas: {
+        titulo: "Candidaturas",
+        nomeCandidato: "Nome do candidato",
+        cartaoCidadao: "Cartão de cidadão",
+        dataCandidatura: "Data de candidatura",
+        nomeAnimal: "Nome do animal",
+        linkAnuncio: "Link do anúncio",
     },
     mensagens: {
         camposVazios: "Não pode deixar campos vazios",
