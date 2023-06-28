@@ -249,6 +249,25 @@ export const pt = {
         animalRemovido: "Animal removido com sucesso",
         fotografiaInvalida: "Formato de fotografia inválido",
         erro: "Ocorreu um erro",
-    }
-    
+    },
+    modalCandidatura: {
+        titulo: "Candidatura de Adoção",
+        cc: "Cartão de Cidadão",
+        telefone: "Telefone",
+        camposObrigatorios: "Campos Obrigatórios",
+        morada: "Morada",
+        distrito: "Distrito",
+        codPostal: "Código Postal",
+        declaracaoTitulo: "Declaração de Responsabilidade",
+        cancelar: "Cancelar",
+        confirmar: "Confirmar",
+        seguinte: "Seguinte",
+        voltar: "Voltar",
+        checkDadosPessoais: "Declaro que aceito o tratamento dos meus dados pessoais",
+        checkCondicoes: "Declaro que tenho todas a condições para adotar o animal",
+        checkResponsabilidade: "Declaro que aceito os termos de responsabilidade",
+
+
+    },
+
 }
