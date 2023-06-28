@@ -102,7 +102,7 @@
                 <ul v-if="utilizador.horario != null" class="list-group m-0 p-0"
                     style="list-style-type: none; text-align:justify;">
                     <li style="display: inline;" v-for="(item, index) in $tm('perfilAssMsg.dias')" :key="item"> {{ item }}:
-                        <span v-if="utilizador.horario[index][0] == true" class="text-end">Fechado</span> <span v-else
+                        <span v-if="utilizador.horario[index][0] == true" class="text-end">{{ $t('paginaEditarPerfilAss.fechado') }}</span> <span v-else
                             class="text-end">{{ utilizador.horario[index][1] }} - {{ utilizador.horario[index][2] }}</span>
                     </li>
                 </ul>

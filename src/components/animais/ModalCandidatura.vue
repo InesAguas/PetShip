@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Candidatura de Adoção</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{ $t('modalCandidatura.titulo') }}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -18,33 +18,33 @@
                                         @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="cc" class="form-label">Cartão de cidadão*</label>
+                                    <label for="cc" class="form-label">{{ $t('modalCandidatura.cc') }}*</label>
                                     <input type="text" class="form-control" id="cc" aria-describedby="cc"
                                         placeholder="Cartão de Cidadão" v-model="candidatura.cc"
                                         @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="telefone" class="form-label">Telefone*</label>
+                                    <label for="telefone" class="form-label">{{ $t('modalCandidatura.telefone') }}*</label>
                                     <input type="text" class="form-control" id="telefone" aria-describedby="telefone"
                                         v-bind:placeholder="utilizadorLogado.telefone"
                                         v-bind:value="utilizadorLogado.telefone" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div>
-                                    <p class="fw-bold">*Campos Obrigatórios</p>
+                                    <p class="fw-bold">*{{ $t('modalCandidatura.camposObrigatorios') }}</p>
                                 </div>
                             </form>
                         </div>
                         <div class="col">
                             <form>
                                 <div class="mb-3">
-                                    <label for="morada" class="form-label">Morada*</label>
+                                    <label for="morada" class="form-label">{{ $t('modalCandidatura.morada') }}*</label>
                                     <input type="text" class="form-control" id="morada" aria-describedby="morada"
                                         v-bind:placeholder="utilizadorLogado.localizacao"
                                         v-bind:value="utilizadorLogado.localizacao" @input="verificarCamposPreenchidos">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col">
-                                        <label for="exampleFormControlInput1" class="form-label">Distrito*</label>
+                                        <label for="exampleFormControlInput1" class="form-label">{{ $t('modalCandidatura.distrito') }}*</label>
                                         <select class="form-select" aria-label="Default select example"
                                             v-model="utilizadorDistrito">
                                             <option selected value="">{{ $t('pageAdotar.qualquer') }}</option>
@@ -54,7 +54,7 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <label for="codPostal" class="form-label">Código Postal*</label>
+                                        <label for="codPostal" class="form-label">{{ $t('modalCandidatura.codPostal') }}*</label>
                                         <input type="text" class="form-control" id="codPostal" aria-describedby="codPostal"
                                             v-bind:placeholder="utilizadorLogado.codigo_postal ? utilizadorLogado.codigo_postal : '0000-000'"
                                             v-bind:value="utilizadorLogado.codigo_postal"
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="row ms-3 me-3" v-if="conteudoCurrent == 2">
-                        <h5>Declaração</h5>
+                        <h5>{{ $t('modalCandidatura.declaracaoTitulo') }}</h5>
                         <textarea class="form-control disabled mb-3" rows="15" readonly>Declara,ainda,que assume a responsabilidade pelo estado de saúde do animal adotado, uma vez que foi informado de que, dadas as caraterísticas de um canil/ centro de recolha e/ ou qualquer animal que se puder encontrar em período de incubação de qualquer doença sem sintimatologia aparente, não é possível atestar, garantir e comprovar um perfeito estado sanitário de todos os animais aqui alojados.
 
 
@@ -96,32 +96,32 @@ Aceita que os seus dados pessoais sejam utilizados afim de receber informações
                             <input class="form-check-input" type="checkbox" value="" id="responsabilidade"
                                 v-model="aceitouResponsabilidade">
                             <label class="form-check-label" for="responsabilidade">
-                                Declaro que aceito os termos de responsabilidade*
+                                {{ $t('modalCandidatura.checkResponsabilidade') }}*
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="condicoes"
                                 v-model="aceitouCondicoes">
                             <label class="form-check-label" for="condicoes">
-                                Declaro que tenho todas a condições para adotar o animal*
+                                {{ $t('modalCandidatura.checkCondicoes') }}*
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="dadosPessoais"
                                 v-model="aceitouDadosPessoais">
                             <label class="form-check-label" for="dadosPessoais">
-                                Declaro que aceito o tratamento dos meus dados pessoais*
+                                {{ $t('modalCandidatura.checkDadosPessoais') }}*
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-if="first">Cancelar</button>
-                    <button type="button" class="btn btn-secondary" @click="prev" v-if="!first">Voltar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-if="first">{{ $t('modalCandidatura.cancelar') }}</button>
+                    <button type="button" class="btn btn-secondary" @click="prev" v-if="!first">{{ $t('modalCandidatura.voltar') }}</button>
                     <button type="button" class="btn btn-primary" id="seguinte"
-                        style="background-color:#FD7E14; display: none;" @click="next" v-if="first">Seguinte</button>
+                        style="background-color:#FD7E14; display: none;" @click="next" v-if="first">{{ $t('modalCandidatura.seguinte') }}</button>
                     <button type="button" class="btn btn-primary" style="background-color:#FD7E14;"
-                        v-if="!first && checkboxesSelecionadas" @click="confirmar" data-bs-dismiss="modal">Confirmar</button>
+                        v-if="!first && checkboxesSelecionadas" @click="confirmar" data-bs-dismiss="modal">{{ $t('modalCandidatura.confirmar') }}</button>
                 </div>
             </div>
         </div>

@@ -248,6 +248,24 @@ export const en = {
         animalRemovido: "Pet removed successfully",
         fotografiaInvalida: "Invalid photo format",
         erro: "An error has occurred",
-    }
+    },
+    modalCandidatura: {
+        titulo: "Adoption Application",
+        cc: "Citizen Card",
+        telefone: "Phone Number",
+        camposObrigatorios: "Required fields",
+        morada: "Address",
+        distrito: "District",
+        codPostal: "Postal Code",
+        declaracaoTitulo: "Declaration of Responsibility",
+        cancelar: "Cancel",
+        confirmar: "Confirm",
+        seguinte : "Next",
+        voltar : "Back",
+        checkDadosPessoais:"I declare that I accept the processing of my personal data",
+        checkCondicoes : "I declare that I have all the conditions to adopt the animal",
+        checkResponsabilidade : "I declare that I accept the terms of responsibility",
+        
+    },
     
 }
