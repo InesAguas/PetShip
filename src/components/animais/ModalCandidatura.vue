@@ -151,7 +151,7 @@ export default {
                 id_anuncio: this.animal.id,
                 id_utilizador: this.utilizadorLogado.id,
                 cc: '',
-                estado: true,
+                termos: true,
             }
 
         }
@@ -201,7 +201,7 @@ export default {
                 id_anuncio: this.animal.id,
                 id_utilizador: this.utilizadorLogado.id,
                 cc: this.candidatura.cc,
-                estado: true,
+                termos: true,
             };
             console.log(this.candidatura);
             this.axios.post('/candidaturainserir', this.candidatura, {
@@ -222,7 +222,7 @@ export default {
                     id_anuncio: this.animal.id,
                     id_utilizador: this.utilizadorLogado.id,
                     cc: '',
-                    estado: true,
+                    termos: true,
                 }
     
                 

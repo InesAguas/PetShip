@@ -211,7 +211,6 @@ export const pt = {
         escalas: "Escalas",
         perfil: "Perfil",
         candidaturas: "Candidaturas",
-
     },
     gestaoStock: {
         botaoAdicionar: "Adicionar produto",
@@ -234,6 +233,16 @@ export const pt = {
         dataCandidatura: "Data de candidatura",
         nomeAnimal: "Nome do animal",
         linkAnuncio: "Link do anúncio",
+        cancelar: "Cancelar",
+        cancelarCandidatura: "Cancelar candidatura",
+        cancelarCandidaturaTexto: "Tem a certeza que pretende cancelar a candidatura do animal: ",
+        sim: "Sim",
+        nao: "Não",
+        estado: "Estado",
+        candidaturaCancelada: "Candidatura cancelada com sucesso",
+        acoes: "Ações",
+        aceitar: "Aceitar",
+        candidaturaAceite: "Candidatura aceite com sucesso",
     },
     mensagens: {
         camposVazios: "Não pode deixar campos vazios",
