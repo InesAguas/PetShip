@@ -151,7 +151,7 @@ export default {
                 id_anuncio: this.animal.id,
                 id_utilizador: this.utilizadorLogado.id,
                 cc: '',
-                estado: true,
+                termos: true,
             }
 
         }
@@ -182,14 +182,15 @@ export default {
             const ccPreenchido = document.getElementById('cc').value.trim() !== '';
             const ccValido = this.candidatura.cc.length === 12;
             const telefonePreenchido = this.utilizadorLogado.telefone && this.utilizadorLogado.telefone.trim() !== '';
-            const telefoneValido = this.utilizadorLogado.telefone.length === 9;
+            const telefoneValido = true; //this.utilizadorLogado.telefone.length === 9;
             const moradaPreenchida = this.utilizadorLogado.localizacao && this.utilizadorLogado.localizacao.trim() !== '';
             const distritoPreenchido = this.utilizadorDistrito && this.utilizadorDistrito.trim() !== '';
             const codPostalPreenchido = document.getElementById('codPostal').value.trim() !== '';
             const emailPreenchido = this.utilizadorLogado.email && this.utilizadorLogado.email.trim() !== '';
             if (ccValido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido && telefoneValido) {
-                document.getElementById('seguinte').style.display = (nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido) ? 'block' : 'none';
+                document.getElementById('seguinte').style.display = 'block';
                 this.camposPreenchidos = nomePreenchido && ccPreenchido && telefonePreenchido && moradaPreenchida && distritoPreenchido && codPostalPreenchido && emailPreenchido;
+                console.log("yes");
             } else {
                 document.getElementById('seguinte').style.display = 'none';
                 this.camposPreenchidos = false;
@@ -200,7 +201,7 @@ export default {
                 id_anuncio: this.animal.id,
                 id_utilizador: this.utilizadorLogado.id,
                 cc: this.candidatura.cc,
-                estado: true,
+                termos: true,
             };
             console.log(this.candidatura);
             this.axios.post('/candidaturainserir', this.candidatura, {
@@ -221,7 +222,7 @@ export default {
                     id_anuncio: this.animal.id,
                     id_utilizador: this.utilizadorLogado.id,
                     cc: '',
-                    estado: true,
+                    termos: true,
                 }
     
                 

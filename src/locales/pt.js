@@ -210,7 +210,7 @@ export const pt = {
         animais: "Animais",
         escalas: "Escalas",
         perfil: "Perfil",
-
+        candidaturas: "Candidaturas",
     },
     gestaoStock: {
         botaoAdicionar: "Adicionar produto",
@@ -225,9 +225,24 @@ export const pt = {
         removerProdutoTexto: "Tem a certeza que pretende remover o produto: ",
         remover: "Remover",
         acoes: "Ações",
-
-
-
+    },
+    dashboardCandidaturas: {
+        titulo: "Candidaturas",
+        nomeCandidato: "Nome do candidato",
+        cartaoCidadao: "Cartão de cidadão",
+        dataCandidatura: "Data de candidatura",
+        nomeAnimal: "Nome do animal",
+        linkAnuncio: "Link do anúncio",
+        cancelar: "Cancelar",
+        cancelarCandidatura: "Cancelar candidatura",
+        cancelarCandidaturaTexto: "Tem a certeza que pretende cancelar a candidatura do animal: ",
+        sim: "Sim",
+        nao: "Não",
+        estado: "Estado",
+        candidaturaCancelada: "Candidatura cancelada com sucesso",
+        acoes: "Ações",
+        aceitar: "Aceitar",
+        candidaturaAceite: "Candidatura aceite com sucesso",
     },
     mensagens: {
         camposVazios: "Não pode deixar campos vazios",

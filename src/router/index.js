@@ -17,6 +17,7 @@ import GestaoAnuncios from '../components/dashboard/GestaoAnuncios'
 import GestaoStock from '../components/dashboard/GestaoStock'
 import PaginaDashboard from '../components/dashboard/PaginaDashboard'
 import GestaoEscalas from '../components/dashboard/GestaoEscalas'
+import GestaoCandidaturas from '../components/dashboard/GestaoCandidaturas'
 
 //import App from '../App'
 
@@ -153,6 +154,12 @@ const routes = [
         name: 'dashboardEscalas',
         component: GestaoEscalas,
         beforeEnter: [logado, isTipo2]
+    },
+    {
+        path: '/dashboard/candidaturas',
+        name: 'dashboardCandidaturas',
+        component: GestaoCandidaturas,
+        beforeEnter: [logado]
     },
     {
         path: '/:pathMatch(.*)*',
