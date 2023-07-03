@@ -215,7 +215,7 @@ export default {
 
     methods: {
         publicarAnimal() {
-            if(this.animal.data_recolha == null || this.animal.nome == null || this.animal.nome == '' || (this.chipSelecionado && this.animal.chip == null || this.animal.chip == '')) {
+            if(this.animal.data_recolha == null || this.animal.nome == null || this.animal.nome == '' || (this.chipSelecionado && (this.animal.chip == null || this.animal.chip == ''))) {
                 this.erro = true
                 this.mensagemErro = this.$t('mensagens.camposObrigatorios')
                 return
