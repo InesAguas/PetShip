@@ -246,6 +246,8 @@ export const en = {
         acoes: "Actions",
         aceitar: "Accept",
         candidaturaAceite: "Application accepted successfully",
+        terminar: "Conclude",
+        candidaturaConcluida: "Application concluded successfully",
     },
     mensagens: {
         camposVazios: "Please fill in all fields",

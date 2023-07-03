@@ -243,6 +243,8 @@ export const pt = {
         acoes: "Ações",
         aceitar: "Aceitar",
         candidaturaAceite: "Candidatura aceite com sucesso",
+        terminar: "Concluir",
+        candidaturaConcluida: "Candidatura concluída com sucesso",
     },
     mensagens: {
         camposVazios: "Não pode deixar campos vazios",
