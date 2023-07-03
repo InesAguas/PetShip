@@ -171,7 +171,7 @@ export default {
             for (let i = 0; i < e.target.files.length; i++) {
                 var dot = e.target.files[i].name.lastIndexOf('.');
                 var extension = e.target.files[i].name.substring(dot + 1);
-                if (extension != "jpg" && extension != "jpeg" && extension != "png") {
+                if (extension != "jpg" && extension != "jpeg" && extension != "png" && extension != "webp") {
                 if(this.$i18n.locale == "pt") {
                     alert("Ficheiro com formato inválido!")
                 } else {

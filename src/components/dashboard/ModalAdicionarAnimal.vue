@@ -268,7 +268,7 @@ export default {
         atualizaFotografia(event) {
             var dot = event.target.files[0].name.lastIndexOf('.');
             var extension = event.target.files[0].name.substring(dot + 1);
-            if (extension != "jpg" && extension != "jpeg" && extension != "png") {
+            if (extension != "jpg" && extension != "jpeg" && extension != "png" && extension != "webp") {
                 this.mensagemErro = this.$t('mensagens.fotografiaInvalida')
                 this.erro = true
             }
