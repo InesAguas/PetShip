@@ -248,6 +248,7 @@ export const en = {
         candidaturaAceite: "Application accepted successfully",
         terminar: "Conclude",
         candidaturaConcluida: "Application concluded successfully",
+        indisponivel: "Unavailable",
     },
     mensagens: {
         camposVazios: "Please fill in all fields",
