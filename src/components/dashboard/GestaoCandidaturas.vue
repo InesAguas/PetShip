@@ -37,7 +37,6 @@
                     <th scope="col">{{$t('dashboardCandidaturas.cartaoCidadao')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.nomeAnimal')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.dataCandidatura')}}</th>
-                    <th scope="col">{{$t('dashboardCandidaturas.linkAnuncio')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.estado')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.acoes')}}</th>
                   </tr>
@@ -48,7 +47,6 @@
                     <td style="width:10%;vertical-align: middle">{{candidatura.cc}}</td>
                     <td style="width:10%;vertical-align: middle">{{candidatura.nome_animal}}</td>
                     <td style="width:10%;vertical-align: middle">{{candidatura.created_at}}</td>
-                    <td style="width:10%;vertical-align: middle">{{candidatura.estado_anuncio ? "https://petship.pt/animal/" + candidatura.id_anuncio : $t('dashboardCandidaturas.indisponivel') }}</td>
                     <td style="width:10%;vertical-align: middle">{{candidatura.estado}}</td>
                     <td style="width:10%;vertical-align: middle">
                       <button v-if="candidatura.estado != 'Cancelada' && candidatura.estado != 'Cancelled' && candidatura.estado == ('Pedido realizado' || 'Requested') " type="button" class="btn btn-success" @click="aceitar(candidatura)">{{$t('dashboardCandidaturas.aceitar')}}</button>
@@ -68,7 +66,6 @@
                   <tr>
                     <th scope="col">{{$t('dashboardCandidaturas.nomeAnimal')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.dataCandidatura')}}</th>
-                    <th scope="col">{{$t('dashboardCandidaturas.linkAnuncio')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.estado')}}</th>
                     <th scope="col">{{$t('dashboardCandidaturas.acoes')}}</th>
                   </tr>
@@ -77,7 +74,6 @@
                   <tr v-for="candidatura in candidaturas" :key="candidatura">
                     <td style="width:10%;vertical-align: middle">{{candidatura.nome_animal}}</td>
                     <td style="width:10%;vertical-align: middle">{{candidatura.created_at}}</td>
-                    <td style="width:10%;vertical-align: middle">{{candidatura.estado_anuncio ? "https://petship.pt/animal/" + candidatura.id_anuncio : $t('dashboardCandidaturas.indisponivel') }}</td>
                     <td style="width:10%;vertical-align: middle">{{candidatura.estado}}</td>
                     <td style="width:10%;vertical-align: middle"><button v-if="candidatura.estado != 'Cancelada' && candidatura.estado != 'Cancelled' && candidatura.estado != 'Concluída' && candidatura.estado != 'Complete'" type="button" class="btn btn-danger" @click="abrirModal(candidatura)" data-bs-toggle="modal"
                       data-bs-target="#modalApagar">{{$t('dashboardCandidaturas.cancelar')}}</button></td>
