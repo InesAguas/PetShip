@@ -105,7 +105,7 @@
 
                             <!--Modal de adotar -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            v-if="modalAberto" aria-hidden="true">
+                             aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
