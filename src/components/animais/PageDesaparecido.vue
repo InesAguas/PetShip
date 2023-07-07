@@ -115,10 +115,10 @@ export default {
         loadAnimais() {
             this.axios.get('/desaparecido')
             .then(response => {
-                console.log(response.data)
+               
                 this.todosAnimais = response.data.animais
                 this.animais = this.todosAnimais
-                console.log(this.animais)
+              
                 
             })
         },
@@ -134,7 +134,7 @@ export default {
                     && (this.filtroCor != "" ? animal.cor === this.filtroCor : true)
             });
 
-            console.log(this.animais)
+            
 
         },
         irPaginaAnimal(animal) {

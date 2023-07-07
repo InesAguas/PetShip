@@ -58,7 +58,7 @@ export default {
     },
     methods: {
         login() {
-            console.log(this.$store.state.utilizador)
+            
 
             if (this.utilizador.email == null || this.utilizador.password == null) {
                 this.mensagemErro = this.$t('mensagens.camposVazios');

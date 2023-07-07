@@ -39,11 +39,11 @@ export default {
     },
     mounted() {
         this.utilizadorLogado = JSON.parse(sessionStorage.getItem('utilizador'));
-        console.log(this.utilizadorLogado);
+       
 
         if (this.$route.params.id == null) {
             this.utilizador = this.utilizadorLogado;
-            console.log(this.utilizador);
+            
         } else {
             this.axios.get('/perfil/' + this.$route.params.id)
                 .then(response => {

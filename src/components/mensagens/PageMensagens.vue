@@ -41,7 +41,6 @@ export default ({
     },
     mounted() {
         this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
-        console.log(sessionStorage.getItem('token'));
         this.getConversas();
         this.$socket.emit('authenticate', {token: this.utilizador.id});
     },

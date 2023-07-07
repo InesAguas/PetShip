@@ -147,7 +147,7 @@ export default {
 
       this.axios.get('associacao/animal/num/' + this.$route.query.animalanuncio)
                 .then(response => {
-                    console.log(response)
+                    
 
                     this.anuncioSelecionado.nome = response.data.animal.nome
                     this.anuncioSelecionado.sexo = response.data.animal.sexo

@@ -236,7 +236,7 @@ export default {
                     this.utilizadorEditado.horario[6][2] = valor[3]
                     break
             }
-            console.log(this.utilizadorEditado.horario)
+            
         },
         editarPerfil() {
             for (let i = 0; i < this.utilizadorEditado.horario.length; i++) {
@@ -267,7 +267,7 @@ export default {
                 }
             }
 
-            console.log(this.utilizadorEditado)
+            
             this.utilizadorEditado.horario = JSON.stringify(this.utilizadorEditado.horario);
             this.axios.post('/editarperfilA', this.utilizadorEditado, {
                 headers: {
@@ -275,7 +275,7 @@ export default {
                 }
 
             }).then(response => {
-                console.log(response.data)
+                
                 sessionStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
 
                 alert("Perfil editado com sucesso!")
@@ -288,7 +288,7 @@ export default {
             const value = event.target.value
             if (String(value).length > 25) {
                 this.utilizadorEditado.iban = String(value).slice(0, 25)
-                console.log(this.utilizadorEditado.iban)
+                
             } 
         }
     }

@@ -113,7 +113,7 @@
             this.axios.get("dashboard/candidaturas", {
     }).then(response => {
       this.candidaturas = response.data.candidaturas
-      console.log(this.utilizador)
+      
     })
         },
 
@@ -149,7 +149,6 @@
     },
     mounted() {
       this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
-      console.log(this.utilizador.tipo)
       this.obterCandidaturas()
     }
   }

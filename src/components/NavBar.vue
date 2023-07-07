@@ -96,11 +96,11 @@ export default {
   },
   mounted() {
     this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
-    console.log(this.utilizador);
+  
     if(this.utilizador && this.utilizador.tipo == 2) {
       this.axios.get('stock/notificacoes')
       .then((response) => {
-        console.log(response.data)
+       
         this.stocks = response.data.stocks;
       })
     }

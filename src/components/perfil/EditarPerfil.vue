@@ -39,7 +39,7 @@ export default {
     },
     mounted() {
         this.utilizador = JSON.parse(sessionStorage.getItem('utilizador'));
-        console.log(this.utilizador);
+        
     }
 }
 

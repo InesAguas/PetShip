@@ -146,10 +146,10 @@ export default {
             });
         },
         eliminarConta() {
-            console.log(this.utilizadorLogado.id);
+            
             this.axios.delete("eliminarconta/" + this.utilizadorLogado.id)
                 .then(response => {
-                    console.log(response);
+                    
                     //ir para o login
                     this.mostrarModal = false;
                     localStorage.removeItem('token');

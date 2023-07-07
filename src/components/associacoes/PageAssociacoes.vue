@@ -28,7 +28,7 @@ export default {
 
         this.axios.get('/associacoes')
             .then(response => {
-                console.log(response.data.associacoes)
+              
                 this.associacoes = response.data.associacoes
             })
         },

@@ -103,14 +103,14 @@ export default {
     },
     methods: {
         editarPerfil() {
-            console.log(this.utilizadorEditado)
+            
             this.axios.post('/editarperfil', this.utilizadorEditado, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 }
 
             }).then(response => {
-                console.log(response.data)
+                
                 sessionStorage.setItem('utilizador', JSON.stringify(response.data.utilizador));
 
                 alert("Perfil editado com sucesso!")

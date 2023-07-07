@@ -108,8 +108,6 @@ export default {
     mounted() {
         if(this.$route.params != null) {
             this.filtroDistrito = this.$route.params.distrito != null ? this.$route.params.distrito : "";
-            console.log("Hello")
-            console.log(this.filtroDistrito);
             this.filtroSexo = this.$route.params.sexo != null ? this.$route.params.sexo : "";
             this.filtroIdade = this.$route.params.idade != null ? this.$route.params.idade : "";
             this.filtroEspecie = this.$route.params.especie != null ? this.$route.params.especie : "";
@@ -133,7 +131,7 @@ export default {
                     && (this.filtroCor != "" ? animal.cor === this.filtroCor : true)
             });
 
-            console.log(this.animais)
+           
 
         },
 
@@ -141,10 +139,8 @@ export default {
         loadAnimais() {
             this.axios.get('/adotar')
             .then(response => {
-                console.log(response.data)
                 this.todosAnimais = response.data.animais
                 this.animais = this.todosAnimais
-                console.log(this.animais)
                 this.filtrar();
             })
             

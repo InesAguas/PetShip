@@ -69,10 +69,10 @@ export default {
         loadAnimais() {
             this.axios.get('/petsitting')
             .then(response => {
-                console.log(response.data)
+               
                 this.todosAnimais = response.data.animais
                 this.animais = this.todosAnimais
-                console.log(this.animais)
+                
                 
             })
         },
@@ -83,7 +83,7 @@ export default {
                     && (this.filtroEspecie != "" ? animal.especie === this.filtroEspecie : true)
             });
 
-            console.log(this.animais)
+          
 
         },
         irPaginaAnimal(animal) {

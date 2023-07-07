@@ -362,7 +362,7 @@ export default {
             .then(response => {
                 this.animal = response.data.animal
                 this.utilizador = response.data.utilizador
-                console.log(this.animal)
+                
             })
             .catch(() => {
                 this.$router.push({ name: 'notFound' });
@@ -430,13 +430,12 @@ export default {
                 cc: this.cc,
                 termos: true,
             };
-            console.log(this.candidatura);
+            
             this.axios.post('/candidaturainserir', this.candidatura, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(response => {
-                console.log(response);
                  //Mostrar mensagem de sucesso
                  alert("Candidatura efetuada com sucesso!");
                 this.modalAberto = false;
