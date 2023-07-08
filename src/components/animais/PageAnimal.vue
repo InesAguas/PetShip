@@ -435,7 +435,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(response => {
+            }).then(() => {
                  //Mostrar mensagem de sucesso
                  alert("Candidatura efetuada com sucesso!");
                 this.modalAberto = false;

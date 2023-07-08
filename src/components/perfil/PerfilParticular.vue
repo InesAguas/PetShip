@@ -108,7 +108,7 @@ export default {
         eliminarConta() {
             
             this.axios.delete("eliminarconta/" + this.utilizadorLogado.id)
-                .then(response => {
+                .then(() => {
                     
                     //ir para o login
                     this.mostrarModal = false;

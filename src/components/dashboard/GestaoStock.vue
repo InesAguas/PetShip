@@ -145,7 +145,7 @@ export default {
       }
 
       this.timeoutId = setTimeout(() => {
-        this.axios.post('editarstock/' + produto.id, produto).then((response) => {
+        this.axios.post('editarstock/' + produto.id, produto).then(() => {
           
         }).catch((error) => {
           console.log(error)
